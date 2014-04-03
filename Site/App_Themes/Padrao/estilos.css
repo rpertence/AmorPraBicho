@@ -1,0 +1,73 @@
+﻿#divHeader {
+    background-image: url('Imagens/testeira-topo.png');
+    background-repeat: repeat-x;
+    height: 235px;
+}
+
+#divHeaderInterna {
+    height: 190px;
+    top: 45px;
+    position: relative;
+    margin: 0 auto;
+    width: 865px;
+}
+
+#divHeaderBotoes {
+    margin-top: -68px;
+    text-align: center;
+}
+
+#divHeaderRedesSociais {
+    width: 435px;
+    position: relative;
+    top: -105px;
+    left: 225px;
+}
+
+    #divHeaderRedesSociais img {
+        vertical-align: text-bottom;
+    }
+
+#divHeaderBusca {
+    background-image: url('Imagens/busca.png');
+    height: 36px;
+    width: 468px;
+    position: relative;
+    top: -77px;
+    left: 221px;
+}
+
+#imgCarrinhoHeader {
+    float: right;
+}
+#divFooter {
+    background-image: url('Imagens/cor-fim-da-pagina.png');
+    background-repeat: repeat-x;
+    height: 257px;
+}
+#divFooterTesteira {
+    background-image: url('Imagens/testeira-fim-da-pagina.png');
+    background-repeat: repeat-x;
+    height: 51px;
+    position: relative;
+    top: -7px;
+}
+#divFooterInterna {
+    height: 170px;
+    margin: 0 auto;
+    width: 1040px;
+    color: white;
+    position: relative;
+    top: 15px;
+}
+    #divFooterInterna div {
+        float: left;
+        width: 185px;
+        padding: 10px;
+    }
+    #divFooterInterna li {
+        padding: 2px;
+    }
+#divPagina {
+    min-height: 150px;
+}

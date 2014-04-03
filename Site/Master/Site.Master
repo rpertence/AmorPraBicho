@@ -1,0 +1,89 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Site.Master.Site" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100italic' rel='stylesheet' type='text/css' />
+    <%--<link href='http://fonts.googleapis.com/css?family=Rambla:400,700' rel='stylesheet' type='text/css' />--%>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="divHeader">
+            <div id="divHeaderInterna">
+                <img src="../App_Themes/Padrao/Imagens/logo-topo.png" />
+                <img src="../App_Themes/Padrao/Imagens/carrinho.png" id="imgCarrinhoHeader" />
+                <div id="divHeaderRedesSociais">
+                    <i>acesse nossas redes e fique ligado nas promoções!</i>
+                    <img src="../App_Themes/Padrao/Imagens/botão-googleplus-topo.png" />
+                    <img src="../App_Themes/Padrao/Imagens/botão-facebook-topo.png" />
+                    <img src="../App_Themes/Padrao/Imagens/botao-twitter-topo.png" />
+                </div>
+                <div id="divHeaderBusca">
+                </div>
+                <div id="divHeaderBotoes">
+                    <a>
+                        <img src="../App_Themes/Padrao/Imagens/botao-caes.png" alt="cães" /></a>
+                    <a>
+                        <img src="../App_Themes/Padrao/Imagens/botao-gatos.png" alt="gatos" /></a>
+                    <a>
+                        <img src="../App_Themes/Padrao/Imagens/botao-passaros.png" alt="pássaros" /></a>
+                    <a>
+                        <img src="../App_Themes/Padrao/Imagens/botao-peixes.png" alt="peixes" /></a>
+                    <a>
+                        <img src="../App_Themes/Padrao/Imagens/botao-roedores.png" alt="roedores" /></a>
+                </div>
+            </div>
+        </div>
+        <div id="divPagina">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <div id="divFooter">
+            <div id="divFooterTesteira"></div>
+            <div id="divFooterInterna">
+                <div>
+                    <img src="../App_Themes/Padrao/Imagens/marca-fim-da-pagina.png" />
+                </div>
+                <div>
+                    <span style="font-size: 17px;">Institucional</span><br /><br />
+                    <ul>
+                        <li><a>Home</a></li>
+                        <li><a>Empresa</a></li>
+                        <li><a>Política de privacidade</a></li>
+                        <li><a>Cancelamentos, devoluções e reembolsos</a></li>
+                        <li><a>Blog PetLove</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <span style="font-size: 17px;">Departamentos</span><br /><br />
+                    <ul>
+                        <li><a>Cães</a></li>
+                        <li><a>Gatos</a></li>
+                        <li><a>Pássaros</a></li>
+                        <li><a>Peixes</a></li>
+                        <li><a>Roedores</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <span style="font-size: 17px;">Atendimento</span><br /><br />
+                    <ul>
+                        <li><a>Canal de atendimento</a></li>
+                        <li><a>Dúvidas frequentes</a></li>
+                        <li><a>É seguro comprar</a></li>
+                        <li><a>Trocas e devoluções</a></li>
+                        <li><a>Formas de pagamento</a></li>
+                        <li><a>Política de entrega</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <span style="font-size: 17px;">Redes sociais</span>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
