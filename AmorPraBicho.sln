@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Site", "Site\Site.csproj", "{8AE1FE6A-3A1E-4726-9F36-12C20C928B26}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADMS", "ADMS\ADMS.csproj", "{D2C01082-2DD6-4C21-B753-5F34AF934ACF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Actio.Negocio", "Actio.Negocio\Actio.Negocio.csproj", "{4BEC26FA-8935-49CF-BBFB-ABD0D71586D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,14 @@ Global
 		{8AE1FE6A-3A1E-4726-9F36-12C20C928B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AE1FE6A-3A1E-4726-9F36-12C20C928B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AE1FE6A-3A1E-4726-9F36-12C20C928B26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2C01082-2DD6-4C21-B753-5F34AF934ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2C01082-2DD6-4C21-B753-5F34AF934ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2C01082-2DD6-4C21-B753-5F34AF934ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2C01082-2DD6-4C21-B753-5F34AF934ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BEC26FA-8935-49CF-BBFB-ABD0D71586D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BEC26FA-8935-49CF-BBFB-ABD0D71586D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BEC26FA-8935-49CF-BBFB-ABD0D71586D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BEC26FA-8935-49CF-BBFB-ABD0D71586D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
