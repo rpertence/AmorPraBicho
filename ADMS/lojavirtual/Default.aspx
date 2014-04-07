@@ -1372,7 +1372,8 @@
                                                     <asp:ImageButton ID="ibt_Banner" runat="server" 
                                                         AlternateText='<%# Bind("banner_alt") %>' 
                                                         CommandArgument='<%# Bind("banner_id") %>' CommandName="Alterar" 
-                                                        ImageAlign="Middle" ImageUrl='<%# Bind("banner_arquivo") %>' Width="98px" />
+                                                        ImageAlign="Middle"
+                                                        ImageUrl='<%# Bind("banner_arquivo", "~/App_Themes/ActioAdms/hd/banner_loja/{0}") %>' Width="98px" />
                                                 </ItemTemplate>
                                                 <HeaderStyle HorizontalAlign="Left" />
                                                 <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="100px" />
@@ -1488,7 +1489,7 @@
                                         </tr>
                                         <tr>
                                             <td align="right" valign="middle" width="100px">Banner:</td>
-                                            <td align="left" style="padding: 8px" valign="middle">Sua imagem deve ter 165px X 510px, procure fazer imagens apropriadas para internet.
+                                            <td align="left" style="padding: 8px" valign="middle">Sua imagem deve ter 280px X 830px, procure fazer imagens apropriadas para internet.
                                                 <br />
                                                 <br />
                                                 <asp:FileUpload ID="fuBanner" runat="server" />

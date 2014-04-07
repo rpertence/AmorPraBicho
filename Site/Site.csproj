@@ -78,18 +78,24 @@
     <Content Include="App_Themes\Padrao\Imagens\testeira-fim-da-pagina.png" />
     <Content Include="App_Themes\Padrao\Imagens\testeira-topo.png" />
     <Content Include="Controles\Banners.ascx" />
-    <Content Include="Controles\banner\jquery.easing.1.3.js" />
-    <Content Include="Controles\banner\slidebox.html" />
-    <Content Include="Controles\banner\slidebox_next.png" />
-    <Content Include="Controles\banner\slidebox_next_hover.png" />
-    <Content Include="Controles\banner\slidebox_previous.png" />
-    <Content Include="Controles\banner\slidebox_previous_hover.png" />
-    <Content Include="Controles\banner\slidebox_thumb.png" />
+    <Content Include="Controles\banner\images\bx_loader.gif" />
+    <Content Include="Controles\banner\images\controls.png" />
+    <Content Include="Controles\banner\jquery.bxslider.css" />
+    <Content Include="Controles\banner\jquery.bxslider.js" />
+    <Content Include="Controles\banner\jquery.bxslider.min.js" />
+    <Content Include="Controles\banner\plugins\jquery.easing.1.3.js" />
+    <Content Include="Controles\banner\plugins\jquery.fitvids.js" />
     <Content Include="Home.aspx" />
     <Content Include="Produto.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseUserControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Controles\Banners.ascx.cs">
       <DependentUpon>Banners.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -122,6 +128,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Master\Site.Master" />
+    <Content Include="Controles\banner\bower.json" />
+    <Content Include="Controles\banner\readme.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

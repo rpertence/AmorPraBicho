@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Site.Controles
 {
-    public partial class Banners : System.Web.UI.UserControl
+    public partial class Banners : BaseUserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {

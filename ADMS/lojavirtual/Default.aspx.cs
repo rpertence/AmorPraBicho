@@ -1544,6 +1544,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
     {
         #region concatenando dados
         #region Banner Postado
+        string nomeArquivo = "";
         if (fuBanner.FileName != string.Empty)
         {
             string extensao = (fuBanner.PostedFile.FileName.Split('.'))[1];
@@ -1564,7 +1565,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
                 }
             }
             catch { }
-            string nomeArquivo = string.Format("{0}_{1}.{2}", nextID.ToString("ActioBanner"), newresult, extensao);
+            nomeArquivo = string.Format("{0}_{1}.{2}", nextID.ToString("ActioBanner"), newresult, extensao);
             string enderecoCompleto = Server.MapPath(string.Format("~/App_Themes/ActioAdms/hd/banner_loja/" + nomeArquivo));
             fuBanner.PostedFile.SaveAs(enderecoCompleto);
             hidBanner.Value = "~/App_Themes/ActioAdms/hd/banner_loja/" + nomeArquivo;
@@ -1573,7 +1574,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
         #endregion
         #endregion
         #region salva dados
-        Banner_Loja.Inserir(TituloBanner.Text, bannerLink.Text, Status.SelectedValue, hidBanner.Value);
+        Banner_Loja.Inserir(TituloBanner.Text, bannerLink.Text, Status.SelectedValue, nomeArquivo);
         #endregion
         #region comportamenteo da página
         mvBanner.ActiveViewIndex = 0;
