@@ -78,6 +78,7 @@
     <Content Include="App_Themes\Padrao\Imagens\testeira-fim-da-pagina.png" />
     <Content Include="App_Themes\Padrao\Imagens\testeira-topo.png" />
     <Content Include="Home.aspx" />
+    <Content Include="Produto.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +95,13 @@
     </Compile>
     <Compile Include="Master\Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Produto.aspx.cs">
+      <DependentUpon>Produto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Produto.aspx.designer.cs">
+      <DependentUpon>Produto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
