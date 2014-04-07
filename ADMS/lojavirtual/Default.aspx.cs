@@ -775,8 +775,12 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
             catch { }
 
             string nomeArquivo = string.Format("{0}_{1}.jpg", nextID.ToString("ActioCategoriaPadrao"), newresult);
-            File.Copy(Server.MapPath(@"..\..\App_Themes\Site\ImagesSuporte\IconeRCC.jpg"), Server.MapPath(string.Format(@"..\..\App_Themes\ActioAdms\hd\produtos\categorias\{0}", nomeArquivo)));
-            HidIconeCategoria.Value = nomeArquivo;
+
+            if (File.Exists(Server.MapPath(@"~\App_Themes\Site\ImagesSuporte\IconeRCC.jpg")))
+            {
+                File.Copy(Server.MapPath(@"~\App_Themes\Site\ImagesSuporte\IconeRCC.jpg"), Server.MapPath(string.Format(@"~\App_Themes\ActioAdms\hd\produtos\categorias\{0}", nomeArquivo)));
+                HidIconeCategoria.Value = nomeArquivo;
+            }
         }
         #endregion
         #endregion
