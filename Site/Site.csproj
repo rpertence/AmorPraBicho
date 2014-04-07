@@ -77,11 +77,18 @@
     <Content Include="App_Themes\Padrao\Imagens\marca-fim-da-pagina.png" />
     <Content Include="App_Themes\Padrao\Imagens\testeira-fim-da-pagina.png" />
     <Content Include="App_Themes\Padrao\Imagens\testeira-topo.png" />
+    <Content Include="Controles\Banners.ascx" />
     <Content Include="Home.aspx" />
     <Content Include="Produto.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controles\Banners.ascx.cs">
+      <DependentUpon>Banners.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Banners.ascx.designer.cs">
+      <DependentUpon>Banners.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
