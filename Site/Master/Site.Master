@@ -6,9 +6,8 @@
 <head runat="server">
     <title></title>
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,100italic' rel='stylesheet' type='text/css' />
-    <%--<link href='http://fonts.googleapis.com/css?family=Rambla:400,700' rel='stylesheet' type='text/css' />--%>
     <script src="../Scripts/jquery-1.11.0.min.js"></script>
-    <link href="../App_Themes/Padrao/estilos.css" rel="stylesheet" />
+    <script src="../Scripts/scripts.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -20,23 +19,23 @@
                 <img src="../App_Themes/Padrao/Imagens/carrinho.png" id="imgCarrinhoHeader" />
                 <div id="divHeaderRedesSociais">
                     <i>acesse nossas redes e fique ligado nas promoções!</i>
-                    <img src="../App_Themes/Padrao/Imagens/botão-googleplus-topo.png" />
-                    <img src="../App_Themes/Padrao/Imagens/botão-facebook-topo.png" />
-                    <img src="../App_Themes/Padrao/Imagens/botao-twitter-topo.png" />
+                    <img src="../App_Themes/Padrao/Imagens/botão-googleplus-topo.png" class="ImageComOver" />
+                    <img src="../App_Themes/Padrao/Imagens/botão-facebook-topo.png" class="ImageComOver" />
+                    <img src="../App_Themes/Padrao/Imagens/botao-twitter-topo.png" class="ImageComOver" />
                 </div>
                 <div id="divHeaderBusca">
                 </div>
                 <div id="divHeaderBotoes">
                     <a>
-                        <img src="../App_Themes/Padrao/Imagens/botao-caes.png" alt="cães" /></a>
+                        <img src="../App_Themes/Padrao/Imagens/botao-caes.png" alt="cães" class="ImageComOver" /></a>
                     <a>
-                        <img src="../App_Themes/Padrao/Imagens/botao-gatos.png" alt="gatos" /></a>
+                        <img src="../App_Themes/Padrao/Imagens/botao-gatos.png" alt="gatos" class="ImageComOver" /></a>
                     <a>
-                        <img src="../App_Themes/Padrao/Imagens/botao-passaros.png" alt="pássaros" /></a>
+                        <img src="../App_Themes/Padrao/Imagens/botao-passaros.png" alt="pássaros" class="ImageComOver" /></a>
                     <a>
-                        <img src="../App_Themes/Padrao/Imagens/botao-peixes.png" alt="peixes" /></a>
+                        <img src="../App_Themes/Padrao/Imagens/botao-peixes.png" alt="peixes" class="ImageComOver" /></a>
                     <a>
-                        <img src="../App_Themes/Padrao/Imagens/botao-roedores.png" alt="roedores" /></a>
+                        <img src="../App_Themes/Padrao/Imagens/botao-roedores.png" alt="roedores" class="ImageComOver" /></a>
                 </div>
             </div>
         </div>

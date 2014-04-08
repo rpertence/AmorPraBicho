@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Banners.ascx.cs" Inherits="Site.Controles.Banners" %>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<%--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>--%>
 <script src="/Controles/banner/jquery.bxslider.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {

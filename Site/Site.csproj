@@ -65,11 +65,16 @@
     <Content Include="App_Themes\Padrao\Imagens\agilidade.png" />
     <Content Include="App_Themes\Padrao\Imagens\botao-avaliar-o-produto-over.png" />
     <Content Include="App_Themes\Padrao\Imagens\botao-avaliar-o-produto.png" />
+    <Content Include="App_Themes\Padrao\Imagens\botao-caes-OVER.png" />
     <Content Include="App_Themes\Padrao\Imagens\botao-caes.png" />
     <Content Include="App_Themes\Padrao\Imagens\botao-comprar.png" />
+    <Content Include="App_Themes\Padrao\Imagens\botao-gatos-OVER.png" />
     <Content Include="App_Themes\Padrao\Imagens\botao-gatos.png" />
+    <Content Include="App_Themes\Padrao\Imagens\botao-passaros-OVER.png" />
     <Content Include="App_Themes\Padrao\Imagens\botao-passaros.png" />
+    <Content Include="App_Themes\Padrao\Imagens\botao-peixes-OVER.png" />
     <Content Include="App_Themes\Padrao\Imagens\botao-peixes.png" />
+    <Content Include="App_Themes\Padrao\Imagens\botao-roedores-OVER.png" />
     <Content Include="App_Themes\Padrao\Imagens\botao-roedores.png" />
     <Content Include="App_Themes\Padrao\Imagens\botao-twitter-topo-OVER.png" />
     <Content Include="App_Themes\Padrao\Imagens\botao-twitter-topo.png" />
