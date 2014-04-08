@@ -1574,7 +1574,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
         #endregion
         #endregion
         #region salva dados
-        Banner_Loja.Inserir(TituloBanner.Text, bannerLink.Text, Status.SelectedValue, nomeArquivo);
+        Banner_Loja.Inserir(TituloBanner.Text, bannerLink.Text, Status.SelectedValue, int.Parse(Tipo.SelectedValue), nomeArquivo);
         #endregion
         #region comportamenteo da página
         mvBanner.ActiveViewIndex = 0;
@@ -1630,6 +1630,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
     {
         #region concatenando dados
         #region Banner Postado
+        string nomeArquivo = "";
         if (fuBanner.FileName != string.Empty)
         {
             #region apaga icone atual
@@ -1658,7 +1659,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
                 }
             }
             catch { }
-            string nomeArquivo = string.Format("{0}_{1}.{2}", nextID.ToString("ActioBanner"), newresult, extensao);
+            nomeArquivo = string.Format("{0}_{1}.{2}", nextID.ToString("ActioBanner"), newresult, extensao);
             string enderecoCompleto = Server.MapPath(string.Format("~/App_Themes/ActioAdms/hd/banner_loja/" + nomeArquivo));
 
             fuBanner.PostedFile.SaveAs(enderecoCompleto);
@@ -1672,7 +1673,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
         if (umBanner != 2)
         {
             #region salva dados
-            Banner_Loja.Update(Session["banner_id"].ToString(), TituloBanner.Text, bannerLink.Text, hidBanner.Value, Status.SelectedValue);
+            Banner_Loja.Update(Session["banner_id"].ToString(), TituloBanner.Text, bannerLink.Text, nomeArquivo, Status.SelectedValue);
             #endregion
             #region comportamento da página
             Page.ClientScript.RegisterClientScriptBlock(typeof(Page), "sucesso", "alert('Item atualizado com sucesso!');window.location.src = window.location.src;", true);
@@ -1704,7 +1705,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
                 if (ativo == 1)
                 {
                     #region salva dados
-                    Banner_Loja.Update(Session["banner_id"].ToString(), TituloBanner.Text, bannerLink.Text, hidBanner.Value, Status.SelectedValue);
+                    Banner_Loja.Update(Session["banner_id"].ToString(), TituloBanner.Text, bannerLink.Text, nomeArquivo, Status.SelectedValue);
                     #endregion
                     #region comportamento da página
                     Page.ClientScript.RegisterClientScriptBlock(typeof(Page), "sucesso", "alert('Item atualizado com sucesso!');window.location.src = window.location.src;", true);
@@ -1718,7 +1719,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
                 if (ativo == 0)
                 {
                     #region salva dados
-                    Banner_Loja.Update(Session["banner_id"].ToString(), TituloBanner.Text, bannerLink.Text, hidBanner.Value, Status.SelectedValue);
+                    Banner_Loja.Update(Session["banner_id"].ToString(), TituloBanner.Text, bannerLink.Text, nomeArquivo, Status.SelectedValue);
                     #endregion
                     #region comportamento da página
                     Page.ClientScript.RegisterClientScriptBlock(typeof(Page), "sucesso", "alert('Item atualizado com sucesso!');window.location.src = window.location.src;", true);
@@ -1805,6 +1806,13 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
     }
 
     #endregion
+
+    protected void Tipo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        MensagemTamanho.Text = int.Parse(Tipo.SelectedValue) == 0 ?
+            "Sua imagem deve ter 280px X 830px, procure fazer imagens apropriadas para internet." :
+            "Sua imagem deve ter 200px de largura, procure fazer imagens apropriadas para internet.";
+    }
     #endregion
 }
 #endregion

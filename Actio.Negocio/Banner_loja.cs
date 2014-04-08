@@ -21,12 +21,10 @@ namespace Actio.Negocio
     public class Banner_Loja
     {
         #region Novo Banner
-        public static void Inserir(string banner_alt, string banner_url, string banner_isAtivo, string banner_arquivo)
+        public static void Inserir(string banner_alt, string banner_url, string banner_isAtivo, int banner_tipo, string banner_arquivo)
         {
-            string SQL = @"INSERT INTO `banner_loja` 
-                          (`banner_alt`, `banner_url`, `banner_isAtivo`, `banner_arquivo`) 
-                          VALUES
-                          ('" + banner_alt + "','" + banner_url + "','" + banner_isAtivo + "','" + banner_arquivo + "');";
+            string SQL = string.Format(@"INSERT INTO banner_loja (banner_alt, banner_url, banner_isAtivo, banner_arquivo, banner_tipo)
+VALUES('{0}', '{1}', '{2}', '{3}', '{4}');", banner_alt, banner_url, banner_isAtivo, banner_arquivo, banner_tipo);
 
             conexao.ExecuteNonQuery(SQL);
         }
@@ -75,9 +73,14 @@ namespace Actio.Negocio
         #endregion
         #region Seleciona todos ativos
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public static DataTable SelectAllActive()
+        public static DataTable SelectAllActive(int tipo)
         {
-            string SQL = string.Format("SELECT b.`banner_id`, b.`banner_alt`, b.`banner_url`, b.`banner_isAtivo`, b.`banner_arquivo` FROM banner_loja b WHERE b.`banner_isAtivo` = '1' ORDER BY b.`banner_id` ASC");
+            string SQL = string.Format(@"SELECT banner_id, banner_alt, banner_url, banner_isAtivo, banner_arquivo
+FROM banner_loja
+WHERE banner_isAtivo = '1'
+    and banner_tipo = {0}
+ORDER BY banner_id ASC", tipo);
+
             return conexao.Dados(SQL);
         }
         #endregion
