@@ -69,7 +69,10 @@
         padding: 2px;
     }
 #divPagina {
-    min-height: 150px;
+    
+    padding-bottom: 50px;
+    width: 830px;
+    margin: 0 auto;
 }
 #divQualidades {
     width: 830px;

@@ -20,5 +20,41 @@ namespace Site {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Site.Controles.Banners Banners;
+        
+        /// <summary>
+        /// vitrineCachorro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Site.Controles.Vitrine vitrineCachorro;
+        
+        /// <summary>
+        /// vitrineGato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Site.Controles.Vitrine vitrineGato;
+        
+        /// <summary>
+        /// vitrineRoedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Site.Controles.Vitrine vitrineRoedor;
+        
+        /// <summary>
+        /// vitrinePassaro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Site.Controles.Vitrine vitrinePassaro;
     }
 }

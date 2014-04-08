@@ -161,6 +161,20 @@ namespace Actio.Negocio
                 "p.`id`, p.`id_categoria`, p.`id_subcategoria`, p.`estoque`, p.`status`, p.`destaque`, p.`ProdDescricao_`, (p.`ProdValor_`) valor, p.`icone`, p.`resumo` FROM produtos p WHERE p.`destaque` = '1' AND P.`status` = '1' AND p.`estoque` > '0' ORDER BY p.`id` ASC;";
             return conexao.Dados(SQL);
         }
+        public static DataTable SelectByDestaque(int categoria, int qtde)
+        {
+            string SQL = @"SELECT cast(p.ProdValor_ as decimal(10,2)) ValorProduto, p.icone NomeArquivo, p.proddescricao_ Nome
+FROM produtos p
+  inner join produtos_categoria pc on pc.id = p.id_categoria
+  inner join produtos_subcategoria pcs on pcs.id = p.id_subcategoria
+WHERE p.id_categoria = " + categoria + @"
+  AND p.destaque = '1'
+  AND p.status = '1'
+  AND p.estoque > '0'
+LIMIT 0, " + qtde;
+
+            return conexao.Dados(SQL);
+        }
         #endregion
         #region produtos por subcategoria
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
