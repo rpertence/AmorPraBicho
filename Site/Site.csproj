@@ -98,6 +98,7 @@
     <Content Include="App_Themes\Padrao\Imagens\frete.png" />
     <Content Include="App_Themes\Padrao\Imagens\goggleplus-over.png" />
     <Content Include="App_Themes\Padrao\Imagens\googleplus.png" />
+    <Content Include="App_Themes\Padrao\Imagens\linha-fim-moldura.png" />
     <Content Include="App_Themes\Padrao\Imagens\logo-topo.png" />
     <Content Include="App_Themes\Padrao\Imagens\marca-fim-da-pagina.png" />
     <Content Include="App_Themes\Padrao\Imagens\para-o-seu-caozinho.png" />
