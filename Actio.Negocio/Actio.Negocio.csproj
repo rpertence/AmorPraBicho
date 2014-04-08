@@ -70,6 +70,7 @@
     <Compile Include="CapelaVirtual.cs" />
     <Compile Include="Coordenador_GO.cs" />
     <Compile Include="Agenda.cs" />
+    <Compile Include="Marca.cs" />
     <Compile Include="GrupodeOracao.cs" />
     <Compile Include="Produtos.cs" />
     <Compile Include="Produtos_Categoria.cs" />

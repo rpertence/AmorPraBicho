@@ -48,6 +48,15 @@ public partial class ActioAdms_LojaVirtual_Default {
     protected global::System.Web.UI.WebControls.LinkButton lk_Clientes;
     
     /// <summary>
+    /// linkMarcas control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton linkMarcas;
+    
+    /// <summary>
     /// hl_PagSeguro control.
     /// </summary>
     /// <remarks>
@@ -253,6 +262,33 @@ public partial class ActioAdms_LojaVirtual_Default {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.ObjectDataSource ods_Subcategorias;
+    
+    /// <summary>
+    /// ddlMarca control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList ddlMarca;
+    
+    /// <summary>
+    /// RequiredFieldValidator2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+    
+    /// <summary>
+    /// odsMarca control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ObjectDataSource odsMarca;
     
     /// <summary>
     /// ProdDescricao_ control.
@@ -1236,186 +1272,6 @@ public partial class ActioAdms_LojaVirtual_Default {
     protected global::System.Web.UI.WebControls.TextBox DescricaoProduto;
     
     /// <summary>
-    /// ViewDoacao control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.View ViewDoacao;
-    
-    /// <summary>
-    /// Image10 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Image Image10;
-    
-    /// <summary>
-    /// PanelListaBanco control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Panel PanelListaBanco;
-    
-    /// <summary>
-    /// ibt_NovoBanco control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.ImageButton ibt_NovoBanco;
-    
-    /// <summary>
-    /// lbt_NovoBanco control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton lbt_NovoBanco;
-    
-    /// <summary>
-    /// gridBanco control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.GridView gridBanco;
-    
-    /// <summary>
-    /// ods_Doacao control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.ObjectDataSource ods_Doacao;
-    
-    /// <summary>
-    /// PanelDetalhaBanco control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Panel PanelDetalhaBanco;
-    
-    /// <summary>
-    /// ibt_ListBanco control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.ImageButton ibt_ListBanco;
-    
-    /// <summary>
-    /// AlterarBanco control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.ImageButton AlterarBanco;
-    
-    /// <summary>
-    /// SalvarBanco control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.ImageButton SalvarBanco;
-    
-    /// <summary>
-    /// Banco control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox Banco;
-    
-    /// <summary>
-    /// RequiredFieldValidator26 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator26;
-    
-    /// <summary>
-    /// Agencia control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox Agencia;
-    
-    /// <summary>
-    /// RequiredFieldValidator27 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator27;
-    
-    /// <summary>
-    /// Conta control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox Conta;
-    
-    /// <summary>
-    /// RequiredFieldValidator28 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator28;
-    
-    /// <summary>
-    /// CheckStatusBanco control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.CheckBox CheckStatusBanco;
-    
-    /// <summary>
-    /// v8Vendas control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.View v8Vendas;
-    
-    /// <summary>
-    /// v9Clientes control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.View v9Clientes;
-    
-    /// <summary>
     /// v10Banner control.
     /// </summary>
     /// <remarks>
@@ -1648,4 +1504,121 @@ public partial class ActioAdms_LojaVirtual_Default {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Image ImagemAtual;
+    
+    /// <summary>
+    /// viewMarcas control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.View viewMarcas;
+    
+    /// <summary>
+    /// Image4 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Image Image4;
+    
+    /// <summary>
+    /// PanelListaBanco control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Panel PanelListaBanco;
+    
+    /// <summary>
+    /// ImageButton4 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ImageButton ImageButton4;
+    
+    /// <summary>
+    /// LinkButton7 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton LinkButton7;
+    
+    /// <summary>
+    /// gridBanco control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView gridBanco;
+    
+    /// <summary>
+    /// odsMarcas control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ObjectDataSource odsMarcas;
+    
+    /// <summary>
+    /// PanelDetalhaBanco control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Panel PanelDetalhaBanco;
+    
+    /// <summary>
+    /// ibt_ListBanco control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ImageButton ibt_ListBanco;
+    
+    /// <summary>
+    /// AlterarBanco control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ImageButton AlterarBanco;
+    
+    /// <summary>
+    /// SalvarBanco control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ImageButton SalvarBanco;
+    
+    /// <summary>
+    /// Marca control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox Marca;
+    
+    /// <summary>
+    /// RequiredFieldValidator1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 }
