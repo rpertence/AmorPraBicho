@@ -15,4 +15,31 @@ $(document).ready(function () {
             $(this).attr('src', src);
         }
     });
+
+    //âncoras
+    $('a[href^=#]').click(function () {
+        $($(this).attr('href')).ancora();
+        return false;
+    });
+
+    //Cantos arredondados das caixas de texto.
+    $("[id$='txtCEP']").corner("35px");
+
+    //Escondendo/exibindo resultado de frete e prazo de entrega.
+    $("#produtoFretePrazoResultado").hide();
+
+    $("[id$='imbOK']").click(function () {
+        $("[id$='lblCEPDigitado']").text($("[id$='txtCEP']").val());
+        $("#produtoFretePrazoResultado").show();
+        return false;
+    });
+
+    $("#linkPesquisarOutroCEP").click(function () {
+        $("[id$='txtCEP']").focus();
+        $("#produtoFretePrazoResultado").hide();
+    });
 });
+
+$.fn.ancora = function () {
+    $('html,body').animate({ scrollTop: $(this).offset().top });
+}

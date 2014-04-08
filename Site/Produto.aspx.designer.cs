@@ -49,13 +49,13 @@ namespace Site {
         protected global::System.Web.UI.WebControls.Label lblCondicoesPagto;
         
         /// <summary>
-        /// txtFretePrazo control.
+        /// txtCEP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFretePrazo;
+        protected global::System.Web.UI.WebControls.TextBox txtCEP;
         
         /// <summary>
         /// imbOK control.
@@ -65,5 +65,41 @@ namespace Site {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imbOK;
+        
+        /// <summary>
+        /// lblPrazoEntrega control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPrazoEntrega;
+        
+        /// <summary>
+        /// lblCEPDigitado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCEPDigitado;
+        
+        /// <summary>
+        /// lblValorFrete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblValorFrete;
+        
+        /// <summary>
+        /// lblConteudoDescricao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblConteudoDescricao;
     }
 }
