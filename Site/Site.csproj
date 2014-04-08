@@ -61,7 +61,10 @@
     <Content Include="App_Themes\Padrao\estilos.css" />
     <Content Include="App_Themes\Padrao\Imagens\5_desconto.png" />
     <Content Include="App_Themes\Padrao\Imagens\agilidade.png" />
+    <Content Include="App_Themes\Padrao\Imagens\botao-avaliar-o-produto-over.png" />
+    <Content Include="App_Themes\Padrao\Imagens\botao-avaliar-o-produto.png" />
     <Content Include="App_Themes\Padrao\Imagens\botao-caes.png" />
+    <Content Include="App_Themes\Padrao\Imagens\botao-comprar.png" />
     <Content Include="App_Themes\Padrao\Imagens\botao-gatos.png" />
     <Content Include="App_Themes\Padrao\Imagens\botao-passaros.png" />
     <Content Include="App_Themes\Padrao\Imagens\botao-peixes.png" />
@@ -73,14 +76,33 @@
     <Content Include="App_Themes\Padrao\Imagens\botão-googleplus-topo-OVER.png" />
     <Content Include="App_Themes\Padrao\Imagens\botão-googleplus-topo.png" />
     <Content Include="App_Themes\Padrao\Imagens\busca.png" />
+    <Content Include="App_Themes\Padrao\Imagens\campo-cep.png" />
     <Content Include="App_Themes\Padrao\Imagens\carrinho.png" />
+    <Content Include="App_Themes\Padrao\Imagens\cep-ok.png" />
     <Content Include="App_Themes\Padrao\Imagens\cor-fim-da-pagina.png" />
+    <Content Include="App_Themes\Padrao\Imagens\email-over.png" />
+    <Content Include="App_Themes\Padrao\Imagens\email.png" />
+    <Content Include="App_Themes\Padrao\Imagens\estrela-cinza.png" />
+    <Content Include="App_Themes\Padrao\Imagens\estrela-verde.png" />
+    <Content Include="App_Themes\Padrao\Imagens\facebook-over.png" />
+    <Content Include="App_Themes\Padrao\Imagens\facebook.png" />
     <Content Include="App_Themes\Padrao\Imagens\facilidade.png" />
+    <Content Include="App_Themes\Padrao\Imagens\frete.png" />
+    <Content Include="App_Themes\Padrao\Imagens\goggleplus-over.png" />
+    <Content Include="App_Themes\Padrao\Imagens\googleplus.png" />
     <Content Include="App_Themes\Padrao\Imagens\logo-topo.png" />
     <Content Include="App_Themes\Padrao\Imagens\marca-fim-da-pagina.png" />
     <Content Include="App_Themes\Padrao\Imagens\qualidade.png" />
+    <Content Include="App_Themes\Padrao\Imagens\seta-produto-baixo.png" />
+    <Content Include="App_Themes\Padrao\Imagens\seta-produto-cima.png" />
+    <Content Include="App_Themes\Padrao\Imagens\seta-produto-direita.png" />
+    <Content Include="App_Themes\Padrao\Imagens\seta-produto-esquerda.png" />
     <Content Include="App_Themes\Padrao\Imagens\testeira-fim-da-pagina.png" />
     <Content Include="App_Themes\Padrao\Imagens\testeira-topo.png" />
+    <Content Include="App_Themes\Padrao\Imagens\twitter-over.png" />
+    <Content Include="App_Themes\Padrao\Imagens\twitter.png" />
+    <Content Include="App_Themes\Padrao\Imagens\video-over.png" />
+    <Content Include="App_Themes\Padrao\Imagens\video.png" />
     <Content Include="Controles\Banners.ascx" />
     <Content Include="Controles\banner\images\bx_loader.gif" />
     <Content Include="Controles\banner\images\controls.png" />
@@ -92,6 +114,8 @@
     <Content Include="Controles\Vitrine.ascx" />
     <Content Include="Home.aspx" />
     <Content Include="Produto.aspx" />
+    <Content Include="Scripts\jquery-1.11.0.min.js" />
+    <Content Include="Scripts\jquery.corner.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +134,7 @@
     </Compile>
     <Compile Include="Controles\Vitrine.ascx.cs">
       <DependentUpon>Vitrine.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controles\Vitrine.ascx.designer.cs">
       <DependentUpon>Vitrine.ascx</DependentUpon>
@@ -148,9 +173,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scripts\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Actio.Negocio\Actio.Negocio.csproj">
       <Project>{4bec26fa-8935-49cf-bbfb-abd0d71586d6}</Project>

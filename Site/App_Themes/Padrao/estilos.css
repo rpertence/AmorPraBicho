@@ -40,11 +40,13 @@
 #imgCarrinhoHeader {
     float: right;
 }
+
 #divFooter {
     background-image: url('Imagens/cor-fim-da-pagina.png');
     background-repeat: repeat-x;
     height: 257px;
 }
+
 #divFooterTesteira {
     background-image: url('Imagens/testeira-fim-da-pagina.png');
     background-repeat: repeat-x;
@@ -52,6 +54,7 @@
     position: relative;
     top: -7px;
 }
+
 #divFooterInterna {
     height: 170px;
     margin: 0 auto;
@@ -60,22 +63,105 @@
     position: relative;
     top: 15px;
 }
+
     #divFooterInterna div {
         float: left;
         width: 185px;
         padding: 10px;
     }
+
     #divFooterInterna li {
         padding: 2px;
     }
+
 #divPagina {
     min-height: 150px;
 }
+
 #divQualidades {
     width: 830px;
     margin: 0 auto;
     text-align: center;
 }
+
     #divQualidades img {
         padding: 0px 30px 0px 30px;
     }
+
+#produtoTopo {
+    width: 865px;
+    height: 500px;
+    padding: 50px 5px 0 5px;
+    margin: auto;
+}
+
+#produtoImagens {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+#produtoInformacoes {
+    width: 50%;
+    height: 100%;
+    float: right;
+}
+
+#produtoNome {
+    font-family: Roboto;
+    font-size: 19pt;
+    font-variant-caps: all-petite-caps;
+    padding-bottom: 10px;
+    border-bottom: solid 2px #ECECEC;
+    text-align: left;
+}
+
+#produtoEstrelas {
+    height: 20px;
+}
+
+#produtoResumo {
+    font-family: Roboto;
+    font-size: 11pt;
+    margin-top: 10px;
+    padding-bottom: 5px;
+    text-align: justify;
+}
+
+#produtoVejaMais {
+    font-family: Roboto;
+    font-size: 12pt;
+    margin-top: 10px;
+    padding-bottom: 30px;
+    border-bottom: solid 2px #ECECEC;
+    text-align: justify;
+}
+
+#produtoPrecoComprarContainer {
+    font-family: Roboto;
+    font-size: 11pt;
+    margin-top: 40px;
+    padding-bottom: 100px;
+    border-bottom: solid 2px #ECECEC;
+}
+
+#produtoPreco {
+    width: 50%;
+    float: left;
+}
+
+.produtoPreco2 {
+    font-size:22pt;
+    font-weight:900;
+}
+
+#produtoComprar {
+    width: 50%;
+    float: right;
+}
+
+#produtoFretePrazoContainer {
+    font-family:Roboto;
+    font-size:11pt;
+    margin-top:30px;
+}

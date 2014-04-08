@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Site
 {
-    public partial class Produto : System.Web.UI.Page
+    public partial class Produto : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
