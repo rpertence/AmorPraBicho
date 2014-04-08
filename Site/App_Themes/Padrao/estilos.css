@@ -96,6 +96,7 @@
     height: 500px;
     padding: 50px 5px 0 5px;
     margin: auto;
+    border-bottom: solid 2px #ECECEC;
 }
 
 #produtoImagens {
@@ -113,10 +114,10 @@
 #produtoNome {
     font-family: Roboto;
     font-size: 19pt;
-    font-variant-caps: all-petite-caps;
     padding-bottom: 10px;
     border-bottom: solid 2px #ECECEC;
     text-align: left;
+    text-transform:uppercase;
 }
 
 #produtoEstrelas {
@@ -134,6 +135,7 @@
 #produtoVejaMais {
     font-family: Roboto;
     font-size: 12pt;
+    color: #36A9E1;
     margin-top: 10px;
     padding-bottom: 30px;
     border-bottom: solid 2px #ECECEC;
@@ -167,4 +169,92 @@
     font-family:Roboto;
     font-size:11pt;
     margin-top:30px;
+}
+
+#produtoFretePrazoResultado {
+    margin-top:10px;
+}
+
+.fretePrazoTxt {
+    font-size:8pt;
+    width: 75px;
+    height: 12px;
+    padding-left:10px;
+    background-image: url('Imagens/campo-cep.png');
+    background-repeat:no-repeat;
+    background-position: left;
+}
+
+.prazoEntregaResultado {
+    color: #36A9E1;
+    font-size: 12pt;
+    font-weight:bold;
+}
+
+.cepDigitado {
+    font-weight:bold;
+}
+
+#produtoPrazoEntregaContainer {
+    font-weight:bold;
+}
+
+#produtoValorFreteContainer {
+    margin-top:5px;
+}
+
+#linkPesquisarOutroCEP {
+    color: #36A9E1;
+}
+
+#produtoMeio {
+    width: 865px;
+    height: 500px;
+    padding-top: 10px;
+    margin: auto;
+}
+
+#produtoDescricao {
+    width:50%;
+    float:left;
+}
+
+#produtoComentariosFacebook {
+    width:48%;
+    float:right;
+    padding-left: 15px;
+}
+
+#abaDescricao {
+    background-color: #ECECEC;
+    font-family: Roboto;
+    font-size: 14pt;
+    font-weight:500;
+    text-transform:uppercase;
+    height:30px;
+    width: 120px;
+    margin-left: 20px;
+    text-align:center;
+}
+
+.valignCenter {
+    vertical-align:middle;
+    display:inline-block;
+}
+
+#conteudoDescricao {
+    padding: 20px 10px 20px 10px;
+    border: solid 2px #ECECEC;
+    text-align:justify;
+}
+
+#tituloSugerimos {
+    font-family: Roboto;
+    font-size: 19pt;
+    margin-left:20px;
+}
+
+.bordaPontilhada {
+    border: dotted 2px #ECECEC;
+    width: 800px;
 }

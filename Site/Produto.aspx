@@ -8,7 +8,7 @@
         <div id="produtoImagens"></div>
         <div id="produtoInformacoes">
             <div id="produtoNome">
-                <asp:Label ID="lblNomeProduto" runat="server" Text="NOME DO PRODUTO"></asp:Label>
+                <asp:Label ID="lblNomeProduto" runat="server" Text="Nome do Produto"></asp:Label>
             </div>
             <div id="produtoEstrelas">
             </div>
@@ -20,10 +20,14 @@
             </div>
             <div id="produtoPrecoComprarContainer">
                 <div id="produtoPreco">
-                    <p>Por:
-                        <asp:Label ID="lblPreco" CssClass="produtoPreco2" runat="server" Text="R$ 71,90"></asp:Label></p>
-                    <p>ou
-                        <asp:Label ID="lblCondicoesPagto" runat="server" Text="3x de R$ 23,96"></asp:Label></p>
+                    <p>
+                        Por:
+                        <asp:Label ID="lblPreco" CssClass="produtoPreco2" runat="server" Text="R$ 71,90"></asp:Label>
+                    </p>
+                    <p>
+                        ou
+                        <asp:Label ID="lblCondicoesPagto" runat="server" Text="3x de R$ 23,96"></asp:Label>
+                    </p>
                 </div>
                 <div id="produtoComprar">
                     <img src="App_Themes/Padrao/Imagens/botao-comprar.png" />
@@ -31,14 +35,40 @@
             </div>
             <div id="produtoFretePrazoContainer">
                 <div id="produtoPesquisaFrete">
-                    <span>Frete e prazo:</span>&nbsp;&nbsp;&nbsp;<asp:TextBox ID="txtFretePrazo" runat="server" MaxLength="8" Width="100px"></asp:TextBox>&nbsp;&nbsp;&nbsp;<asp:ImageButton ID="imbOK" runat="server" ImageUrl="~/App_Themes/Padrao/Imagens/cep-ok.png" />
+                    <img src="App_Themes/Padrao/Imagens/frete.png" />
+                    <span>Frete e prazo:</span>&nbsp;&nbsp;&nbsp;<asp:TextBox ID="txtCEP" runat="server" CssClass="fretePrazoTxt" MaxLength="8"></asp:TextBox>&nbsp;&nbsp;&nbsp;<asp:ImageButton ID="imbOK" runat="server" ImageUrl="~/App_Themes/Padrao/Imagens/cep-ok.png" />
+                </div>
+                <div id="produtoFretePrazoResultado">
+                    <div id="produtoPrazoEntregaContainer">
+                        <span>Prazo de entrega em até</span>
+                        <asp:Label ID="lblPrazoEntrega" runat="server" CssClass="prazoEntregaResultado" Text="10 dias úteis"></asp:Label>
+                    </div>
+                    <div><a href="#">Entenda o prazo</a></div>
+                    <div id="produtoValorFreteContainer">
+                        <span>Valor do Frete para o CEP </span>
+                        <asp:Label ID="lblCEPDigitado" runat="server" CssClass="cepDigitado"></asp:Label>&nbsp;&nbsp;&nbsp;<asp:Label ID="lblValorFrete" runat="server" CssClass="prazoEntregaResultado" Text="Frete Grátis"></asp:Label>
+                    </div>
+                    <div><a href="#produtoPesquisaFrete" id="linkPesquisarOutroCEP">pesquisar outro CEP</a></div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="produtoMeio"></div>
+    <div id="produtoMeio">
+        <div id="produtoDescricao">
+            <div id="abaDescricao"><span class="valignCenter">Descrição</span></div>
+            <div id="conteudoDescricao">
+                <asp:Label ID="lblConteudoDescricao" runat="server" Text="Assento Tubline para cães e gatos e adaptável à maioria dos assentos de automóveis."></asp:Label>
+            </div>
+        </div>
+        <div id="produtoComentariosFacebook">
+            AQUI VIRÁ O PLUGIN DO FACEBOOK
+        </div>
+    </div>
     <div id="produtoFooter">
-        <div id="produtoSugerimos"></div>
+        <div id="produtoSugerimos">
+            <div id="tituloSugerimos"><span>Sugerimos Também</span></div>
+            <div class="bordaPontilhada"></div>
+        </div>
         <div id="produtoMesmaMarca"></div>
         <div id="produtoOpinioes"></div>
     </div>
