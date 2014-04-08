@@ -1473,6 +1473,15 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td align="right" valign="middle" width="100px">tipo:</td>
+                                            <td align="left" style="padding: 8px" valign="middle">
+                                                <asp:RadioButtonList ID="Tipo" runat="server" RepeatDirection="Horizontal" AutoPostBack="true" OnSelectedIndexChanged="Tipo_SelectedIndexChanged">
+                                                    <asp:ListItem Selected="True" Value="0">topo</asp:ListItem>
+                                                    <asp:ListItem Value="1">lateral</asp:ListItem>
+                                                </asp:RadioButtonList>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td align="right" valign="middle" width="100px">titulo:</td>
                                             <td align="left" style="padding: 8px" valign="middle">
                                                 <asp:TextBox ID="TituloBanner" runat="server" Width="300px"></asp:TextBox>
@@ -1489,7 +1498,7 @@
                                         </tr>
                                         <tr>
                                             <td align="right" valign="middle" width="100px">Banner:</td>
-                                            <td align="left" style="padding: 8px" valign="middle">Sua imagem deve ter 280px X 830px, procure fazer imagens apropriadas para internet.
+                                            <td align="left" style="padding: 8px" valign="middle"><asp:Label runat="server" ID="MensagemTamanho" Text="Sua imagem deve ter 280px X 830px, procure fazer imagens apropriadas para internet." />
                                                 <br />
                                                 <br />
                                                 <asp:FileUpload ID="fuBanner" runat="server" />

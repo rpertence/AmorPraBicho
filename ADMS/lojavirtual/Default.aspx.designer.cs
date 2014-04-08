@@ -1542,6 +1542,15 @@ public partial class ActioAdms_LojaVirtual_Default {
     protected global::System.Web.UI.WebControls.RadioButtonList Status;
     
     /// <summary>
+    /// Tipo control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RadioButtonList Tipo;
+    
+    /// <summary>
     /// TituloBanner control.
     /// </summary>
     /// <remarks>
@@ -1576,6 +1585,15 @@ public partial class ActioAdms_LojaVirtual_Default {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+    
+    /// <summary>
+    /// MensagemTamanho control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label MensagemTamanho;
     
     /// <summary>
     /// fuBanner control.

@@ -186,6 +186,7 @@
     <Content Include="Master\Site.Master" />
     <Content Include="Controles\banner\bower.json" />
     <Content Include="Controles\banner\readme.md" />
+    <None Include="Properties\PublishProfiles\publish.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

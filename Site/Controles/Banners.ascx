@@ -16,4 +16,8 @@
         </ItemTemplate>
     </asp:Repeater>
 </ul>
-<asp:ObjectDataSource ID="odsBanner" runat="server" SelectMethod="SelectAllActive" TypeName="Actio.Negocio.Banner_loja"></asp:ObjectDataSource>
+<asp:ObjectDataSource ID="odsBanner" runat="server" SelectMethod="SelectAllActive" TypeName="Actio.Negocio.Banner_loja">
+    <SelectParameters>
+        <asp:Parameter Name="tipo" DefaultValue="0" />
+    </SelectParameters>
+</asp:ObjectDataSource>
