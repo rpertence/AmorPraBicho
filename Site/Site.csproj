@@ -83,6 +83,7 @@
     <Content Include="App_Themes\Padrao\Imagens\botão-googleplus-topo-OVER.png" />
     <Content Include="App_Themes\Padrao\Imagens\botão-googleplus-topo.png" />
     <Content Include="App_Themes\Padrao\Imagens\busca.png" />
+    <Content Include="App_Themes\Padrao\Imagens\busque-por-aqui.png" />
     <Content Include="App_Themes\Padrao\Imagens\campo-cep.png" />
     <Content Include="App_Themes\Padrao\Imagens\carrinho.png" />
     <Content Include="App_Themes\Padrao\Imagens\cep-ok.png" />
@@ -122,10 +123,12 @@
     <Content Include="Controles\banner\jquery.bxslider.min.js" />
     <Content Include="Controles\banner\plugins\jquery.easing.1.3.js" />
     <Content Include="Controles\banner\plugins\jquery.fitvids.js" />
+    <Content Include="Controles\Busca.ascx" />
     <Content Include="Controles\Produto.ascx" />
     <Content Include="Controles\Vitrine.ascx" />
     <Content Include="Home.aspx" />
     <Content Include="Produto.aspx" />
+    <Content Include="ResultadoBusca.aspx" />
     <Content Include="Scripts\jquery-1.11.0.min.js" />
     <Content Include="Scripts\jquery.corner.js" />
     <Content Include="Scripts\scripts.js" />
@@ -144,6 +147,13 @@
     </Compile>
     <Compile Include="Controles\Banners.ascx.designer.cs">
       <DependentUpon>Banners.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Busca.ascx.cs">
+      <DependentUpon>Busca.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\Busca.ascx.designer.cs">
+      <DependentUpon>Busca.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controles\Produto.ascx.cs">
       <DependentUpon>Produto.ascx</DependentUpon>
@@ -181,6 +191,13 @@
       <DependentUpon>Produto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultadoBusca.aspx.cs">
+      <DependentUpon>ResultadoBusca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResultadoBusca.aspx.designer.cs">
+      <DependentUpon>ResultadoBusca.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Master\Site.Master" />
