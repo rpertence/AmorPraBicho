@@ -22,42 +22,14 @@ namespace Actio.Negocio
     {
         #region comandos Básicos
         #region Novo
-        public static void Novo(string id_categoria, string id_subcategoria, string estoque, string status, string destaque, string resumo, string ProdDescricao_, string ProdValor_, string tipo, string email_cobranca, string moeda, string peso, string extras, string icone)
+        public static void Novo(string id_categoria, string id_subcategoria, string estoque, string status, string destaque, string resumo, string ProdDescricao_, string ProdValor_, string tipo, string email_cobranca, string moeda, string peso, string extras, string icone, int idMarca)
         {
-            string SQL = @"
-                        INSERT INTO `produtos` 
-                            (
-                                `id_categoria`, 
-                                `id_subcategoria`, 
-                                `estoque`, 
-                                `status`,
-                                `destaque`,
-                                `resumo`, 
-                                `ProdDescricao_`, 
-                                `ProdValor_`, 
-                                `tipo`, 
-                                `email_cobranca`, 
-                                `moeda`,
-                                `peso`, 
-                                `extras`, 
-                                `icone` 
-                            ) 
-                        VALUES
-                            (
-                                '" + id_categoria + "'," +
-                                "'" + id_subcategoria + "'," +
-                                "'" + estoque + "'," +
-                                "'" + status + "'," +
-                                "'" + destaque + "'," +
-                                "'" + resumo + "'," +
-                                "'" + ProdDescricao_ + "'," +
-                                "'" + ProdValor_ + "'," +
-                                "'" + tipo + "', " +
-                                "'" + email_cobranca + "', " +
-                                "'" + moeda + "'," +
-                                "'" + peso + "', " +
-                                "'" + extras + "', " +
-                                "'" + icone + "');";
+            string SQL = @"INSERT INTO produtos
+(id_categoria, id_subcategoria, estoque, status, destaque, resumo, ProdDescricao_, ProdValor_, tipo, email_cobranca, moeda, peso, extras, icone, id_marca)
+VALUES ({0}, {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', {14});";
+
+            SQL = string.Format(SQL, id_categoria, id_subcategoria, estoque, status, destaque, resumo, ProdDescricao_, ProdValor_, tipo, email_cobranca, moeda,
+                peso, extras, icone, idMarca);
 
             conexao.ExecuteNonQuery(SQL);
         }
@@ -88,7 +60,7 @@ namespace Actio.Negocio
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
         public static DataTable SelectByIdCategoria(int id_categoria)
         {
-            string SQL = "SELECT p.`id`, p.`id_subcategoria`, p.`estoque`, p.`status`, p.`destaque`, p.`ProdDescricao_`, p.`ProdValor_`, p.`tipo`, p.`email_cobranca`, p.`moeda`, p.`peso`, p.`icone` FROM produtos p WHERE p.`id_categoria` = '" + id_categoria + "';";
+            string SQL = "SELECT p.`id`, p.`id_subcategoria`, p.`estoque`, p.`status`, p.`destaque`, p.`ProdDescricao_`, p.`ProdValor_`, p.`tipo`, p.`email_cobranca`, p.`moeda`, p.`peso`, p.`icone` FROM produtos p WHERE p.`id_categoria` = '" + id_categoria + "' ORDER BY cast(ProdValor_ as decimal(10, 2));";
             return conexao.Dados(SQL);
         }
         #endregion
@@ -96,14 +68,24 @@ namespace Actio.Negocio
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
         public static DataTable SelectByIdSubCategoria(int id_subcategoria)
         {
-            string SQL = "SELECT p.`id`, p.`id_subcategoria`, p.`estoque`, p.`status`, p.`destaque`, p.`ProdDescricao_`, p.`ProdValor_`, p.`resumo`, p.`tipo`, p.`email_cobranca`, p.`moeda`, p.`peso`, p.`icone` FROM produtos p WHERE p.`id_subcategoria` = '" + id_subcategoria + "';";
+            string SQL = "SELECT p.`id`, p.`id_subcategoria`, p.`estoque`, p.`status`, p.`destaque`, p.`ProdDescricao_`, p.`ProdValor_`, p.`resumo`, p.`tipo`, p.`email_cobranca`, p.`moeda`, p.`peso`, p.`icone` FROM produtos p WHERE p.`id_subcategoria` = '" + id_subcategoria + "' ORDER BY cast(ProdValor_ as decimal(10, 2));";
             return conexao.Dados(SQL);
         }
         #endregion
-        #region Atualizar
-        public static void Update(string id, string id_categoria, string id_subcategoria, string estoque, string status, string destaque, string resumo, string ProdDescricao_, string ProdValor_, string tipo, string email_cobranca, string moeda, string peso, string extras, string icone)
+        public static DataTable SelectByIdMarca(int idMarca, int idSubcategoria)
         {
-            string SQL = @"UPDATE produtos SET id_categoria = '" + id_categoria + "', estoque = '" + estoque + "', id_subcategoria = '" + id_subcategoria + "', status = '" + status + "', destaque = '" + destaque + "', ProdDescricao_ = '" + ProdDescricao_ + "', ProdValor_ = '" + ProdValor_ + "', tipo = '" + tipo + "', email_cobranca = '" + email_cobranca + "', moeda = '" + moeda + "', peso = '" + peso + "', extras = '" + extras + "', icone = '" + icone + "' WHERE id = '" + id + "' LIMIT 1";
+            string sql = string.Format(@"select *
+from produtos
+where id_subcategoria = {0}
+    and id_marca = {1}
+order by cast(ProdValor_ as decimal(10, 2))", idSubcategoria, idMarca);
+
+            return conexao.Dados(sql);
+        }
+        #region Atualizar
+        public static void Update(string id, string id_categoria, string id_subcategoria, string estoque, string status, string destaque, string resumo, string ProdDescricao_, string ProdValor_, string tipo, string email_cobranca, string moeda, string peso, string extras, string icone, int idMarca)
+        {
+            string SQL = @"UPDATE produtos SET id_categoria = '" + id_categoria + "', estoque = '" + estoque + "', id_subcategoria = '" + id_subcategoria + "', status = '" + status + "', destaque = '" + destaque + "', ProdDescricao_ = '" + ProdDescricao_ + "', ProdValor_ = '" + ProdValor_ + "', tipo = '" + tipo + "', email_cobranca = '" + email_cobranca + "', moeda = '" + moeda + "', peso = '" + peso + "', extras = '" + extras + "', icone = '" + icone + "', id_marca = " + idMarca + " WHERE id = '" + id + "' LIMIT 1";
             conexao.ExecuteNonQuery(SQL);
         }
         #endregion
@@ -165,8 +147,6 @@ namespace Actio.Negocio
         {
             string SQL = @"SELECT cast(p.ProdValor_ as decimal(10,2)) ValorProduto, p.icone NomeArquivo, p.proddescricao_ Nome
 FROM produtos p
-  inner join produtos_categoria pc on pc.id = p.id_categoria
-  inner join produtos_subcategoria pcs on pcs.id = p.id_subcategoria
 WHERE p.id_categoria = " + categoria + @"
   AND p.destaque = '1'
   AND p.status = '1'

@@ -185,7 +185,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
         #endregion
         #endregion
         #region grava dados
-        Produtos.Novo(ddlCategoria.SelectedValue, rdb_SubCategorias.SelectedValue, Estoque.Text, CheckStatus.Checked ? "1" : "0", CheckDestaque.Checked ? "1" : "0", Resumo.Text, ProdDescricao_.Text, ProdValor_.Text, "CBR", "loja@rccbh.com.br", "BRL", Peso.Text, Extras.Text, HidIconeProduto.Value);
+        Produtos.Novo(ddlCategoria.SelectedValue, rdb_SubCategorias.SelectedValue, Estoque.Text, CheckStatus.Checked ? "1" : "0", CheckDestaque.Checked ? "1" : "0", Resumo.Text, ProdDescricao_.Text, ProdValor_.Text, "CBR", "loja@rccbh.com.br", "BRL", Peso.Text, Extras.Text, HidIconeProduto.Value,  int.Parse(ddlMarca.SelectedValue));
         #endregion
         #region comportamento da página
         mvProdutos.ActiveViewIndex = 0;
@@ -313,7 +313,8 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
             "BRL",
             Peso.Text,
             Extras.Text,
-            HidIconeProduto.Value
+            HidIconeProduto.Value,
+            int.Parse(ddlMarca.SelectedValue)
             );
         #endregion
         #region comportamento da página
@@ -1125,9 +1126,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
     {
         PanelDetalhaBanco.Visible = true;
         PanelListaBanco.Visible = false;
-        Banco.Text = "";
-        Agencia.Text = "";
-        Conta.Text = "";
+        Marca.Text = "";
         SalvarBanco.Visible = true;
         AlterarBanco.Visible = false;
     }
@@ -1135,9 +1134,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
     {
         PanelDetalhaBanco.Visible = true;
         PanelListaBanco.Visible = false;
-        Banco.Text = "";
-        Agencia.Text = "";
-        Conta.Text = "";
+        Marca.Text = "";
         SalvarBanco.Visible = true;
         AlterarBanco.Visible = false;
     }
@@ -1145,12 +1142,11 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
     #region salva banco
     protected void SalvarBanco_Click(object sender, ImageClickEventArgs e)
     {
-
-        //Doacao.Inserir(CheckStatusBanco.Checked ? "1" : "0", Banco.Text, Agencia.Text, Conta.Text);
-        //Page.ClientScript.RegisterClientScriptBlock(typeof(Page), "sucesso", "alert('Item atualizado com sucesso!');window.location.src = window.location.src;", true);
-        //gridBanco.DataBind();
-        //PanelListaBanco.Visible = true;
-        //PanelDetalhaBanco.Visible = false;
+        Actio.Negocio.Marca.Inserir(Marca.Text);
+        Page.ClientScript.RegisterClientScriptBlock(typeof(Page), "sucesso", "alert('Item atualizado com sucesso!');window.location.src = window.location.src;", true);
+        gridBanco.DataBind();
+        PanelListaBanco.Visible = true;
+        PanelDetalhaBanco.Visible = false;
     }
     #endregion
     #endregion
@@ -1172,39 +1168,35 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
     #region carrega dados | aparencia da página
     public void carregaBanco()
     {
-        //DataTable dt = Doacao.SelectOne(int.Parse(Session["id_Banco"].ToString()));
-        //DataRow dr = dt.Rows[0];
+        DataTable dt = Actio.Negocio.Marca.SelectOne(int.Parse(Session["id_Banco"].ToString()));
+        DataRow dr = dt.Rows[0];
 
-        //Banco.Text = dr["banco"].ToString();
-        //Agencia.Text = dr["agencia"].ToString();
-        //Conta.Text = dr["conta"].ToString();
-        //CheckStatusBanco.Checked = (dr["status"].ToString() == "1");
+        Marca.Text = dr["descricao"].ToString();
 
-        //PanelDetalhaBanco.Visible = true;
-        //PanelListaBanco.Visible = false;
-        //SalvarBanco.Visible = false;
-        //AlterarBanco.Visible = true;
+        PanelDetalhaBanco.Visible = true;
+        PanelListaBanco.Visible = false;
+        SalvarBanco.Visible = false;
+        AlterarBanco.Visible = true;
     }
     #endregion
     #region grava alterações
     protected void AlterarBanco_Click(object sender, ImageClickEventArgs e)
     {
-        //Doacao.Update(Session["id_Banco"].ToString(), CheckStatusBanco.Checked ? "1" : "0", Banco.Text, Conta.Text, Agencia.Text);
-        //PanelDetalhaBanco.Visible = false;
-        //PanelListaBanco.Visible = true;
-        //gridBanco.DataBind();
+        Actio.Negocio.Marca.Update(int.Parse(Session["id_Banco"].ToString()), Marca.Text);
+        PanelDetalhaBanco.Visible = false;
+        PanelListaBanco.Visible = true;
+        gridBanco.DataBind();
 
-        //Page.ClientScript.RegisterClientScriptBlock(typeof(Page), "sucesso", "alert('Item atualizado com sucesso!');window.location.src = window.location.src;", true);
-
+        Page.ClientScript.RegisterClientScriptBlock(typeof(Page), "sucesso", "alert('Item atualizado com sucesso!');window.location.src = window.location.src;", true);
     }
     #endregion
     #endregion
     #region exclui banco
     public void excluiBanco()
     {
-        //Doacao.Excluir(int.Parse(Session["id_Banco"].ToString()));
-        //Page.ClientScript.RegisterClientScriptBlock(typeof(Page), "sucesso", "alert('Item excluido com sucesso!');window.location.src = window.location.src;", true);
-        //gridBanco.DataBind();
+        Actio.Negocio.Marca.Excluir(int.Parse(Session["id_Banco"].ToString()));
+        Page.ClientScript.RegisterClientScriptBlock(typeof(Page), "sucesso", "alert('Item excluido com sucesso!');window.location.src = window.location.src;", true);
+        gridBanco.DataBind();
     }
     #endregion
     #region cancela edição e listar bancos
@@ -1814,5 +1806,14 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
             "Sua imagem deve ter 200px de largura, procure fazer imagens apropriadas para internet.";
     }
     #endregion
+
+    protected void linkMarcas_Click(object sender, EventArgs e)
+    {
+        mvProdutos.SetActiveView(viewMarcas);
+        PanelDetalhaBanco.Visible = false;
+        PanelListaBanco.Visible = true;
+        LabelTitulo.Text = "Cadastro de Marcas";
+        gridBanco.DataBind();
+    }
 }
 #endregion

@@ -75,8 +75,9 @@
     }
 
 #divPagina {
+    min-height: 300px;
     padding-bottom: 50px;
-    width: 920px;
+    width: 961px;
     margin: 0 auto;
 }
 

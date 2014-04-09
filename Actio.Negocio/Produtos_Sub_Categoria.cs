@@ -52,7 +52,7 @@ namespace Actio.Negocio
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
         public static DataTable SelectByIDCategoria(int id_categoria)
         {
-            string SQL = string.Format("SELECT p.`id`, p.`titulo`, p.`icone`, p.`id_categoria` FROM produtos_subcategoria p WHERE p.`id_categoria` = '" + id_categoria + "'");
+            string SQL = string.Format("SELECT p.`id`, p.`titulo`, p.`icone`, p.`id_categoria` FROM produtos_subcategoria p WHERE p.`id_categoria` = '" + id_categoria + "' order by titulo");
             return conexao.Dados(SQL);
         }
         #endregion
