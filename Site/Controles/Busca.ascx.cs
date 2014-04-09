@@ -49,19 +49,25 @@ namespace Site.Controles
 
         private void BuscaProdutosPorCategoria(int idCategoria)
         {
-            rptResultado.DataSource = Produtos.SelectByIdCategoria(idCategoria);
+            Resultado = Produtos.SelectByIdCategoria(idCategoria);
+
+            rptResultado.DataSource = Resultado;
             rptResultado.DataBind();
         }
 
         private void BuscaProdutosPorSubCategoria(int idSubCategoria)
         {
-            rptResultado.DataSource = Produtos.SelectByIdSubCategoria(idSubCategoria);
+            Resultado = Produtos.SelectByIdSubCategoria(idSubCategoria);
+
+            rptResultado.DataSource = Resultado;
             rptResultado.DataBind();
         }
 
         private void BuscaProdutosPorMarca(int idMarca, int idSubCategoria)
         {
-            rptResultado.DataSource = Produtos.SelectByIdMarca(idMarca, idSubCategoria);
+            Resultado = Produtos.SelectByIdMarca(idMarca, idSubCategoria);
+
+            rptResultado.DataSource = Resultado;
             rptResultado.DataBind();
         }
 
@@ -69,7 +75,7 @@ namespace Site.Controles
         {
             int qtde = ((DataTable)rptResultado.DataSource).Rows.Count;
 
-            lblResultadoBusca.Text = string.Format("A busca por \"{0}\" teve {1} resultado{2}.",
+            lblResultadoBusca.Text = string.Format("A busca por <span style='color: rgb(117, 108, 108);'>\"{0}\"</span> teve <span style='color: rgb(117, 108, 108);'>{1}</span> resultado{2}.",
                 valor,
                 qtde,
                 qtde == 1 ? "" : "s");
@@ -84,6 +90,32 @@ namespace Site.Controles
         {
             get { return (int)ViewState["IdSubCategoria"]; }
             set { ViewState["IdSubCategoria"] = value; }
+        }
+
+        private DataTable Resultado
+        {
+            get { return (DataTable)ViewState["Resultado"]; }
+            set { ViewState["Resultado"] = value; }
+        }
+
+        protected void ddlOrdenacao_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (ddlOrdenacao.SelectedIndex)
+            {
+                case 0:
+                    Resultado = Resultado.AsEnumerable().OrderBy(o => decimal.Parse(o["ProdValor_"].ToString())).CopyToDataTable();
+                    break;
+                case 1:
+                    Resultado = Resultado.AsEnumerable().OrderByDescending(o => decimal.Parse(o["ProdValor_"].ToString())).CopyToDataTable();
+                    break;
+                case 2:
+                    throw new NotImplementedException("Ordenação por 'mais vendidos' ainda não foi implementada.");
+                case 3:
+                    throw new NotImplementedException("Ordenação por 'melhores avaliados' ainda não foi implementada.");
+            }
+
+            rptResultado.DataSource = Resultado;
+            rptResultado.DataBind();
         }
     }
 }

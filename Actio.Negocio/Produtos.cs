@@ -60,7 +60,7 @@ VALUES ({0}, {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}'
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
         public static DataTable SelectByIdCategoria(int id_categoria)
         {
-            string SQL = "SELECT p.`id`, p.`id_subcategoria`, p.`estoque`, p.`status`, p.`destaque`, p.`ProdDescricao_`, p.`ProdValor_`, p.`tipo`, p.`email_cobranca`, p.`moeda`, p.`peso`, p.`icone` FROM produtos p WHERE p.`id_categoria` = '" + id_categoria + "';";
+            string SQL = "SELECT p.`id`, p.`id_subcategoria`, p.`estoque`, p.`status`, p.`destaque`, p.`ProdDescricao_`, p.`ProdValor_`, p.`tipo`, p.`email_cobranca`, p.`moeda`, p.`peso`, p.`icone` FROM produtos p WHERE p.`id_categoria` = '" + id_categoria + "' ORDER BY cast(ProdValor_ as decimal(10, 2));";
             return conexao.Dados(SQL);
         }
         #endregion
@@ -68,16 +68,17 @@ VALUES ({0}, {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}'
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
         public static DataTable SelectByIdSubCategoria(int id_subcategoria)
         {
-            string SQL = "SELECT p.`id`, p.`id_subcategoria`, p.`estoque`, p.`status`, p.`destaque`, p.`ProdDescricao_`, p.`ProdValor_`, p.`resumo`, p.`tipo`, p.`email_cobranca`, p.`moeda`, p.`peso`, p.`icone` FROM produtos p WHERE p.`id_subcategoria` = '" + id_subcategoria + "';";
+            string SQL = "SELECT p.`id`, p.`id_subcategoria`, p.`estoque`, p.`status`, p.`destaque`, p.`ProdDescricao_`, p.`ProdValor_`, p.`resumo`, p.`tipo`, p.`email_cobranca`, p.`moeda`, p.`peso`, p.`icone` FROM produtos p WHERE p.`id_subcategoria` = '" + id_subcategoria + "' ORDER BY cast(ProdValor_ as decimal(10, 2));";
             return conexao.Dados(SQL);
         }
         #endregion
         public static DataTable SelectByIdMarca(int idMarca, int idSubcategoria)
         {
             string sql = string.Format(@"select *
-from produto
+from produtos
 where id_subcategoria = {0}
-    and id_marca = {1}", idSubcategoria, idMarca);
+    and id_marca = {1}
+order by cast(ProdValor_ as decimal(10, 2))", idSubcategoria, idMarca);
 
             return conexao.Dados(sql);
         }

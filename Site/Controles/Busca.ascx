@@ -81,15 +81,16 @@
     </div>
     <div id="divResultadoBusca">
         <div style="height: 65px; padding-left: 35px;">
-            <div id="divOrdenacao">Ordenar por:&nbsp;&nbsp;&nbsp;
-                <asp:DropDownList runat="server" ID="ddlOrdenacao">
+            <div id="divOrdenacao">
+                Ordenar por:&nbsp;&nbsp;&nbsp;
+                <asp:DropDownList runat="server" ID="ddlOrdenacao" AutoPostBack="true" OnSelectedIndexChanged="ddlOrdenacao_SelectedIndexChanged">
                     <asp:ListItem>menor preço</asp:ListItem>
                     <asp:ListItem>maior preço</asp:ListItem>
                     <asp:ListItem>mais vendidos</asp:ListItem>
                     <asp:ListItem>melhores avaliações</asp:ListItem>
                 </asp:DropDownList>
             </div>
-            <div style="float: left; padding: 12px; margin-left: 17px;">
+            <div style="float: left; padding: 12px; margin-left: 17px; color: rgb(78, 171, 233); font-size: 15px;">
                 <asp:Label runat="server" ID="lblResultadoBusca" />
             </div>
         </div>
