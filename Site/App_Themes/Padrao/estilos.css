@@ -255,7 +255,7 @@
 }
 
 .produtoSugerimos {
-    clear: both;
+    margin-top: 50px;
 }
 
 .produtoTituloSugerimos {
@@ -281,7 +281,6 @@
 }
 
 .seta {
-    height: 325px;
     width: 31px;
-    padding-top: 80px;
+    margin-top: 70px;
 }

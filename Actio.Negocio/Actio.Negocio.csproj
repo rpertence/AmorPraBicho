@@ -73,6 +73,7 @@
     <Compile Include="Marca.cs" />
     <Compile Include="GrupodeOracao.cs" />
     <Compile Include="Produtos.cs" />
+    <Compile Include="Produtos_Avaliacao.cs" />
     <Compile Include="Produtos_Categoria.cs" />
     <Compile Include="Produtos_Comprados.cs" />
     <Compile Include="Produtos_Descricao.cs" />

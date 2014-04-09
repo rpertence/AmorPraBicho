@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Produto.aspx.cs" Inherits="Site.Produto" MasterPageFile="~/Master/Site.Master" %>
+
 <%@ Register Src="~/Controles/Sugestoes.ascx" TagPrefix="uc1" TagName="Sugestoes" %>
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
@@ -69,7 +70,7 @@
         <div class="produtoSugerimos">
             <div class="produtoTituloSugerimos">
                 <div class="tituloSugerimosMesmaMarca"><span>Sugerimos Também</span></div>
-                <div class="bordaPontilhada" style="width:710px;">&nbsp;</div>
+                <div class="bordaPontilhada" style="width: 710px;">&nbsp;</div>
             </div>
             <div class="produtoSugestoesContainer">
                 <uc1:Sugestoes runat="server" ID="ucSugestoes" QtdeProdutos="5" />
@@ -78,12 +79,17 @@
         <div class="produtoSugerimos">
             <div class="produtoTituloSugerimos">
                 <div class="tituloSugerimosMesmaMarca"><span>Outros Produtos da Marca</span></div>
-                <div class="bordaPontilhada" style="width:630px;">&nbsp;</div>
+                <div class="bordaPontilhada" style="width: 640px;">&nbsp;</div>
             </div>
             <div class="produtoSugestoesContainer">
                 <uc1:Sugestoes runat="server" ID="ucMesmaMarca" QtdeProdutos="5" />
             </div>
         </div>
-        <div id="produtoOpinioes"></div>
+        <div id="produtoOpinioes" class="produtoSugerimos">
+            <div class="produtoTituloSugerimos">
+                <div class="tituloSugerimosMesmaMarca"><span>Opiniões dos Clientes</span></div>
+                <div class="bordaPontilhada" style="width: 690px;">&nbsp;</div>
+            </div>
+        </div>
     </div>
 </asp:Content>
