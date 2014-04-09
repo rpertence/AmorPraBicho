@@ -1,0 +1,24 @@
+﻿.ratingStar
+{
+	white-space:nowrap;
+	height:14px;
+}
+.ratingStar .ratingItem {
+    font-size: 0pt;
+    width: 13px;
+    height: 12px;
+    margin: 0px;
+    padding: 0px;
+    display: block;
+    background-repeat: no-repeat;
+	cursor:pointer;
+}
+.ratingStar .Filled {
+    background-image: url('Imagens/estrela-verde.png');
+}
+.ratingStar .Empty {
+    background-image: url('Imagens/estrela-cinza.png');
+}
+.ratingStar .Saved {
+    background-image: url('Imagens/estrela-verde.png');
+}

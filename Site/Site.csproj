@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\..\..\Users\Henrique\Downloads\AjaxRatingCS2\Ajax-Rating\Bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -111,12 +114,15 @@
     <Content Include="App_Themes\Padrao\Imagens\seta-produto-cima.png" />
     <Content Include="App_Themes\Padrao\Imagens\seta-produto-direita.png" />
     <Content Include="App_Themes\Padrao\Imagens\seta-produto-esquerda.png" />
+    <Content Include="App_Themes\Padrao\Imagens\star.gif" />
     <Content Include="App_Themes\Padrao\Imagens\testeira-fim-da-pagina.png" />
     <Content Include="App_Themes\Padrao\Imagens\testeira-topo.png" />
     <Content Include="App_Themes\Padrao\Imagens\twitter-over.png" />
     <Content Include="App_Themes\Padrao\Imagens\twitter.png" />
     <Content Include="App_Themes\Padrao\Imagens\video-over.png" />
     <Content Include="App_Themes\Padrao\Imagens\video.png" />
+    <Content Include="App_Themes\Padrao\rating.css" />
+    <Content Include="Controles\AvaliacaoLeitura.ascx" />
     <Content Include="Controles\Banners.ascx" />
     <Content Include="Controles\banner\images\bx_loader.gif" />
     <Content Include="Controles\banner\images\controls.png" />
@@ -143,6 +149,13 @@
     </Compile>
     <Compile Include="BaseUserControl.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\AvaliacaoLeitura.ascx.cs">
+      <DependentUpon>AvaliacaoLeitura.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\AvaliacaoLeitura.ascx.designer.cs">
+      <DependentUpon>AvaliacaoLeitura.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controles\Banners.ascx.cs">
       <DependentUpon>Banners.ascx</DependentUpon>

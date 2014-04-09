@@ -1,11 +1,16 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Produto.aspx.cs" Inherits="Site.Produto" MasterPageFile="~/Master/Site.Master" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
 <%@ Register Src="~/Controles/Sugestoes.ascx" TagPrefix="uc1" TagName="Sugestoes" %>
+<%@ Register Src="~/Controles/AvaliacaoLeitura.ascx" TagPrefix="uc1" TagName="AvaliacaoLeitura" %>
+
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
     <script src="Scripts/jquery.corner.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div id="produtoTopo">
         <div id="produtoImagens"></div>
         <div id="produtoInformacoes">
@@ -89,6 +94,78 @@
             <div class="produtoTituloSugerimos">
                 <div class="tituloSugerimosMesmaMarca"><span>Opiniões dos Clientes</span></div>
                 <div class="bordaPontilhada" style="width: 690px;">&nbsp;</div>
+            </div>
+            <div id="produtoRating">
+                <div id="produtoRatingEsquerda" style="float: left;">
+                    <div>
+                        <asp:Rating ID="rateReadOnly" runat="server" ReadOnly="true" MaxRating="5" CurrentRating="<%# CalculaMediaNotas() %>"
+                            CssClass="ratingStar" StarCssClass="ratingItem" WaitingStarCssClass="Saved" FilledStarCssClass="Filled"
+                            EmptyStarCssClass="Empty" AutoPostBack="false">
+                        </asp:Rating>
+                    </div>
+                    <br />
+                    <div class="barras">
+                        <div class="textoBarra">
+                            <div style="float: left;"><span>5 estrelas</span></div>
+                            <div class="barraAvaliacao"></div>
+                            <div style="float: right;"></div>
+                            <asp:Label ID="lblQtde5Estrelas" runat="server"></asp:Label>
+                        </div>
+                        <div class="textoBarra">
+                            <div style="float: left;"><span>4 estrelas</span></div>
+                            <div class="barraAvaliacao"></div>
+                            <div style="float: right;"></div>
+                            <asp:Label ID="lblQtde4Estrelas" runat="server"></asp:Label>
+                        </div>
+                        <div class="textoBarra">
+                            <div style="float: left;"><span>3 estrelas</span></div>
+                            <div class="barraAvaliacao"></div>
+                            <div style="float: right;"></div>
+                            <asp:Label ID="lblQtde3Estrelas" runat="server"></asp:Label>
+                        </div>
+                        <div class="textoBarra">
+                            <div style="float: left;"><span>2 estrelas</span></div>
+                            <div class="barraAvaliacao"></div>
+                            <div style="float: right;"></div>
+                            <asp:Label ID="lblQtde2Estrelas" runat="server"></asp:Label>
+                        </div>
+                        <div class="textoBarra">
+                            <div style="float: left;"><span>1 estrela </span></div>
+                            <div class="barraAvaliacao" style="margin-left: 13px;"></div>
+                            <div style="float: right;"></div>
+                            <asp:Label ID="lblQtde1Estrela" runat="server"></asp:Label>
+                        </div>
+                    </div>
+                </div>
+                <div id="produtoRatingDireita">
+                    <div id="deSuaOpiniao">
+                        <div id="labelDeSuaOpiniao"><span>Dê sua opinião! O que achou do Produto?</span></div>
+                        <div id="imagemAvaliarProduto">
+                            <img id="avaliarProduto" src="App_Themes/Padrao/Imagens/botao-avaliar-o-produto.png" class="ImageComOver" /></div>
+                    </div>
+                    <div id="cadastroOpiniao">
+                        <span>Nota: </span>
+                        <br />
+                        <br />
+                        <asp:Rating ID="rateEnabled" runat="server" MaxRating="5" CurrentRating="0"
+                            CssClass="ratingStar" StarCssClass="ratingItem" WaitingStarCssClass="Saved" FilledStarCssClass="Filled"
+                            EmptyStarCssClass="Empty" AutoPostBack="true">
+                        </asp:Rating>
+                        <br />
+                        <span>Comente sobre o produto:</span>
+                        <br />
+                        <br />
+                        <div style="float:left;margin-right:10px;"><asp:TextBox ID="txtOpiniaoProduto" runat="server" Width="350px" Height="60px" TextMode="MultiLine" MaxLength="500"></asp:TextBox></div>
+                        <div style="margin-top:40px;"><asp:Button ID="btnSalvarAvaliacao" runat="server" Text="Salvar" /></div>
+                    </div>
+                </div>
+            </div>
+            <div id="produtoLeituraAvaliacoes">
+                <%--<asp:Repeater ID="rptAvaliacoes" runat="server">
+                    <ItemTemplate>
+                        <uc1:AvaliacaoLeitura runat="server" ID="ucAvaliacao" />
+                    </ItemTemplate>
+                </asp:Repeater>--%>
             </div>
         </div>
     </div>

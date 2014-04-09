@@ -38,6 +38,16 @@ $(document).ready(function () {
         $("[id$='txtCEP']").focus();
         $("#produtoFretePrazoResultado").hide();
     });
+
+    //Escondendo/exibindo cadastro de opiniões do produto
+    $("#cadastroOpiniao").hide();
+
+    $("#avaliarProduto").click(function () {
+        $("#deSuaOpiniao").hide();
+        $("#cadastroOpiniao").show();
+    });
+
+    
 });
 
 $.fn.ancora = function () {
