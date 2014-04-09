@@ -75,7 +75,6 @@
     }
 
 #divPagina {
-    
     padding-bottom: 50px;
     width: 920px;
     margin: 0 auto;
@@ -117,7 +116,7 @@
     padding-bottom: 10px;
     border-bottom: solid 2px #ECECEC;
     text-align: left;
-    text-transform:uppercase;
+    text-transform: uppercase;
 }
 
 #produtoEstrelas {
@@ -156,8 +155,8 @@
 }
 
 .produtoPreco2 {
-    font-size:22pt;
-    font-weight:900;
+    font-size: 22pt;
+    font-weight: 900;
 }
 
 #produtoComprar {
@@ -166,41 +165,41 @@
 }
 
 #produtoFretePrazoContainer {
-    font-family:Roboto;
-    font-size:11pt;
-    margin-top:30px;
+    font-family: Roboto;
+    font-size: 11pt;
+    margin-top: 30px;
 }
 
 #produtoFretePrazoResultado {
-    margin-top:10px;
+    margin-top: 10px;
 }
 
 .fretePrazoTxt {
-    font-size:8pt;
+    font-size: 8pt;
     width: 75px;
     height: 12px;
-    padding-left:10px;
+    padding-left: 10px;
     background-image: url('Imagens/campo-cep.png');
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     background-position: left;
 }
 
 .prazoEntregaResultado {
     color: #36A9E1;
     font-size: 12pt;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .cepDigitado {
-    font-weight:bold;
+    font-weight: bold;
 }
 
 #produtoPrazoEntregaContainer {
-    font-weight:bold;
+    font-weight: bold;
 }
 
 #produtoValorFreteContainer {
-    margin-top:5px;
+    margin-top: 5px;
 }
 
 #linkPesquisarOutroCEP {
@@ -209,52 +208,79 @@
 
 #produtoMeio {
     width: 865px;
-    height: 500px;
+    height: 300px;
     padding-top: 10px;
     margin: auto;
 }
 
 #produtoDescricao {
-    width:50%;
-    float:left;
+    width: 50%;
+    float: left;
 }
 
 #produtoComentariosFacebook {
-    width:48%;
-    float:right;
+    width: 48%;
+    float: right;
     padding-left: 15px;
 }
 
-#abaDescricao {
+#produtoAbaDescricao {
     background-color: #ECECEC;
     font-family: Roboto;
     font-size: 14pt;
-    font-weight:500;
-    text-transform:uppercase;
-    height:30px;
+    font-weight: 500;
+    text-transform: uppercase;
+    height: 30px;
     width: 120px;
     margin-left: 20px;
-    text-align:center;
+    text-align: center;
 }
 
 .valignCenter {
-    vertical-align:middle;
-    display:inline-block;
+    vertical-align: middle;
+    display: inline-block;
 }
 
-#conteudoDescricao {
+#produtoConteudoDescricao {
     padding: 20px 10px 20px 10px;
     border: solid 2px #ECECEC;
-    text-align:justify;
+    text-align: justify;
 }
 
-#tituloSugerimos {
+#produtoFooter {
+    width: 970px;
+    padding-top: 10px;
+    margin: auto;
+}
+
+.produtoSugerimos {
+    clear: both;
+}
+
+.produtoTituloSugerimos {
+    height: 30px;
+}
+
+.produtoSugestoesContainer {
+    height: 270px;
+    margin-top: 30px;
+}
+
+.tituloSugerimosMesmaMarca {
     font-family: Roboto;
     font-size: 19pt;
-    margin-left:20px;
+    margin-left: 20px;
+    float: left;
 }
 
 .bordaPontilhada {
-    border: dotted 2px #ECECEC;
-    width: 800px;
+    border-bottom: dotted 2px #ECECEC;
+    float: right;
+    height: 20px;
+}
+
+.seta {
+    height: 325px;
+    width: 31px;
+    padding-top: 80px;
 }
