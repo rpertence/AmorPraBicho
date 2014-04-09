@@ -127,6 +127,7 @@
     <Content Include="Controles\banner\plugins\jquery.fitvids.js" />
     <Content Include="Controles\Busca.ascx" />
     <Content Include="Controles\Produto.ascx" />
+    <Content Include="Controles\Sugestoes.ascx" />
     <Content Include="Controles\Vitrine.ascx" />
     <Content Include="Home.aspx" />
     <Content Include="Produto.aspx" />
@@ -163,6 +164,13 @@
     </Compile>
     <Compile Include="Controles\Produto.ascx.designer.cs">
       <DependentUpon>Produto.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Sugestoes.ascx.cs">
+      <DependentUpon>Sugestoes.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\Sugestoes.ascx.designer.cs">
+      <DependentUpon>Sugestoes.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controles\Vitrine.ascx.cs">
       <DependentUpon>Vitrine.ascx</DependentUpon>

@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Produto.aspx.cs" Inherits="Site.Produto" MasterPageFile="~/Master/Site.Master" %>
+<%@ Register Src="~/Controles/Sugestoes.ascx" TagPrefix="uc1" TagName="Sugestoes" %>
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
     <script src="Scripts/jquery.corner.js"></script>
@@ -55,8 +56,8 @@
     </div>
     <div id="produtoMeio">
         <div id="produtoDescricao">
-            <div id="abaDescricao"><span class="valignCenter">Descrição</span></div>
-            <div id="conteudoDescricao">
+            <div id="produtoAbaDescricao"><span class="valignCenter">Descrição</span></div>
+            <div id="produtoConteudoDescricao">
                 <asp:Label ID="lblConteudoDescricao" runat="server" Text="Assento Tubline para cães e gatos e adaptável à maioria dos assentos de automóveis."></asp:Label>
             </div>
         </div>
@@ -65,11 +66,24 @@
         </div>
     </div>
     <div id="produtoFooter">
-        <div id="produtoSugerimos">
-            <div id="tituloSugerimos"><span>Sugerimos Também</span></div>
-            <div class="bordaPontilhada"></div>
+        <div class="produtoSugerimos">
+            <div class="produtoTituloSugerimos">
+                <div class="tituloSugerimosMesmaMarca"><span>Sugerimos Também</span></div>
+                <div class="bordaPontilhada" style="width:710px;">&nbsp;</div>
+            </div>
+            <div class="produtoSugestoesContainer">
+                <uc1:Sugestoes runat="server" ID="ucSugestoes" QtdeProdutos="5" />
+            </div>
         </div>
-        <div id="produtoMesmaMarca"></div>
+        <div class="produtoSugerimos">
+            <div class="produtoTituloSugerimos">
+                <div class="tituloSugerimosMesmaMarca"><span>Outros Produtos da Marca</span></div>
+                <div class="bordaPontilhada" style="width:630px;">&nbsp;</div>
+            </div>
+            <div class="produtoSugestoesContainer">
+                <uc1:Sugestoes runat="server" ID="ucMesmaMarca" QtdeProdutos="5" />
+            </div>
+        </div>
         <div id="produtoOpinioes"></div>
     </div>
 </asp:Content>

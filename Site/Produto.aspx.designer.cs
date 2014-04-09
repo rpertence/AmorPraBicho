@@ -101,5 +101,23 @@ namespace Site {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblConteudoDescricao;
+        
+        /// <summary>
+        /// ucSugestoes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Site.Controles.Sugestoes ucSugestoes;
+        
+        /// <summary>
+        /// ucMesmaMarca control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Site.Controles.Sugestoes ucMesmaMarca;
     }
 }
