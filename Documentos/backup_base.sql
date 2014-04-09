@@ -189,30 +189,33 @@ INSERT INTO `artigos_coordenador` (`artigo_id`,`artigo_titulo`,`artigo_resumo`,`
 
 
 --
--- Definition of table `banner`
+-- Definition of table `banner_loja`
 --
 
-DROP TABLE IF EXISTS `banner`;
-CREATE TABLE `banner` (
+DROP TABLE IF EXISTS `banner_loja`;
+CREATE TABLE `banner_loja` (
   `banner_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `banner_alt` varchar(90) NOT NULL,
   `banner_url` varchar(250) NOT NULL,
   `banner_isAtivo` char(1) NOT NULL,
   `banner_arquivo` varchar(250) NOT NULL,
+  `banner_tipo` int(10) unsigned NOT NULL,
   PRIMARY KEY (`banner_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `banner`
+-- Dumping data for table `banner_loja`
 --
 
-/*!40000 ALTER TABLE `banner` DISABLE KEYS */;
-INSERT INTO `banner` (`banner_id`,`banner_alt`,`banner_url`,`banner_isAtivo`,`banner_arquivo`) VALUES 
- (1,'Residencial Murano','http://construtorarenna.com.br/Imovel.aspx?id=81','1','ActioBanner_11102012071343.jpg'),
- (2,'EdifÃ­cio Atlantis - Gameleira','http://construtorarenna.com.br/Lancamento.aspx?id=89','1','ActioBanner_11102012111626.jpg'),
- (3,'Bulevard Buritis','http://construtorarenna.com.br/Lancamento.aspx?id=93','1','ActioBanner_11102012110110.jpg'),
- (4,'EdifÃ­o Atlantis - Gameleira','http://construtorarenna.com.br/Lancamento.aspx?id=89','1','ActioBanner_11102012111735.jpg');
-/*!40000 ALTER TABLE `banner` ENABLE KEYS */;
+/*!40000 ALTER TABLE `banner_loja` DISABLE KEYS */;
+INSERT INTO `banner_loja` (`banner_id`,`banner_alt`,`banner_url`,`banner_isAtivo`,`banner_arquivo`,`banner_tipo`) VALUES 
+ (7,'Cachorro','http://www.google.com.br','1','ActioBanner_07042014135834.png',0),
+ (8,'Gato','http://www.google.com.br','1','ActioBanner_07042014140605.png',0),
+ (9,'Pássaros','http://www.google.com.br','1','ActioBanner_07042014144614.png',0),
+ (10,'Banner lateral','http://www.google.com.br','0','',1),
+ (11,'Banner lateral 2','http://www.google.com.br','1','ActioBanner_08042014123158.png',1),
+ (12,'Banner lateral 3','http://www.google.com.br','1','ActioBanner_08042014123339.png',1);
+/*!40000 ALTER TABLE `banner_loja` ENABLE KEYS */;
 
 
 --
@@ -2120,33 +2123,6 @@ INSERT INTO `depoimento` (`id`,`email`,`nome`,`status`,`descricao`,`resumo`,`dat
 
 
 --
--- Definition of table `doacao`
---
-
-DROP TABLE IF EXISTS `doacao`;
-CREATE TABLE `doacao` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `banco` varchar(145) NOT NULL,
-  `agencia` varchar(45) NOT NULL,
-  `conta` varchar(45) NOT NULL,
-  `status` char(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `doacao`
---
-
-/*!40000 ALTER TABLE `doacao` DISABLE KEYS */;
-INSERT INTO `doacao` (`id`,`banco`,`agencia`,`conta`,`status`) VALUES 
- (1,'BANCO DO BRASIL','3858-X','759593-X','1'),
- (2,'BRADESCO','0465-0','348480-7','1'),
- (3,'CAIXA ECONOMICA FEDERAL','1667 OP 03','1591-6','1'),
- (4,'BANCO REAL','0040','4700080-1','0');
-/*!40000 ALTER TABLE `doacao` ENABLE KEYS */;
-
-
---
 -- Definition of table `emailmarketing`
 --
 
@@ -3358,7 +3334,7 @@ CREATE TABLE `historico` (
   `descricao` longtext,
   `painel` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1791 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1804 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `historico`
@@ -4734,7 +4710,20 @@ INSERT INTO `historico` (`id`,`id_usuario`,`data`,`tipo`,`descricao`,`painel`) V
  (1787,1,'04/04/2014 14:05:55','9','Entrou no sistema','login'),
  (1788,1,'04/04/2014 14:12:22','0','Adicionou o item Rafael Pertence','usuários'),
  (1789,1,'04/04/2014 14:18:19','8','Saiu do sistema','logout'),
- (1790,1,'04/04/2014 14:18:23','9','Entrou no sistema','login');
+ (1790,1,'04/04/2014 14:18:23','9','Entrou no sistema','login'),
+ (1791,1,'07/04/2014 10:48:02','9','Entrou no sistema','login'),
+ (1792,1,'07/04/2014 10:58:19','9','Entrou no sistema','login'),
+ (1793,1,'07/04/2014 11:52:39','9','Entrou no sistema','login'),
+ (1794,1,'07/04/2014 13:58:00','9','Entrou no sistema','login'),
+ (1795,1,'07/04/2014 14:04:08','9','Entrou no sistema','login'),
+ (1796,1,'07/04/2014 14:45:55','9','Entrou no sistema','login'),
+ (1797,1,'07/04/2014 15:32:13','9','Entrou no sistema','login'),
+ (1798,1,'07/04/2014 16:31:46','9','Entrou no sistema','login'),
+ (1799,1,'08/04/2014 10:03:18','9','Entrou no sistema','login'),
+ (1800,1,'08/04/2014 12:18:12','9','Entrou no sistema','login'),
+ (1801,1,'08/04/2014 15:32:52','9','Entrou no sistema','login'),
+ (1802,1,'08/04/2014 15:58:26','9','Entrou no sistema','login'),
+ (1803,1,'08/04/2014 16:00:27','9','Entrou no sistema','login');
 /*!40000 ALTER TABLE `historico` ENABLE KEYS */;
 
 
@@ -4760,6 +4749,28 @@ CREATE TABLE `links` (
 INSERT INTO `links` (`id`,`url`,`titulo`,`alt`,`status`) VALUES 
  (1,'http://actio.net.br','Actio ComunicaÃ§Ã£o','A Actio ComunicaÃƒÂ§ÃƒÂ£o Publicidade e Propaganda ÃƒÂ© um empresa especializada em atendimento web','1');
 /*!40000 ALTER TABLE `links` ENABLE KEYS */;
+
+
+--
+-- Definition of table `marca`
+--
+
+DROP TABLE IF EXISTS `marca`;
+CREATE TABLE `marca` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(145) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `marca`
+--
+
+/*!40000 ALTER TABLE `marca` DISABLE KEYS */;
+INSERT INTO `marca` (`id`,`descricao`) VALUES 
+ (5,'Pedigree'),
+ (6,'Cibal');
+/*!40000 ALTER TABLE `marca` ENABLE KEYS */;
 
 
 --
@@ -4845,16 +4856,29 @@ CREATE TABLE `produtos` (
   `peso` varchar(45) NOT NULL,
   `extras` varchar(13) NOT NULL COMMENT 'valor usado para dar desconto ou acrescimo, como embalagem para presente, por exemplo',
   `icone` varchar(145) NOT NULL,
+  `id_marca` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `produtos`
 --
 
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` (`id`,`id_categoria`,`id_subcategoria`,`estoque`,`status`,`destaque`,`resumo`,`ProdDescricao_`,`ProdValor_`,`tipo`,`email_cobranca`,`moeda`,`peso`,`extras`,`icone`) VALUES 
- (1,16,37,'1','1','0','teste','teste','184,00','CBR','loja@rccbh.com.br','BRL','10000','','ActioIconePadrao_2552013174231.jpg');
+INSERT INTO `produtos` (`id`,`id_categoria`,`id_subcategoria`,`estoque`,`status`,`destaque`,`resumo`,`ProdDescricao_`,`ProdValor_`,`tipo`,`email_cobranca`,`moeda`,`peso`,`extras`,`icone`,`id_marca`) VALUES 
+ (2,17,38,'100','1','0','Ração','Ração bacana','30','CBR','loja@rccbh.com.br','BRL','1000','','ActioProdutoIcone_07042014155404.jpg',5),
+ (3,17,38,'20','1','1','Ração 2','Ração 2','123,45','CBR','loja@rccbh.com.br','BRL','500','','ActioProdutoIcone_07042014163235.jpg',0),
+ (4,17,38,'40','1','1','Ração 3','Ração 3','400','CBR','loja@rccbh.com.br','BRL','200','','ActioProdutoIcone_07042014163307.jpg',0),
+ (5,17,38,'33','1','1','Outra ração','Outra ração','555','CBR','loja@rccbh.com.br','BRL','222','','ActioProdutoIcone_07042014163330.jpg',0),
+ (6,18,39,'111','1','1','Ração de gato','Ração de gato','22','CBR','loja@rccbh.com.br','BRL','1','','ActioProdutoIcone_07042014164651.jpg',0),
+ (7,18,39,'23','1','1','Ração de gato','Ração de gato 2','344','CBR','loja@rccbh.com.br','BRL','333','','ActioProdutoIcone_07042014164713.jpg',0),
+ (8,18,39,'3','1','1','Ração de gato','Ração de gato 3','35','CBR','loja@rccbh.com.br','BRL','3','','ActioProdutoIcone_07042014164734.jpg',0),
+ (9,18,39,'34','1','1','Ração de gato','Ração de gato 4','66','CBR','loja@rccbh.com.br','BRL','222','','ActioProdutoIcone_07042014164800.jpg',0),
+ (10,20,40,'2','1','1','Item para roedores','Item 1','23','CBR','loja@rccbh.com.br','BRL','2','','ActioProdutoIcone_07042014165150.jpg',0),
+ (11,20,40,'2','1','1','Item para roedores','Item 2','23','CBR','loja@rccbh.com.br','BRL','2','','ActioProdutoIcone_07042014165223.jpg',0),
+ (12,19,41,'43','1','1','Pássaros','Item 1','465','CBR','loja@rccbh.com.br','BRL','333','','ActioProdutoIcone_07042014165736.jpg',0),
+ (13,19,41,'222','1','1','Pássaros','Item 2','51','CBR','loja@rccbh.com.br','BRL','2','','ActioProdutoIcone_07042014165801.jpg',0),
+ (14,17,38,'222','1','1','Ração','Ração','222','CBR','loja@rccbh.com.br','BRL','444','','ActioProdutoIcone_08042014165438.jpg',5);
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 
 
@@ -4869,7 +4893,7 @@ CREATE TABLE `produtos_categoria` (
   `icone` varchar(145) NOT NULL,
   `destaque` char(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `produtos_categoria`
@@ -4877,7 +4901,11 @@ CREATE TABLE `produtos_categoria` (
 
 /*!40000 ALTER TABLE `produtos_categoria` DISABLE KEYS */;
 INSERT INTO `produtos_categoria` (`id`,`titulo`,`icone`,`destaque`) VALUES 
- (16,'INSCRIÇÕES ','ActioCategoriaIcone_6122011101922.gif','0');
+ (17,'Cães','','0'),
+ (18,'Gatos',' ','0'),
+ (19,'Pássaros',' ','0'),
+ (20,'Roedores',' ','0'),
+ (21,'Peixes',' ','0');
 /*!40000 ALTER TABLE `produtos_categoria` ENABLE KEYS */;
 
 
@@ -6862,7 +6890,7 @@ CREATE TABLE `produtos_subcategoria` (
   `icone` varchar(145) NOT NULL,
   `id_categoria` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `produtos_subcategoria`
@@ -6870,8 +6898,14 @@ CREATE TABLE `produtos_subcategoria` (
 
 /*!40000 ALTER TABLE `produtos_subcategoria` DISABLE KEYS */;
 INSERT INTO `produtos_subcategoria` (`id`,`titulo`,`icone`,`id_categoria`) VALUES 
- (34,'Congresso Arquidiocesano','0',16),
- (37,'Congressinho p/ Crianças','0',16);
+ (38,'Ração','0',17),
+ (39,'Ração','0',18),
+ (40,'Acessórios','0',20),
+ (41,'Acessórios','0',19),
+ (42,'Acessórios','0',17),
+ (43,'Extras','0',17),
+ (44,'Brinquedos','0',17),
+ (45,'Bebedouro','0',17);
 /*!40000 ALTER TABLE `produtos_subcategoria` ENABLE KEYS */;
 
 

@@ -13,5 +13,16 @@ namespace Site.Master
         {
 
         }
+
+        protected void imgLupa_Click(object sender, ImageClickEventArgs e)
+        {
+            if (txtBusca.Text.Trim() != string.Empty)
+                Response.Redirect("ResultadoBusca.aspx?p=" + txtBusca.Text.Trim());
+        }
+
+        public void AtualizaCampoPesquisa(string valor)
+        {
+            txtBusca.Text = valor;
+        }
     }
 }

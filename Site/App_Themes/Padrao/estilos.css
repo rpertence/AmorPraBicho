@@ -37,6 +37,15 @@
     left: 221px;
 }
 
+    #divHeaderBusca input[type=text] {
+        width: 418px;
+        height: 30px;
+        background-color: transparent;
+        border: 0;
+        padding-left: 10px;
+        font-size: 14px;
+    }
+
 #imgCarrinhoHeader {
     float: right;
 }
@@ -283,4 +292,13 @@
 .seta {
     width: 31px;
     margin-top: 70px;
+}
+
+#divFacebook {
+    width: 961px;
+    margin: 0 auto;
+    height: 285px;
+}
+.fb-comments {
+    top: -109px;
 }
