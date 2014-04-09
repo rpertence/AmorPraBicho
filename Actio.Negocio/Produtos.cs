@@ -82,6 +82,22 @@ order by cast(ProdValor_ as decimal(10, 2))", idSubcategoria, idMarca);
 
             return conexao.Dados(sql);
         }
+        public static DataTable SelectByPesquisa(string valor)
+        {
+            string sql = string.Format(@"select distinct p.id, p.proddescricao_, p.prodvalor_, p.icone
+from produtos p
+  inner join produtos_categoria c on p.id_categoria = c.id
+    and p.status = 1
+  inner join produtos_subcategoria sc on p.id_subcategoria = sc.id
+  inner join marca m on p.id_marca = m.id
+where resumo like '%{0}%'
+  or proddescricao_ like '%{0}%'
+  or c.titulo like '%{0}%'
+  or sc.titulo like '%{0}%'
+  or m.descricao like '%{0}%'", valor);
+
+            return conexao.Dados(sql);
+        }
         #region Atualizar
         public static void Update(string id, string id_categoria, string id_subcategoria, string estoque, string status, string destaque, string resumo, string ProdDescricao_, string ProdValor_, string tipo, string email_cobranca, string moeda, string peso, string extras, string icone, int idMarca)
         {

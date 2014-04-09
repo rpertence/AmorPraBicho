@@ -13,10 +13,19 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
+    <div id="fb-root"></div>
+    <script>(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
     <form id="form1" runat="server">
         <div id="divHeader">
             <div id="divHeaderInterna">
-                <img src="../App_Themes/Padrao/Imagens/logo-topo.png" />
+                <a href="/">
+                    <img src="../App_Themes/Padrao/Imagens/logo-topo.png" /></a>
                 <img src="../App_Themes/Padrao/Imagens/carrinho.png" id="imgCarrinhoHeader" />
                 <div id="divHeaderRedesSociais">
                     <i>acesse nossas redes e fique ligado nas promoções!</i>
@@ -25,6 +34,8 @@
                     <img src="../App_Themes/Padrao/Imagens/botao-twitter-topo.png" class="ImageComOver" />
                 </div>
                 <div id="divHeaderBusca">
+                    <asp:TextBox runat="server" ID="txtBusca" />
+                    <asp:ImageButton runat="server" ID="imgLupa" ImageUrl="~/App_Themes/Padrao/Imagens/lupa_transparente.png" ImageAlign="Middle" OnClick="imgLupa_Click" />
                 </div>
                 <div id="divHeaderBotoes">
                     <a>
@@ -44,6 +55,10 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+        <div id="divFacebook">
+            <div class="fb-comments" data-href="https://www.facebook.com/amorprabicho" data-numposts="5" data-colorscheme="light"></div>
+            <div class="fb-like-box" data-href="https://www.facebook.com/amorprabicho" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+        </div>
         <div id="divFooter">
             <div id="divFooterTesteira"></div>
             <div id="divFooterInterna">
@@ -51,7 +66,8 @@
                     <img src="../App_Themes/Padrao/Imagens/marca-fim-da-pagina.png" />
                 </div>
                 <div>
-                    <span style="font-size: 17px;">Institucional</span><br /><br />
+                    <span style="font-size: 17px;">Institucional</span><br />
+                    <br />
                     <ul>
                         <li><a>Home</a></li>
                         <li><a>Empresa</a></li>
@@ -61,7 +77,8 @@
                     </ul>
                 </div>
                 <div>
-                    <span style="font-size: 17px;">Departamentos</span><br /><br />
+                    <span style="font-size: 17px;">Departamentos</span><br />
+                    <br />
                     <ul>
                         <li><a>Cães</a></li>
                         <li><a>Gatos</a></li>
@@ -71,7 +88,8 @@
                     </ul>
                 </div>
                 <div>
-                    <span style="font-size: 17px;">Atendimento</span><br /><br />
+                    <span style="font-size: 17px;">Atendimento</span><br />
+                    <br />
                     <ul>
                         <li><a>Canal de atendimento</a></li>
                         <li><a>Dúvidas frequentes</a></li>

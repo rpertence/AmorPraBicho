@@ -100,6 +100,7 @@
     <Content Include="App_Themes\Padrao\Imagens\googleplus.png" />
     <Content Include="App_Themes\Padrao\Imagens\linha-fim-moldura.png" />
     <Content Include="App_Themes\Padrao\Imagens\logo-topo.png" />
+    <Content Include="App_Themes\Padrao\Imagens\lupa_transparente.png" />
     <Content Include="App_Themes\Padrao\Imagens\marca-fim-da-pagina.png" />
     <Content Include="App_Themes\Padrao\Imagens\para-o-seu-caozinho.png" />
     <Content Include="App_Themes\Padrao\Imagens\para-o-seu-gatinho.png" />
@@ -232,7 +233,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>54676</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:4952/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

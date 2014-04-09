@@ -6,14 +6,27 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using MasterPage = Site.Master.Site;
 
 namespace Site.Controles
 {
-    public partial class Busca : System.Web.UI.UserControl
+    public partial class Busca : BaseUserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                string p;
+                if (!string.IsNullOrEmpty(p = Request.QueryString["p"]))
+                {
+                    Resultado = Produtos.SelectByPesquisa(p);
 
+                    BindResultados();
+
+                    ((MasterPage)this.Page.Master).AtualizaCampoPesquisa(p);
+                    ExibeMensagemResultadoBusca(p);
+                }
+            }
         }
 
         protected void rptCategorias_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -51,21 +64,26 @@ namespace Site.Controles
         {
             Resultado = Produtos.SelectByIdCategoria(idCategoria);
 
-            rptResultado.DataSource = Resultado;
-            rptResultado.DataBind();
+            BindResultados();
         }
 
         private void BuscaProdutosPorSubCategoria(int idSubCategoria)
         {
             Resultado = Produtos.SelectByIdSubCategoria(idSubCategoria);
 
-            rptResultado.DataSource = Resultado;
-            rptResultado.DataBind();
+            BindResultados();
         }
 
         private void BuscaProdutosPorMarca(int idMarca, int idSubCategoria)
         {
             Resultado = Produtos.SelectByIdMarca(idMarca, idSubCategoria);
+
+            BindResultados();
+        }
+
+        private void BindResultados()
+        {
+            AplicaOrdenacao();
 
             rptResultado.DataSource = Resultado;
             rptResultado.DataBind();
@@ -73,7 +91,7 @@ namespace Site.Controles
 
         private void ExibeMensagemResultadoBusca(string valor)
         {
-            int qtde = ((DataTable)rptResultado.DataSource).Rows.Count;
+            int qtde = Resultado.Rows.Count;
 
             lblResultadoBusca.Text = string.Format("A busca por <span style='color: rgb(117, 108, 108);'>\"{0}\"</span> teve <span style='color: rgb(117, 108, 108);'>{1}</span> resultado{2}.",
                 valor,
@@ -100,22 +118,27 @@ namespace Site.Controles
 
         protected void ddlOrdenacao_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (ddlOrdenacao.SelectedIndex)
-            {
-                case 0:
-                    Resultado = Resultado.AsEnumerable().OrderBy(o => decimal.Parse(o["ProdValor_"].ToString())).CopyToDataTable();
-                    break;
-                case 1:
-                    Resultado = Resultado.AsEnumerable().OrderByDescending(o => decimal.Parse(o["ProdValor_"].ToString())).CopyToDataTable();
-                    break;
-                case 2:
-                    throw new NotImplementedException("Ordenação por 'mais vendidos' ainda não foi implementada.");
-                case 3:
-                    throw new NotImplementedException("Ordenação por 'melhores avaliados' ainda não foi implementada.");
-            }
+            BindResultados();
+        }
 
-            rptResultado.DataSource = Resultado;
-            rptResultado.DataBind();
+        private void AplicaOrdenacao()
+        {
+            if (Resultado.Rows.Count > 0)
+            {
+                switch (ddlOrdenacao.SelectedIndex)
+                {
+                    case 0:
+                        Resultado = Resultado.AsEnumerable().OrderBy(o => decimal.Parse(o["ProdValor_"].ToString())).CopyToDataTable();
+                        break;
+                    case 1:
+                        Resultado = Resultado.AsEnumerable().OrderByDescending(o => decimal.Parse(o["ProdValor_"].ToString())).CopyToDataTable();
+                        break;
+                    case 2:
+                        throw new NotImplementedException("Ordenação por 'mais vendidos' ainda não foi implementada.");
+                    case 3:
+                        throw new NotImplementedException("Ordenação por 'melhores avaliados' ainda não foi implementada.");
+                }
+            }
         }
     }
 }

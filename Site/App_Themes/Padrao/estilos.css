@@ -267,3 +267,12 @@
     border: dotted 2px #ECECEC;
     width: 800px;
 }
+
+#divFacebook {
+    width: 961px;
+    margin: 0 auto;
+    height: 285px;
+}
+.fb-comments {
+    top: -109px;
+}
