@@ -85,6 +85,11 @@
     <Content Include="App_Themes\Padrao\Imagens\botão-facebook-topo.png" />
     <Content Include="App_Themes\Padrao\Imagens\botão-googleplus-topo-OVER.png" />
     <Content Include="App_Themes\Padrao\Imagens\botão-googleplus-topo.png" />
+    <Content Include="App_Themes\Padrao\Imagens\busca-caozinho.png" />
+    <Content Include="App_Themes\Padrao\Imagens\busca-gatinho.png" />
+    <Content Include="App_Themes\Padrao\Imagens\busca-passaro.png" />
+    <Content Include="App_Themes\Padrao\Imagens\busca-peixe.png" />
+    <Content Include="App_Themes\Padrao\Imagens\busca-roedor.png" />
     <Content Include="App_Themes\Padrao\Imagens\busca.png" />
     <Content Include="App_Themes\Padrao\Imagens\busque-por-aqui.png" />
     <Content Include="App_Themes\Padrao\Imagens\campo-cep.png" />
