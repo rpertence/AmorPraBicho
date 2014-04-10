@@ -1484,7 +1484,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
     #region lista de banner
     protected void lk_Banner_Click(object sender, EventArgs e)
     {
-        mvProdutos.ActiveViewIndex = 10;
+        mvProdutos.SetActiveView(v10Banner);
         mvBanner.ActiveViewIndex = 0;
     }
     #endregion
@@ -1566,7 +1566,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
         #endregion
         #endregion
         #region salva dados
-        Banner_Loja.Inserir(TituloBanner.Text, bannerLink.Text, Status.SelectedValue, int.Parse(Tipo.SelectedValue), nomeArquivo);
+        Banner_Loja.Inserir(TituloBanner.Text, bannerLink.Text, Status.SelectedValue, int.Parse(Tipo.SelectedValue), nomeArquivo, ddlCategoriaBanner.SelectedIndex == 0 ? null : (int?)int.Parse(ddlCategoriaBanner.SelectedValue));
         #endregion
         #region comportamenteo da página
         mvBanner.ActiveViewIndex = 0;
@@ -1665,7 +1665,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
         if (umBanner != 2)
         {
             #region salva dados
-            Banner_Loja.Update(Session["banner_id"].ToString(), TituloBanner.Text, bannerLink.Text, nomeArquivo, Status.SelectedValue);
+            Banner_Loja.Update(Session["banner_id"].ToString(), TituloBanner.Text, bannerLink.Text, nomeArquivo, Status.SelectedValue, ddlCategoriaBanner.SelectedIndex == 0 ? null : (int?)int.Parse(ddlCategoriaBanner.SelectedValue));
             #endregion
             #region comportamento da página
             Page.ClientScript.RegisterClientScriptBlock(typeof(Page), "sucesso", "alert('Item atualizado com sucesso!');window.location.src = window.location.src;", true);
@@ -1697,7 +1697,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
                 if (ativo == 1)
                 {
                     #region salva dados
-                    Banner_Loja.Update(Session["banner_id"].ToString(), TituloBanner.Text, bannerLink.Text, nomeArquivo, Status.SelectedValue);
+                    Banner_Loja.Update(Session["banner_id"].ToString(), TituloBanner.Text, bannerLink.Text, nomeArquivo, Status.SelectedValue, ddlCategoriaBanner.SelectedIndex == 0 ? null : (int?)int.Parse(ddlCategoriaBanner.SelectedValue));
                     #endregion
                     #region comportamento da página
                     Page.ClientScript.RegisterClientScriptBlock(typeof(Page), "sucesso", "alert('Item atualizado com sucesso!');window.location.src = window.location.src;", true);
@@ -1711,7 +1711,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
                 if (ativo == 0)
                 {
                     #region salva dados
-                    Banner_Loja.Update(Session["banner_id"].ToString(), TituloBanner.Text, bannerLink.Text, nomeArquivo, Status.SelectedValue);
+                    Banner_Loja.Update(Session["banner_id"].ToString(), TituloBanner.Text, bannerLink.Text, nomeArquivo, Status.SelectedValue, ddlCategoriaBanner.SelectedIndex == 0 ? null : (int?)int.Parse(ddlCategoriaBanner.SelectedValue));
                     #endregion
                     #region comportamento da página
                     Page.ClientScript.RegisterClientScriptBlock(typeof(Page), "sucesso", "alert('Item atualizado com sucesso!');window.location.src = window.location.src;", true);
@@ -1814,6 +1814,14 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
         PanelListaBanco.Visible = true;
         LabelTitulo.Text = "Cadastro de Marcas";
         gridBanco.DataBind();
+    }
+
+    protected void ddlCategoriaBanner_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        Tipo.Enabled = ddlCategoriaBanner.SelectedIndex == 0;
+
+        if (ddlCategoriaBanner.SelectedIndex > 0)
+            Tipo.SelectedIndex = 0;
     }
 }
 #endregion

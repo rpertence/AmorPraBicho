@@ -1166,130 +1166,6 @@
 
                 </asp:Panel>
             </asp:View>
-<%--            <asp:View ID="ViewDoacao" runat="server">
-                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                    <tr>
-                        <td align="center" width="150px">
-                            <asp:Image ID="Image10" runat="server" ImageAlign="Middle"
-                                ImageUrl="~/LojaVirtual/imagens/bancoOK.png" />
-                        </td>
-                        <td>Cadastro de bancos para doação</td>
-                    </tr>
-                    <tr>
-                        <td width="150px">&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td width="150px">&nbsp;</td>
-                        <td>
-                            <asp:Panel ID="PanelListaBanco" runat="server">
-                                <asp:ImageButton ID="ibt_NovoBanco" runat="server" CausesValidation="False"
-                                    ImageAlign="Middle" ImageUrl="~/LojaVirtual/imagens/bancoNovo.png"
-                                    OnClick="ibt_NovoBanco_Click" Width="28px" />
-                                &nbsp;<asp:LinkButton ID="lbt_NovoBanco" runat="server" CssClass="linksAzul"
-                                    OnClick="lbt_NovoBanco_Click">Cadastrar Novo Banco</asp:LinkButton>
-                                <br />
-                                <br />
-                                <asp:GridView ID="gridBanco" runat="server" AllowPaging="True"
-                                    OnRowCommand="BancoRowCommand"
-                                    AllowSorting="True" DataSourceID="odsMarca" EnableModelValidation="True"
-                                    AutoGenerateColumns="False" Width="70%">
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="Banco" SortExpression="banco">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False"
-                                                    CommandArgument='<%# Bind("id") %>' CommandName="Alterar"
-                                                    CssClass="linksPretos" Text='<%# Bind("banco") %>'></asp:LinkButton>
-                                                &nbsp;agência:
-                                            <asp:Label ID="Label1" runat="server" Text='<%# Bind("agencia") %>'></asp:Label>
-                                                &nbsp;conta:
-                                            <asp:Label ID="Label2" runat="server" Text='<%# Bind("conta") %>'></asp:Label>
-                                            </ItemTemplate>
-                                            <HeaderStyle HorizontalAlign="Left" VerticalAlign="Middle" />
-                                            <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" />
-                                        </asp:TemplateField>
-                                        <asp:BoundField DataField="ATIVO" HeaderText="status" SortExpression="status">
-                                            <HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" />
-                                            <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
-                                        </asp:BoundField>
-                                        <asp:TemplateField>
-                                            <ItemTemplate>
-                                                <asp:ImageButton ID="ibt_excluir" runat="server"
-                                                    AlternateText="Excluir este item" CausesValidation="False"
-                                                    CommandArgument='<%# Bind("id") %>' CommandName="Excluir" ImageAlign="Middle"
-                                                    ImageUrl="~/App_Themes/ActioAdms/botoes/icoExcluir.png"
-                                                    OnClientClick="if (confirm('você está certo que vai excluir? Exclusões não podem ser desfeitas!') == false) return false;" />
-                                            </ItemTemplate>
-                                            <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
-                                        </asp:TemplateField>
-                                    </Columns>
-                                    <EmptyDataTemplate>
-                                        <asp:Image ID="Image11" runat="server" ImageAlign="Middle"
-                                            ImageUrl="~/LojaVirtual/imagens/bancovazio.png" Width="38px" />
-                                        Não há bancos cadastrados
-                                    </EmptyDataTemplate>
-                                </asp:GridView>
-                                <asp:ObjectDataSource ID="odsMarca" runat="server" DeleteMethod="Excluir"
-                                    OldValuesParameterFormatString="original_{0}" SelectMethod="SelectAll"
-                                    TypeName="Actio.Negocio.Marca">
-                                    <DeleteParameters>
-                                        <asp:Parameter Name="id" Type="Int32" />
-                                    </DeleteParameters>
-                                </asp:ObjectDataSource>
-                            </asp:Panel>
-                            <asp:Panel ID="PanelDetalhaBanco" runat="server">
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                    <tr>
-                                        <td width="100px" align="center">
-                                            <asp:ImageButton ID="ibt_ListBanco" runat="server" CausesValidation="False"
-                                                Height="28px" ImageAlign="Middle"
-                                                ImageUrl="~/App_Themes/ActioAdms/botoes/retornar.png"
-                                                OnClick="ibt_ListBanco_Click" />
-                                        </td>
-                                        <td align="center">
-                                            <asp:ImageButton ID="AlterarBanco" runat="server" ImageAlign="Middle"
-                                                ImageUrl="~/App_Themes/ActioAdms/botoes/alterar.png" OnClick="AlterarBanco_Click" />
-                                            <asp:ImageButton ID="SalvarBanco" runat="server" ImageAlign="Middle"
-                                                ImageUrl="~/App_Themes/ActioAdms/botoes/salvar.png" OnClick="SalvarBanco_Click" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="right" style="padding: 5px" valign="middle" width="100px">Banco:</td>
-                                        <td align="left" style="padding: 5px" valign="middle">
-                                            <asp:TextBox ID="Banco" runat="server"></asp:TextBox>
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator26" runat="server"
-                                                ControlToValidate="Banco" ErrorMessage="nome do banco"></asp:RequiredFieldValidator>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="right" style="padding: 5px" valign="middle" width="100px">Agência:</td>
-                                        <td align="left" style="padding: 5px" valign="middle">
-                                            <asp:TextBox ID="Agencia" runat="server"></asp:TextBox>
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator27" runat="server"
-                                                ControlToValidate="Agencia" ErrorMessage="agência"></asp:RequiredFieldValidator>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="right" style="padding: 5px" valign="middle" width="100px">Conta:</td>
-                                        <td align="left" style="padding: 5px" valign="middle">
-                                            <asp:TextBox ID="Conta" runat="server"></asp:TextBox>
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator28" runat="server"
-                                                ControlToValidate="Conta" ErrorMessage="conta e dígito"></asp:RequiredFieldValidator>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="right" style="padding: 5px" valign="middle" width="100px">status:</td>
-                                        <td align="left" style="padding: 5px" valign="middle">
-                                            <asp:CheckBox ID="CheckStatusBanco" runat="server" Checked="True"
-                                                Text="ativo" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </asp:Panel>
-                        </td>
-                    </tr>
-                </table>
-            </asp:View>--%>
             <asp:View ID="v10Banner" runat="server">
                 <asp:MultiView ID="mvBanner" runat="server">
                     <asp:View ID="v0List" runat="server">
@@ -1415,6 +1291,14 @@
                                                     <asp:ListItem Value="0">inativo</asp:ListItem>
                                                     <asp:ListItem Selected="True" Value="1">ativo</asp:ListItem>
                                                 </asp:RadioButtonList>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" valign="middle" width="100px">categoria:</td>
+                                            <td align="left" style="padding: 8px" valign="middle">
+                                                <asp:DropDownList runat="server" ID="ddlCategoriaBanner" DataTextField="titulo" DataValueField="id" DataSourceID="odsCanal" AppendDataBoundItems="true" AutoPostBack="true" OnSelectedIndexChanged="ddlCategoriaBanner_SelectedIndexChanged">
+                                                    <asp:ListItem>Página principal</asp:ListItem>
+                                                </asp:DropDownList>
                                             </td>
                                         </tr>
                                         <tr>

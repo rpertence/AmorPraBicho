@@ -21,10 +21,10 @@ namespace Actio.Negocio
     public class Banner_Loja
     {
         #region Novo Banner
-        public static void Inserir(string banner_alt, string banner_url, string banner_isAtivo, int banner_tipo, string banner_arquivo)
+        public static void Inserir(string banner_alt, string banner_url, string banner_isAtivo, int banner_tipo, string banner_arquivo, int? banner_categoria)
         {
-            string SQL = string.Format(@"INSERT INTO banner_loja (banner_alt, banner_url, banner_isAtivo, banner_arquivo, banner_tipo)
-VALUES('{0}', '{1}', '{2}', '{3}', '{4}');", banner_alt, banner_url, banner_isAtivo, banner_arquivo, banner_tipo);
+            string SQL = string.Format(@"INSERT INTO banner_loja (banner_alt, banner_url, banner_isAtivo, banner_arquivo, banner_tipo, banner_categoria)
+VALUES('{0}', '{1}', '{2}', '{3}', '{4}', {5});", banner_alt, banner_url, banner_isAtivo, banner_arquivo, banner_tipo, banner_categoria.HasValue ? banner_categoria.Value.ToString() : "NULL");
 
             conexao.ExecuteNonQuery(SQL);
         }
@@ -46,9 +46,17 @@ VALUES('{0}', '{1}', '{2}', '{3}', '{4}');", banner_alt, banner_url, banner_isAt
         }
         #endregion
         #region Atualizar
-        public static void Update(string banner_id, string banner_alt, string banner_url, string banner_arquivo, string banner_isAtivo)
+        public static void Update(string banner_id, string banner_alt, string banner_url, string banner_arquivo, string banner_isAtivo, int? banner_categoria)
         {
-            string SQL = @"UPDATE banner_loja SET banner_alt = '" + banner_alt + "', banner_url = '" + banner_url + "', banner_arquivo = '" + banner_arquivo + "', banner_isAtivo = '" + banner_isAtivo + "' WHERE banner_id = '" + banner_id + "' LIMIT 1";
+            string SQL = string.Format(@"UPDATE banner_loja
+SET banner_alt = '{0}',
+    banner_url = '{1}',
+    banner_arquivo = '{2}',
+    banner_isAtivo = '{3}',
+    banner_categoria = {4}
+WHERE banner_id = '{5}'
+LIMIT 1", banner_alt, banner_url, banner_arquivo, banner_isAtivo, banner_categoria.HasValue ? banner_categoria.Value.ToString() : "NULL", banner_id);
+            //string SQL = @"UPDATE banner_loja SET banner_alt = '" + banner_alt + "', banner_url = '" + banner_url + "', banner_arquivo = '" + banner_arquivo + "', banner_isAtivo = '" + banner_isAtivo + "' WHERE banner_id = '" + banner_id + "' LIMIT 1";
             conexao.ExecuteNonQuery(SQL);
         }
         #endregion
@@ -73,13 +81,14 @@ VALUES('{0}', '{1}', '{2}', '{3}', '{4}');", banner_alt, banner_url, banner_isAt
         #endregion
         #region Seleciona todos ativos
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public static DataTable SelectAllActive(int tipo)
+        public static DataTable SelectAllActive(int tipo, int? categoria)
         {
             string SQL = string.Format(@"SELECT banner_id, banner_alt, banner_url, banner_isAtivo, banner_arquivo
 FROM banner_loja
 WHERE banner_isAtivo = '1'
     and banner_tipo = {0}
-ORDER BY banner_id ASC", tipo);
+    and banner_categoria {1}
+ORDER BY banner_id ASC", tipo, categoria.HasValue ? "= " + categoria.Value.ToString() : "IS NULL");
 
             return conexao.Dados(SQL);
         }

@@ -48,6 +48,7 @@
             <asp:ObjectDataSource ID="odsBannerLateral" runat="server" SelectMethod="SelectAllActive" TypeName="Actio.Negocio.Banner_loja">
                 <SelectParameters>
                     <asp:Parameter Name="tipo" DefaultValue="1" />
+                    <asp:Parameter Name="categoria" DefaultValue="" ConvertEmptyStringToNull="true" />
                 </SelectParameters>
             </asp:ObjectDataSource>
         </div>
