@@ -38,15 +38,15 @@
                     <asp:ImageButton runat="server" ID="imgLupa" ImageUrl="~/App_Themes/Padrao/Imagens/lupa_transparente.png" ImageAlign="Middle" OnClick="imgLupa_Click" />
                 </div>
                 <div id="divHeaderBotoes">
-                    <a>
+                    <a href="../Caes.aspx">
                         <img src="../App_Themes/Padrao/Imagens/botao-caes.png" alt="cães" class="ImageComOver" /></a>
-                    <a>
+                    <a href="../Gatos.aspx">
                         <img src="../App_Themes/Padrao/Imagens/botao-gatos.png" alt="gatos" class="ImageComOver" /></a>
-                    <a>
+                    <a href="../Passaros.aspx">
                         <img src="../App_Themes/Padrao/Imagens/botao-passaros.png" alt="pássaros" class="ImageComOver" /></a>
-                    <a>
+                    <a href="../Peixes.aspx">
                         <img src="../App_Themes/Padrao/Imagens/botao-peixes.png" alt="peixes" class="ImageComOver" /></a>
-                    <a>
+                    <a href="../Roedores.aspx">
                         <img src="../App_Themes/Padrao/Imagens/botao-roedores.png" alt="roedores" class="ImageComOver" /></a>
                 </div>
             </div>

@@ -122,6 +122,7 @@
     <Content Include="App_Themes\Padrao\Imagens\video-over.png" />
     <Content Include="App_Themes\Padrao\Imagens\video.png" />
     <Content Include="App_Themes\Padrao\rating.css" />
+    <Content Include="Caes.aspx" />
     <Content Include="Controles\AvaliacaoLeitura.ascx" />
     <Content Include="Controles\Banners.ascx" />
     <Content Include="Controles\banner\images\bx_loader.gif" />
@@ -135,9 +136,13 @@
     <Content Include="Controles\Produto.ascx" />
     <Content Include="Controles\Sugestoes.ascx" />
     <Content Include="Controles\Vitrine.ascx" />
+    <Content Include="Gatos.aspx" />
     <Content Include="Home.aspx" />
+    <Content Include="Passaros.aspx" />
+    <Content Include="Peixes.aspx" />
     <Content Include="Produto.aspx" />
     <Content Include="ResultadoBusca.aspx" />
+    <Content Include="Roedores.aspx" />
     <Content Include="Scripts\jquery-1.11.0.min.js" />
     <Content Include="Scripts\jquery.corner.js" />
     <Content Include="Scripts\scripts.js" />
@@ -149,6 +154,13 @@
     </Compile>
     <Compile Include="BaseUserControl.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Caes.aspx.cs">
+      <DependentUpon>Caes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Caes.aspx.designer.cs">
+      <DependentUpon>Caes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controles\AvaliacaoLeitura.ascx.cs">
       <DependentUpon>AvaliacaoLeitura.ascx</DependentUpon>
@@ -192,6 +204,13 @@
     <Compile Include="Controles\Vitrine.ascx.designer.cs">
       <DependentUpon>Vitrine.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Gatos.aspx.cs">
+      <DependentUpon>Gatos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gatos.aspx.designer.cs">
+      <DependentUpon>Gatos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -205,6 +224,20 @@
     </Compile>
     <Compile Include="Master\Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Passaros.aspx.cs">
+      <DependentUpon>Passaros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Passaros.aspx.designer.cs">
+      <DependentUpon>Passaros.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Peixes.aspx.cs">
+      <DependentUpon>Peixes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Peixes.aspx.designer.cs">
+      <DependentUpon>Peixes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Produto.aspx.cs">
       <DependentUpon>Produto.aspx</DependentUpon>
@@ -220,6 +253,13 @@
     </Compile>
     <Compile Include="ResultadoBusca.aspx.designer.cs">
       <DependentUpon>ResultadoBusca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Roedores.aspx.cs">
+      <DependentUpon>Roedores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Roedores.aspx.designer.cs">
+      <DependentUpon>Roedores.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
