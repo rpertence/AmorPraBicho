@@ -57,8 +57,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Agenda\Default.aspx" />
-    <Content Include="Agenda\ftb.imagegallery.aspx" />
     <Content Include="App_Themes\ActioAdms\acoes\editar.gif" />
     <Content Include="App_Themes\ActioAdms\acoes\excluir.gif" />
     <Content Include="App_Themes\ActioAdms\acoes\hlp.gif" />
@@ -95,19 +93,9 @@
     <Content Include="App_Themes\ActioAdms\botoes\verificar.png" />
     <Content Include="App_Themes\ActioAdms\botoes\VisualizarSite.jpg" />
     <Content Include="App_Themes\ActioAdms\imagensSuporte\UsuarioActio.jpg" />
-    <Content Include="artigos\Default.aspx" />
     <Content Include="BemVindo\Default.aspx" />
-    <Content Include="capela\Default.aspx" />
     <Content Include="controles\MenuLateral.ascx" />
     <Content Include="Default.aspx" />
-    <Content Include="depoimento\Default.aspx" />
-    <Content Include="depoimento\ftb.imagegallery.aspx" />
-    <Content Include="equipe\Default.aspx" />
-    <Content Include="equipe\ftb.imagegallery.aspx" />
-    <Content Include="fotos\Default.aspx" />
-    <Content Include="fotos\ftb.imagegallery.aspx" />
-    <Content Include="GO\Default.aspx" />
-    <Content Include="GO\ftb.imagegallery.aspx" />
     <Content Include="imagens\Actio.jpg" />
     <Content Include="imagens\adms.jpg" />
     <Content Include="imagens\adms.png" />
@@ -165,8 +153,6 @@
     <Content Include="imagens\recursos\recursos\recurso.png" />
     <Content Include="imagens\recursos\recursos\vazio.png" />
     <Content Include="imagens\recursos\santo.png" />
-    <Content Include="Institucional\Default.aspx" />
-    <Content Include="Institucional\ftb.imagegallery.aspx" />
     <Content Include="Login\ucLoginADMs.ascx" />
     <Content Include="lojavirtual\Default.aspx" />
     <Content Include="lojavirtual\ftb.imagegallery.aspx" />
@@ -188,45 +174,16 @@
     <Content Include="lojavirtual\imagens\recurso.png" />
     <Content Include="lojavirtual\imagens\shopping_cart.png" />
     <Content Include="lojavirtual\imagens\vazio.png" />
-    <Content Include="noticias\Default.aspx" />
-    <Content Include="noticias\ftb.imagegallery.aspx" />
-    <Content Include="publicacao\Default.aspx" />
-    <Content Include="publicacao\ftb.imagegallery.aspx" />
     <Content Include="recursos\Default.aspx" />
-    <Content Include="santo\Default.aspx" />
-    <Content Include="santo\ftb.imagegallery.aspx" />
     <Content Include="usuarios\Default.aspx" />
-    <Content Include="videos\Default.aspx" />
-    <Content Include="videos\ftb.imagegallery.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Agenda\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Agenda\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="artigos\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="artigos\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="BemVindo\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="BemVindo\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="capela\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="capela\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="controles\MenuLateral.ascx.cs">
@@ -241,41 +198,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="depoimento\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="depoimento\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="equipe\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="equipe\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="fotos\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="fotos\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="GO\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="GO\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Institucional\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Institucional\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login\ucLoginADMs.ascx.cs">
@@ -299,21 +221,7 @@
     <Compile Include="MasterPage\MasterPage.master.designer.cs">
       <DependentUpon>MasterPage.master</DependentUpon>
     </Compile>
-    <Compile Include="noticias\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="noticias\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="publicacao\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="publicacao\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="recursos\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -321,25 +229,11 @@
     <Compile Include="recursos\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="santo\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="santo\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="usuarios\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="usuarios\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="videos\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="videos\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
   </ItemGroup>

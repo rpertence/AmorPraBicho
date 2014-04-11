@@ -13,6 +13,15 @@ namespace Site.Controles {
     public partial class Busca {
         
         /// <summary>
+        /// imgBusca control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgBusca;
+        
+        /// <summary>
         /// rptCategorias control.
         /// </summary>
         /// <remarks>
@@ -20,15 +29,6 @@ namespace Site.Controles {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptCategorias;
-        
-        /// <summary>
-        /// odsCategoria control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource odsCategoria;
         
         /// <summary>
         /// ddlOrdenacao control.
