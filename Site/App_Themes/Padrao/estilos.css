@@ -38,7 +38,7 @@
 }
 
     #divHeaderBusca input[type=text] {
-        width: 418px;
+        width: 415px;
         height: 30px;
         background-color: transparent;
         border: 0;
@@ -81,6 +81,11 @@
 
     #divFooterInterna li {
         padding: 2px;
+    }
+
+    #divFooterInterna a {
+        color: white;
+        text-decoration: none;
     }
 
 #divPagina {

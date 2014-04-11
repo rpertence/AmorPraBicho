@@ -1,10 +1,12 @@
 ﻿using Actio.Negocio;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using MasterPage = Site.Master.Site;
 
@@ -16,15 +18,57 @@ namespace Site.Controles
         {
             if (!IsPostBack)
             {
-                string p;
-                if (!string.IsNullOrEmpty(p = Request.QueryString["p"]))
+                if (Tipo == TipoBusca.Principal)
                 {
-                    Resultado = Produtos.SelectByPesquisa(p);
+                    string p;
+                    if (!string.IsNullOrEmpty(p = Request.QueryString["p"]))
+                    {
+                        Resultado = Produtos.SelectByPesquisa(p);
 
-                    BindResultados();
+                        BindResultados();
 
-                    ((MasterPage)this.Page.Master).AtualizaCampoPesquisa(p);
-                    ExibeMensagemResultadoBusca(p);
+                        ((MasterPage)this.Page.Master).AtualizaCampoPesquisa(p);
+                        ExibeMensagemResultadoBusca(p);
+                    }
+
+                    rptCategorias.DataSource = Produtos_Categoria.SelectAll();
+                }
+                else
+                {
+                    switch (Bicho)
+                    {
+                        case TipoBicho.Cachorro:
+                            imgBusca.ImageUrl = "../App_Themes/Padrao/Imagens/busca-caozinho.png";
+                            break;
+                        case TipoBicho.Gato:
+                            imgBusca.ImageUrl = "../App_Themes/Padrao/Imagens/busca-gatinho.png";
+                            break;
+                        case TipoBicho.Passaro:
+                            imgBusca.ImageUrl = "../App_Themes/Padrao/Imagens/busca-passaro.png";
+                            break;
+                        case TipoBicho.Peixe:
+                            imgBusca.ImageUrl = "../App_Themes/Padrao/Imagens/busca-peixe.png";
+                            break;
+                        case TipoBicho.Roedor:
+                            imgBusca.ImageUrl = "../App_Themes/Padrao/Imagens/busca-roedor.png";
+                            break;
+                    }
+
+                    rptCategorias.DataSource = Produtos_Categoria.SelectByID(BuscaCategoria());
+                }
+
+                rptCategorias.DataBind();
+
+                if (Tipo == TipoBusca.PaginaDoBicho)
+                {
+                    LinkButton link = (LinkButton)rptCategorias.Items[0].FindControl("Categoria");
+
+                    rptCategorias_ItemCommand(rptCategorias, new RepeaterCommandEventArgs(rptCategorias.Items[0],
+                        link,
+                        new CommandEventArgs("", link.CommandArgument)));
+
+                    link.Parent.Visible = false;
+                    ((HtmlGenericControl)rptCategorias.Items[0].FindControl("rptSubCategorias").Parent).Style[HtmlTextWriterStyle.MarginLeft] = "0px";
                 }
             }
         }
@@ -139,6 +183,39 @@ namespace Site.Controles
                         throw new NotImplementedException("Ordenação por 'melhores avaliados' ainda não foi implementada.");
                 }
             }
+        }
+
+        private int BuscaCategoria()
+        {
+            string nomeChave = string.Format("CodigoCategoria{0}", this.Bicho);
+            string valorChave;
+
+            if (string.IsNullOrEmpty(valorChave = ConfigurationManager.AppSettings[nomeChave]))
+                throw new Exception(string.Format("A chave '{0}' não foi configurada corretamente", nomeChave));
+
+            int valorChaveDec;
+            if (!int.TryParse(valorChave, out valorChaveDec))
+                throw new Exception(string.Format("A chave '{0}' não foi configurada corretamente", nomeChave));
+
+            return valorChaveDec;
+        }
+
+        public TipoBusca Tipo { get; set; }
+        public TipoBicho Bicho { get; set; }
+
+        public enum TipoBusca
+        {
+            Principal,
+            PaginaDoBicho
+        }
+
+        public enum TipoBicho
+        {
+            Cachorro,
+            Gato,
+            Passaro,
+            Peixe,
+            Roedor
         }
     }
 }

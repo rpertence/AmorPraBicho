@@ -119,7 +119,6 @@
     <Content Include="App_Themes\Padrao\Imagens\seta-produto-cima.png" />
     <Content Include="App_Themes\Padrao\Imagens\seta-produto-direita.png" />
     <Content Include="App_Themes\Padrao\Imagens\seta-produto-esquerda.png" />
-    <Content Include="App_Themes\Padrao\Imagens\star.gif" />
     <Content Include="App_Themes\Padrao\Imagens\testeira-fim-da-pagina.png" />
     <Content Include="App_Themes\Padrao\Imagens\testeira-topo.png" />
     <Content Include="App_Themes\Padrao\Imagens\twitter-over.png" />

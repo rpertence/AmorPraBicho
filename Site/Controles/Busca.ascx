@@ -47,15 +47,15 @@
 </style>
 <div style="height: 600px; padding-top: 30px;">
     <div id="divBuscaAlternativa">
-        <img src="../App_Themes/Padrao/Imagens/busque-por-aqui.png" />
+        <asp:Image runat="server" ID="imgBusca" ImageUrl="~/App_Themes/Padrao/Imagens/busque-por-aqui.png" />
         <div id="divBuscaAlternativaInterna">
             <ul>
-                <asp:Repeater runat="server" ID="rptCategorias" DataSourceID="odsCategoria" OnItemCommand="rptCategorias_ItemCommand">
+                <asp:Repeater runat="server" ID="rptCategorias" OnItemCommand="rptCategorias_ItemCommand">
                     <ItemTemplate>
-                        <li>
+                        <li runat="server">
                             <asp:LinkButton runat="server" ID="Categoria" Text='<%# Bind("titulo") %>' CommandArgument='<%# Bind("id") %>' />
                         </li>
-                        <ul style="margin-left: 30px;">
+                        <ul style="margin-left: 30px;" runat="server">
                             <asp:Repeater runat="server" ID="rptSubCategorias" OnItemCommand="rptSubCategorias_ItemCommand">
                                 <ItemTemplate>
                                     <li>
@@ -76,7 +76,6 @@
                     </ItemTemplate>
                 </asp:Repeater>
             </ul>
-            <asp:ObjectDataSource ID="odsCategoria" runat="server" SelectMethod="SelectAll" TypeName="Actio.Negocio.Produtos_Categoria"></asp:ObjectDataSource>
         </div>
     </div>
     <div id="divResultadoBusca">

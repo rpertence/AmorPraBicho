@@ -54,10 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcessoDados.cs" />
-    <Compile Include="Artigos.cs" />
-    <Compile Include="Artigo_Autor.cs" />
     <Compile Include="Banner_loja.cs" />
-    <Compile Include="Busca.cs" />
     <Compile Include="Carrinho.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="ClienteCSV.cs" />
@@ -67,11 +64,7 @@
     <Compile Include="clsUtil.cs" />
     <Compile Include="Banner.cs" />
     <Compile Include="BannerP.cs" />
-    <Compile Include="CapelaVirtual.cs" />
-    <Compile Include="Coordenador_GO.cs" />
-    <Compile Include="Agenda.cs" />
     <Compile Include="Marca.cs" />
-    <Compile Include="GrupodeOracao.cs" />
     <Compile Include="Produtos.cs" />
     <Compile Include="Produtos_Avaliacao.cs" />
     <Compile Include="Produtos_Categoria.cs" />
@@ -83,23 +76,8 @@
     <Compile Include="Produtos_Sub_Categoria.cs" />
     <Compile Include="Produtos_Vendas.cs" />
     <Compile Include="Produto_Finaliza.cs" />
-    <Compile Include="Santo.cs" />
-    <Compile Include="Links.cs" />
-    <Compile Include="Publicacao.cs" />
     <Compile Include="Venda.cs" />
-    <Compile Include="Videos.cs" />
-    <Compile Include="Noticias_Comentarios.cs" />
-    <Compile Include="Foto.cs" />
-    <Compile Include="Foto_Album.cs" />
-    <Compile Include="Foto_Categoria.cs" />
-    <Compile Include="depoimento.cs" />
-    <Compile Include="Equipe.cs" />
     <Compile Include="Historico.cs" />
-    <Compile Include="Noticias.cs" />
-    <Compile Include="Sociais.cs" />
-    <Compile Include="Textos.cs" />
-    <Compile Include="Textos_Categoria.cs" />
-    <Compile Include="UploadDetail.cs" />
     <Compile Include="Usuario_Recursos.cs" />
     <Compile Include="Recursos.cs" />
     <Compile Include="Usuarios.cs" />

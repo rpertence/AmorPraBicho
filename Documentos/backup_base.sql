@@ -200,21 +200,28 @@ CREATE TABLE `banner_loja` (
   `banner_isAtivo` char(1) NOT NULL,
   `banner_arquivo` varchar(250) NOT NULL,
   `banner_tipo` int(10) unsigned NOT NULL,
+  `banner_categoria` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`banner_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `banner_loja`
 --
 
 /*!40000 ALTER TABLE `banner_loja` DISABLE KEYS */;
-INSERT INTO `banner_loja` (`banner_id`,`banner_alt`,`banner_url`,`banner_isAtivo`,`banner_arquivo`,`banner_tipo`) VALUES 
- (7,'Cachorro','http://www.google.com.br','1','ActioBanner_07042014135834.png',0),
- (8,'Gato','http://www.google.com.br','1','ActioBanner_07042014140605.png',0),
- (9,'Pássaros','http://www.google.com.br','1','ActioBanner_07042014144614.png',0),
- (10,'Banner lateral','http://www.google.com.br','0','',1),
- (11,'Banner lateral 2','http://www.google.com.br','1','ActioBanner_08042014123158.png',1),
- (12,'Banner lateral 3','http://www.google.com.br','1','ActioBanner_08042014123339.png',1);
+INSERT INTO `banner_loja` (`banner_id`,`banner_alt`,`banner_url`,`banner_isAtivo`,`banner_arquivo`,`banner_tipo`,`banner_categoria`) VALUES 
+ (7,'Cachorro','http://www.google.com.br','1','ActioBanner_07042014135834.png',0,NULL),
+ (8,'Gato','http://www.google.com.br','1','ActioBanner_07042014140605.png',0,NULL),
+ (9,'Pássaros','http://www.google.com.br','1','ActioBanner_07042014144614.png',0,NULL),
+ (11,'Banner lateral 2','http://www.google.com.br','1','ActioBanner_08042014123158.png',1,NULL),
+ (12,'Banner lateral 3','http://www.google.com.br','1','ActioBanner_10042014090827.png',1,NULL),
+ (15,'Banner cachorro','http://www.google.com.br','1','ActioBanner_10042014094605.png',0,17),
+ (16,'Banner cachorro','http://www.google.com.br','1','ActioBanner_10042014094643.png',0,17),
+ (17,'Banner','http://www.google.com.br','1','ActioBanner_10042014094722.png',0,18),
+ (18,'Banner','http://www.google.com.br','1','ActioBanner_10042014094748.png',0,18),
+ (19,'Banner','http://www.google.com.br','1','ActioBanner_10042014094826.png',0,19),
+ (20,'Banner','http://www.google.com.br','1','ActioBanner_10042014094853.png',0,21),
+ (21,'Banner','http://www.google.com.br','1','ActioBanner_10042014094924.png',0,20);
 /*!40000 ALTER TABLE `banner_loja` ENABLE KEYS */;
 
 
@@ -3334,7 +3341,7 @@ CREATE TABLE `historico` (
   `descricao` longtext,
   `painel` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1804 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1807 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `historico`
@@ -4723,7 +4730,10 @@ INSERT INTO `historico` (`id`,`id_usuario`,`data`,`tipo`,`descricao`,`painel`) V
  (1800,1,'08/04/2014 12:18:12','9','Entrou no sistema','login'),
  (1801,1,'08/04/2014 15:32:52','9','Entrou no sistema','login'),
  (1802,1,'08/04/2014 15:58:26','9','Entrou no sistema','login'),
- (1803,1,'08/04/2014 16:00:27','9','Entrou no sistema','login');
+ (1803,1,'08/04/2014 16:00:27','9','Entrou no sistema','login'),
+ (1804,1,'10/04/2014 08:46:41','9','Entrou no sistema','login'),
+ (1805,1,'10/04/2014 09:40:39','9','Entrou no sistema','login'),
+ (1806,1,'10/04/2014 10:27:02','9','Entrou no sistema','login');
 /*!40000 ALTER TABLE `historico` ENABLE KEYS */;
 
 

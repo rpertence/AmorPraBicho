@@ -16,9 +16,27 @@ namespace Site.Controles
             if (!IsPostBack)
             {
                 imgBicho.ImageUrl = BuscaImagemBicho();
+                imgBicho.NavigateUrl = BuscaUrlBicho();
 
                 rptProdutos.DataSource = Produtos.SelectByDestaque(BuscaCategoria(), QtdeProdutos);
                 rptProdutos.DataBind();
+            }
+        }
+
+        private string BuscaUrlBicho()
+        {
+            switch (Tipo)
+            {
+                case TipoBicho.Cachorro:
+                    return "../Caes.aspx";
+                case TipoBicho.Gato:
+                    return "../Gatos.aspx";
+                case TipoBicho.Passaro:
+                    return "../Passaros.aspx";
+                case TipoBicho.Roedor:
+                    return "../Roedores.aspx";
+                default:
+                    throw new NotImplementedException("Tipo de bicho não implementado.");
             }
         }
 

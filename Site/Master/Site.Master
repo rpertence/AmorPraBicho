@@ -30,7 +30,9 @@
                 <div id="divHeaderRedesSociais">
                     <i>acesse nossas redes e fique ligado nas promoções!</i>
                     <img src="../App_Themes/Padrao/Imagens/botão-googleplus-topo.png" class="ImageComOver" />
-                    <img src="../App_Themes/Padrao/Imagens/botão-facebook-topo.png" class="ImageComOver" />
+                    <a href="https://www.facebook.com/amorprabicho" style="border: 0;">
+                        <img src="../App_Themes/Padrao/Imagens/botão-facebook-topo.png" class="ImageComOver" />
+                    </a>
                     <img src="../App_Themes/Padrao/Imagens/botao-twitter-topo.png" class="ImageComOver" />
                 </div>
                 <div id="divHeaderBusca">
@@ -80,11 +82,11 @@
                     <span style="font-size: 17px;">Departamentos</span><br />
                     <br />
                     <ul>
-                        <li><a>Cães</a></li>
-                        <li><a>Gatos</a></li>
-                        <li><a>Pássaros</a></li>
-                        <li><a>Peixes</a></li>
-                        <li><a>Roedores</a></li>
+                        <li><a href="../Caes.aspx">Cães</a></li>
+                        <li><a href="../Gatos.aspx">Gatos</a></li>
+                        <li><a href="../Passaros.aspx">Pássaros</a></li>
+                        <li><a href="../Peixes.aspx">Peixes</a></li>
+                        <li><a href="../Roedores.aspx">Roedores</a></li>
                     </ul>
                 </div>
                 <div>

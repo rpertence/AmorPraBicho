@@ -11,11 +11,11 @@
                 ID="lk_Banner" runat="server" CssClass="linksPretos"
                 CausesValidation="False" OnClick="lk_Banner_Click">Banner da Loja</asp:LinkButton>&nbsp;|
             <asp:LinkButton
-                ID="lk_Vendas" runat="server" CssClass="linksPretos"
-                CausesValidation="False" OnClick="lk_Vendas_Click">Vendas</asp:LinkButton>&nbsp;|
+                ID="lk_Vendas" runat="server" CssClass="linksPretos" Visible="false"
+                CausesValidation="False" OnClick="lk_Vendas_Click">Vendas</asp:LinkButton>
             <asp:LinkButton ID="lk_Clientes"
-                runat="server" CssClass="linksPretos" CausesValidation="False"
-                OnClick="lk_Clientes_Click">Clientes</asp:LinkButton>&nbsp;|
+                runat="server" CssClass="linksPretos" CausesValidation="False" Visible="false"
+                OnClick="lk_Clientes_Click">Clientes</asp:LinkButton>
 
             <asp:LinkButton ID="linkMarcas" runat="server" OnClick="linkMarcas_Click"
                 CssClass="linksPretos" CausesValidation="False">Marcas</asp:LinkButton>
