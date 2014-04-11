@@ -60,6 +60,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Themes\Padrao\list_scroll.css" />
     <Content Include="App_Themes\Padrao\cssreset.css" />
     <Content Include="App_Themes\Padrao\estilos.css" />
     <Content Include="App_Themes\Padrao\Imagens\5_desconto.png" />
@@ -149,6 +150,7 @@
     <Content Include="ResultadoBusca.aspx" />
     <Content Include="Roedores.aspx" />
     <Content Include="Scripts\jquery-1.11.0.min.js" />
+    <Content Include="Scripts\jquery.als-1.4.min.js" />
     <Content Include="Scripts\jquery.corner.js" />
     <Content Include="Scripts\scripts.js" />
     <Content Include="Web.config" />

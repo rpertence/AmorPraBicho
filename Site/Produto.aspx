@@ -8,6 +8,17 @@
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
     <script src="Scripts/jquery.corner.js"></script>
+    <script src="Scripts/jquery.als-1.4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$("#my-als-list").als(
+            $(".als-container").als(
+                {
+                    visible_items: 5,
+                    scrolling_items: 1
+                });
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -40,7 +51,7 @@
                     <img src="App_Themes/Padrao/Imagens/botao-comprar.png" />
                 </div>
             </div>
-            <div id="produtoFretePrazoContainer">
+            <div id="produtoFretePrazoContainer" style="display: none;">
                 <div id="produtoPesquisaFrete">
                     <img src="App_Themes/Padrao/Imagens/frete.png" />
                     <span>Frete e prazo:</span>&nbsp;&nbsp;&nbsp;<asp:TextBox ID="txtCEP" runat="server" CssClass="fretePrazoTxt" MaxLength="8"></asp:TextBox>&nbsp;&nbsp;&nbsp;<asp:ImageButton ID="imbOK" runat="server" ImageUrl="~/App_Themes/Padrao/Imagens/cep-ok.png" />
@@ -77,8 +88,8 @@
                 <div class="tituloSugerimosMesmaMarca"><span>Sugerimos Também</span></div>
                 <div class="bordaPontilhada" style="width: 710px;">&nbsp;</div>
             </div>
-            <div class="produtoSugestoesContainer">
-                <uc1:Sugestoes runat="server" ID="ucSugestoes" QtdeProdutos="5" />
+            <div class="als-container" id="my-als-list">
+                <uc1:Sugestoes runat="server" ID="ucSugestoes" QtdeProdutos="10" />
             </div>
         </div>
         <div class="produtoSugerimos">
@@ -86,8 +97,8 @@
                 <div class="tituloSugerimosMesmaMarca"><span>Outros Produtos da Marca</span></div>
                 <div class="bordaPontilhada" style="width: 640px;">&nbsp;</div>
             </div>
-            <div class="produtoSugestoesContainer">
-                <uc1:Sugestoes runat="server" ID="ucMesmaMarca" QtdeProdutos="5" />
+            <div class="als-container" id="my-als-list-2">
+                <uc1:Sugestoes runat="server" ID="ucMesmaMarca" QtdeProdutos="10" />
             </div>
         </div>
         <div id="produtoOpinioes" class="produtoSugerimos">
@@ -141,7 +152,8 @@
                     <div id="deSuaOpiniao">
                         <div id="labelDeSuaOpiniao"><span>Dê sua opinião! O que achou do Produto?</span></div>
                         <div id="imagemAvaliarProduto">
-                            <img id="avaliarProduto" src="App_Themes/Padrao/Imagens/botao-avaliar-o-produto.png" class="ImageComOver" /></div>
+                            <img id="avaliarProduto" src="App_Themes/Padrao/Imagens/botao-avaliar-o-produto.png" class="ImageComOver" />
+                        </div>
                     </div>
                     <div id="cadastroOpiniao">
                         <span>Nota: </span>
@@ -149,14 +161,18 @@
                         <br />
                         <asp:Rating ID="rateEnabled" runat="server" MaxRating="5" CurrentRating="0"
                             CssClass="ratingStar" StarCssClass="ratingItem" WaitingStarCssClass="Saved" FilledStarCssClass="Filled"
-                            EmptyStarCssClass="Empty" AutoPostBack="true">
+                            EmptyStarCssClass="Empty" AutoPostBack="false">
                         </asp:Rating>
                         <br />
                         <span>Comente sobre o produto:</span>
                         <br />
                         <br />
-                        <div style="float:left;margin-right:10px;"><asp:TextBox ID="txtOpiniaoProduto" runat="server" Width="350px" Height="60px" TextMode="MultiLine" MaxLength="500"></asp:TextBox></div>
-                        <div style="margin-top:40px;"><asp:Button ID="btnSalvarAvaliacao" runat="server" Text="Salvar" /></div>
+                        <div style="float: left; margin-right: 10px;">
+                            <asp:TextBox ID="txtOpiniaoProduto" runat="server" Width="350px" Height="60px" TextMode="MultiLine" MaxLength="500"></asp:TextBox>
+                        </div>
+                        <div style="margin-top: 40px;">
+                            <asp:Button ID="btnSalvarAvaliacao" runat="server" Text="Salvar" OnClick="btnSalvarAvaliacao_Click" />
+                        </div>
                     </div>
                 </div>
             </div>
