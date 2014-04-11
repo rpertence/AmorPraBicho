@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -15,35 +16,47 @@ namespace Site.Controles
         {
             if (!IsPostBack)
             {
-                rptProdutos.DataSource = Produtos.SelectByDestaque(BuscaCategoria(), QtdeProdutos);
+                DataTable dt = null;
+
+                switch (this.Tipo)
+                {
+                    case TipoSugestao.MesmaCategoria:
+                        if (this.CodigoCategoria.HasValue)
+                            dt = Produtos.SelectByDestaque(this.CodigoCategoria.Value, this.QtdeProdutos);
+                        break;
+
+                    case TipoSugestao.MesmaMarca:
+                        if (this.CodigoMarca.HasValue)
+                            dt = Produtos.SelectByDestaqueMarca(this.CodigoMarca.Value, this.QtdeProdutos);
+                        break;
+
+                    case TipoSugestao.MesmaSubcategoria:
+                        if (this.CodigoSubcategoria.HasValue)
+                            dt = Produtos.SelectByDestaqueSubcategoria(this.CodigoSubcategoria.Value, this.QtdeProdutos);
+                        break;
+
+                    default:
+                        if (this.CodigoCategoria.HasValue)
+                            dt = Produtos.SelectByDestaque(this.CodigoCategoria.Value, this.QtdeProdutos);
+                        break;
+                }
+
+                rptProdutos.DataSource = dt;
                 rptProdutos.DataBind();
             }
         }
 
-        private int BuscaCategoria()
+        public enum TipoSugestao
         {
-            string nomeChave = string.Format("CodigoCategoria{0}", this.Tipo);
-            string valorChave;
-
-            if (string.IsNullOrEmpty(valorChave = ConfigurationManager.AppSettings[nomeChave]))
-                throw new Exception(string.Format("A chave '{0}' não foi configurada corretamente", nomeChave));
-
-            int valorChaveDec;
-            if (!int.TryParse(valorChave, out valorChaveDec))
-                throw new Exception(string.Format("A chave '{0}' não foi configurada corretamente", nomeChave));
-
-            return valorChaveDec;
+            MesmaCategoria,
+            MesmaSubcategoria,
+            MesmaMarca
         }
 
-        public enum TipoBicho
-        {
-            Cachorro,
-            Gato,
-            Passaro,
-            Roedor
-        }
-
-        public TipoBicho Tipo { get; set; }
+        public TipoSugestao Tipo { get; set; }
         public int QtdeProdutos { get; set; }
+        public int? CodigoCategoria { get; set; }
+        public int? CodigoSubcategoria { get; set; }
+        public int? CodigoMarca { get; set; }
     }
 }

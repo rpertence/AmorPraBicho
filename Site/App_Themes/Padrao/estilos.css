@@ -135,7 +135,14 @@
 }
 
 #produtoEstrelas {
-    height: 20px;
+    width: 100%;
+    margin: 10px 0 10px 0;
+}
+
+#produtoNumAvaliacoes {
+    font-family: Roboto;
+    font-size: 11pt;
+    color: #575756;
 }
 
 #produtoResumo {
@@ -269,7 +276,7 @@
 }
 
 .produtoSugerimos {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .produtoTituloSugerimos {
@@ -278,7 +285,6 @@
 
 .produtoSugestoesContainer {
     height: 270px;
-    /*width:1800px;*/
     margin-top: 30px;
 }
 
@@ -301,45 +307,54 @@
 }
 
 #produtoRating {
-    margin-top:15px;
+    margin-top: 15px;
     margin-left: 20px;
-    height:400px;
-    width:100%;
+    height: 400px;
+    width: 100%;
 }
 
 .barras {
     font-family: Roboto;
-    font-size:11pt;
+    font-size: 11pt;
 }
 
 .textoBarra {
-    margin-bottom:5px;
+    margin-bottom: 5px;
     width: 300px;
-    height:20px;
+    height: 20px;
 }
 
 .barraAvaliacao {
-    width:200px;
-    height:20px;
+    width: 200px;
+    height: 20px;
     background-color: #ECECEC;
-    float:left;
-    margin-left:5px;
+    float: left;
+    margin-left: 5px;
 }
 
 #deSuaOpiniao {
-    width:600px;
-    margin-top:30px;
-    float:right;
+    width: 600px;
+    margin-top: 30px;
+    float: right;
 }
 
 #imagemAvaliarProduto {
-    margin-top:10px;
-    width:600px;
+    margin-top: 10px;
+    width: 600px;
 }
 
 #cadastroOpiniao {
-    width:600px;
-    float:right;
+    width: 600px;
+    float: right;
+}
+
+#produtoInexistente {
+    font-family: Roboto;
+    font-size: 15pt;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
 }
 
 #divFacebook {
@@ -347,6 +362,7 @@
     margin: 0 auto;
     height: 285px;
 }
+
 .fb-comments {
     top: -109px;
 }

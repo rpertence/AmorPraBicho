@@ -22,6 +22,24 @@ namespace Site {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
+        /// mvwProduto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.MultiView mvwProduto;
+        
+        /// <summary>
+        /// viewProduto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View viewProduto;
+        
+        /// <summary>
         /// lblNomeProduto control.
         /// </summary>
         /// <remarks>
@@ -29,6 +47,24 @@ namespace Site {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNomeProduto;
+        
+        /// <summary>
+        /// ratingCabecalho control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.Rating ratingCabecalho;
+        
+        /// <summary>
+        /// lblNumAvaliacoes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNumAvaliacoes;
         
         /// <summary>
         /// lblResumoProduto control.
@@ -103,13 +139,13 @@ namespace Site {
         protected global::System.Web.UI.WebControls.Label lblValorFrete;
         
         /// <summary>
-        /// lblConteudoDescricao control.
+        /// spanConteudoDescricao control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblConteudoDescricao;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spanConteudoDescricao;
         
         /// <summary>
         /// ucSugestoes control.
@@ -209,5 +245,14 @@ namespace Site {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSalvarAvaliacao;
+        
+        /// <summary>
+        /// viewProdutoInexistente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View viewProdutoInexistente;
     }
 }
