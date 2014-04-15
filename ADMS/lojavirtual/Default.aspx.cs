@@ -187,6 +187,11 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
         #endregion
         #region grava dados
         Produtos.Novo(ddlCategoria.SelectedValue, rdb_SubCategorias.SelectedValue, Estoque.Text, CheckStatus.Checked ? "1" : "0", CheckDestaque.Checked ? "1" : "0", Resumo.Text, ProdDescricao_.Text, ProdValor_.Text, "CBR", "loja@rccbh.com.br", "BRL", Peso.Text, Extras.Text, HidIconeProduto.Value, int.Parse(ddlMarca.SelectedValue));
+        #region Cores
+        List<string> listaCores = RetornaCoresListadas();
+        if (listaCores != null)
+            Produtos_Cores.InserirCores(int.Parse(Session["id"].ToString()), listaCores);
+        #endregion
         #endregion
         #region comportamento da página
         mvProdutos.ActiveViewIndex = 0;
@@ -236,6 +241,8 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
         Extras.Text = dr["extras"].ToString();
         HidIconeProduto.Value = dr["icone"].ToString();
         ImageSelecionadaProduto.ImageUrl = string.Format("~/App_Themes/ActioAdms/hd/produtos/icones/" + dr["icone"].ToString());
+
+        PreencheCoresCadastradas();
         #endregion
         #region aparencia do site
         mvProdutos.ActiveViewIndex = 1;
@@ -246,7 +253,29 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
         rdb_SubCategorias.DataBind();
         rdb_SubCategorias.SelectedValue = dr["id_subcategoria"].ToString();
 
+        ddlMarca.DataBind();
+        ddlMarca.SelectedValue = dr["id_marca"].ToString();
         #endregion
+    }
+
+    private void PreencheCoresCadastradas()
+    {
+        //Limpa possíveis dados de outros produtos.
+        hidCoresIncluidas.Value = hidColor.Value = string.Empty;
+        lsbCoresDisponiveis.Items.Clear();
+
+        DataTable dtCores = Produtos_Cores.SelectCoresByIDProduto(int.Parse(Session["id"].ToString()));
+        if (dtCores != null && dtCores.Rows.Count > 0)
+        {
+            foreach (DataRow drCor in dtCores.Rows)
+            {
+                ListItem itemCor = new ListItem(drCor["cor"].ToString(), drCor["cor"].ToString());
+                itemCor.Attributes["style"] = string.Format("background-color:{0};", drCor["cor"].ToString());
+
+                lsbCoresDisponiveis.Items.Add(itemCor);
+                hidCoresIncluidas.Value = hidCoresIncluidas.Value + itemCor.Text + ";";
+            }
+        }
     }
     #endregion
     #region salvar alterações do produto
@@ -317,6 +346,12 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
             HidIconeProduto.Value,
             int.Parse(ddlMarca.SelectedValue)
             );
+
+        #region Cores
+        List<string> listaCores = RetornaCoresListadas();
+        if (listaCores != null)
+            Produtos_Cores.InserirCores(int.Parse(Session["id"].ToString()), listaCores);
+        #endregion
         #endregion
         #region comportamento da página
         mvProdutos.ActiveViewIndex = 0;
@@ -345,6 +380,9 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
 
         }
         #endregion
+        #region exclui cores cadastradas para o produto
+        Produtos_Cores.ExcluirCoresByIdProduto(Convert.ToInt32(Session["id"]));
+        #endregion
         #region exclui produto da base
         Produtos.Excluir(Session["id"].ToString());
         #endregion
@@ -354,7 +392,6 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
         LabelTitulo.Text = "Listagem de produtos cadastrados";
         Page.ClientScript.RegisterClientScriptBlock(typeof(Page), "sucesso", "alert('Item excluido com sucesso!');window.location.src = window.location.src;", true);
         #endregion
-
     }
     #endregion
     #region fotos do produto
@@ -442,7 +479,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
             string nomeArquivo = string.Format("{0}_{1}.{2}", nextID.ToString("ActioFotoProduto"), newresult, extensao);
             string enderecoCompleto = Server.MapPath(string.Format("~/App_Themes/ActioAdms/hd/produtos/album/{0}/{1}", HidDono.Value, nomeArquivo));
             if (!Directory.Exists(enderecoCompleto.Replace("\\" + nomeArquivo, "")))
-            {             
+            {
                 Directory.CreateDirectory(enderecoCompleto.Replace("\\" + nomeArquivo, ""));
             }
             Anexo.PostedFile.SaveAs(enderecoCompleto);
@@ -980,8 +1017,10 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
 
         }
         #endregion
-
         #endregion
+        #endregion
+        #region exclui cores cadastradas para os produtos da categoria
+        Produtos_Cores.ExcluirCoresByIdCategoria(Convert.ToInt32(Session["id_Categoria"].ToString()));
         #endregion
         #region exclui produtos
         Produtos.ExcluirByIdCategoria(Session["id_Categoria"].ToString());
@@ -1101,6 +1140,9 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
 
         #endregion
         #endregion
+        #region exclui cores cadastradas para os produtos da subcategoria
+        Produtos_Cores.ExcluirCoresByIdSubcategoria(Convert.ToInt32(Session["id_SubCategoria"].ToString()));
+        #endregion
         #region exclui produtos
         Produtos.ExcluirByIdSubCategoria(Session["id_SubCategoria"].ToString());
         #endregion
@@ -1113,6 +1155,30 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
     #endregion
     #endregion
     #endregion
+    #region Cores
+    /// <summary>
+    /// Retorna a lista de cores que estão atualmente no listbox.
+    /// </summary>
+    /// <returns></returns>
+    private List<string> RetornaCoresListadas()
+    {
+        if (!string.IsNullOrEmpty(hidCoresIncluidas.Value))
+        {
+            List<string> listaCores = new List<string>();
+            string[] cores = hidCoresIncluidas.Value.Split(';');
+            foreach (string cor in cores)
+            {
+                if (cor.StartsWith("#"))
+                    listaCores.Add(cor);
+            }
+
+            return listaCores;
+        }
+
+        return null;
+    }
+    #endregion
+
     #endregion
     #region cadastro de bancos para doação
     #region aparencia do site

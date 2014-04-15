@@ -1,6 +1,58 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/MasterPage.master" ValidateRequest="false" AutoEventWireup="True" CodeBehind="Default.aspx.cs" Inherits="ActioAdms_LojaVirtual_Default" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <script src="../Scripts/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //Incluir cor na listbox (sem incluir itens repetidos)
+            $("[id$='imbIncluirCor']").click(function () {
+                var listbox = $("[id$='lsbCoresDisponiveis']");
+                var hiddenCorAtual = $("[id$='hidColor']");
+                var hiddenCoresIncluidas = $("[id$='hidCoresIncluidas']");
+                if (listbox != null && hiddenCorAtual != null) {
+                    var color = hiddenCorAtual.val();
+                    var itemExists = false;
+
+                    listbox.find("option").each(function () {
+                        if (this.value == color)
+                            itemExists = true;
+                    });
+
+                    if (color.replace('#', '') != "" && !itemExists) {
+                        listbox.append("<option value='" + hiddenCorAtual.val() + "' style='background-color: " + hiddenCorAtual.val() + ";'>" + hiddenCorAtual.val() + "</option>");
+                        hiddenCoresIncluidas.val(hiddenCoresIncluidas.val() + hiddenCorAtual.val() + ";");
+                    }
+                }
+                return false;
+            });
+
+            //Remover cor da listbox
+            $("[id$='imbRetirarCor']").click(function () {
+                //Removendo da listbox
+                $("[id$='lsbCoresDisponiveis'] option:selected").remove();
+
+                var stringCores = '';
+
+                //Atualizando hidden field de cores incluidas
+                $("[id$='lsbCoresDisponiveis'] option").each(function () {
+                    stringCores = stringCores + $(this).val() + ";";
+                });
+
+                $("[id$='hidCoresIncluidas']").val(stringCores);
+
+                return false;
+            });
+        });
+
+        function colorChanged(sender) {
+            var hiddenCorAtual = $("[id$='hidColor']");
+            if (hiddenCorAtual != null) {
+                hiddenCorAtual.val("#" + sender.get_selectedColor());
+            }
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderAdms" runat="Server">
     <fieldset style="border: 1px solid #000000; width: 800px; padding: 15px">
@@ -171,7 +223,7 @@
                                                     <td align="left" valign="top" width="200px" rowspan="2"
                                                         style="padding-left: 10px; border-left-style: dotted; border-left-width: 1px; border-left-color: #808000">
                                                         <br />
-                                                        sub-cateogiras:<asp:RadioButtonList ID="rdb_SubCategorias" runat="server"
+                                                        sub-categorias:<asp:RadioButtonList ID="rdb_SubCategorias" runat="server"
                                                             DataSourceID="ods_Subcategorias" DataTextField="titulo" DataValueField="id">
                                                         </asp:RadioButtonList>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator25" runat="server"
@@ -246,8 +298,7 @@
                                             ControlToValidate="ddlMarca" ErrorMessage="marca"></asp:RequiredFieldValidator>
                                         <asp:ObjectDataSource ID="odsMarca" runat="server"
                                             SelectMethod="SelectAll"
-                                            TypeName="Actio.Negocio.Marca">
-                                        </asp:ObjectDataSource>
+                                            TypeName="Actio.Negocio.Marca"></asp:ObjectDataSource>
                                     </td>
                                 </tr>
                                 <tr>
@@ -309,6 +360,40 @@
                                     <td align="right" style="padding: 5px" valign="middle" width="100px">extras:</td>
                                     <td align="left" style="padding: 5px" valign="middle">
                                         <asp:TextBox ID="Extras" runat="server" Width="100px" SkinID="Dinheiro"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="padding: 5px" valign="middle" width="100px">cores disponíveis:</td>
+                                    <td align="left" style="padding: 5px" valign="middle">
+                                        <div style="float: left">
+                                            <div style="float: left">
+                                                <asp:HiddenField ID="hidColor" runat="server" />
+                                                <asp:ColorPickerExtender ID="colorPicker" runat="server" TargetControlID="txtColor" PopupButtonID="imbColor"
+                                                    SampleControlID="divColor" OnClientColorSelectionChanged="colorChanged">
+                                                </asp:ColorPickerExtender>
+                                                <asp:ImageButton ID="imbColor" runat="server" ImageUrl="~/App_Themes/ActioAdms/botoes/color_selector.png" />
+                                                <asp:TextBox ID="txtColor" runat="server" Enabled="false" Width="50"></asp:TextBox>
+                                                &nbsp;&nbsp;
+                                            </div>
+                                            <div id="divColor" runat="server" style="width: 25px; height: 25px; float: right;"></div>
+                                            <br />
+                                            <asp:RequiredFieldValidator ID="rfvColor" runat="server" ValidationGroup="cor" ErrorMessage="Selecione uma cor!"
+                                                ControlToValidate="txtColor"></asp:RequiredFieldValidator>
+                                        </div>
+                                        <div style="float: left">
+                                            <asp:ImageButton ID="imbIncluirCor" runat="server" ValidationGroup="cor"
+                                                ImageUrl="~/App_Themes/ActioAdms/botoes/arrow_right.png" />
+                                            <br />
+                                            <br />
+                                            <asp:ImageButton ID="imbRetirarCor" runat="server" ValidationGroup="corIncluida"
+                                                ImageUrl="~/App_Themes/ActioAdms/botoes/arrow_left.png" />
+                                        </div>
+                                        <div>
+                                            <asp:ListBox ID="lsbCoresDisponiveis" runat="server" Width="100" SelectionMode="Single"></asp:ListBox>
+                                            <asp:RequiredFieldValidator ID="rfvCoresIncluidas" runat="server" ValidationGroup="corIncluida" ErrorMessage="Selecione uma cor para ser removida"
+                                                ControlToValidate="lsbCoresDisponiveis"></asp:RequiredFieldValidator>
+                                            <asp:HiddenField ID="hidCoresIncluidas" runat="server" />
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
