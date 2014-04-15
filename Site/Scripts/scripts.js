@@ -45,9 +45,7 @@ $(document).ready(function () {
     $("#avaliarProduto").click(function () {
         $("#deSuaOpiniao").hide();
         $("#cadastroOpiniao").show();
-    });
-
-    
+    });    
 });
 
 $.fn.ancora = function () {

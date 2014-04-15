@@ -107,7 +107,7 @@
 
 #produtoTopo {
     width: 865px;
-    height: 400px;
+    height: 475px;
     padding: 50px 5px 0 5px;
     margin: auto;
     border-bottom: solid 2px #ECECEC;
@@ -117,6 +117,12 @@
     width: 50%;
     height: 100%;
     float: left;
+}
+
+#produtoFotoAmpliada {
+    width: 330px;
+    height: 330px;
+    margin-left: 70px;
 }
 
 #produtoInformacoes {
@@ -329,7 +335,12 @@
     height: 20px;
     background-color: #ECECEC;
     float: left;
-    margin-left: 5px;
+    margin-left: 10px;
+}
+
+.barraVerde {
+    background-color: #39A935;
+    height: 20px;
 }
 
 #deSuaOpiniao {

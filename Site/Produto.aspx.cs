@@ -85,6 +85,29 @@ namespace Site
                 ViewState["CodigoMarca"] = value;
             }
         }
+
+        /// <summary>
+        /// Armazena todas as avaliações feitas para o produto.
+        /// </summary>
+        public DataTable DtAvaliacoes
+        {
+            get
+            {
+                if (this.CodigoProduto.HasValue)
+                {
+                    if (ViewState["DtAvaliacoes"] == null)
+                        ViewState["DtAvaliacoes"] = Produtos_Avaliacao.BuscaTodasAvaliacoes(this.CodigoProduto.Value);
+
+                    return (DataTable)ViewState["DtAvaliacoes"];
+                }
+
+                return null;
+            }
+            set
+            {
+                ViewState["DtAvaliacoes"] = value;
+            }
+        }
         #endregion
 
         #region Eventos
@@ -104,6 +127,16 @@ namespace Site
                 }
                 else
                     mvwProduto.SetActiveView(viewProdutoInexistente);
+            }
+        }
+
+        protected void rptProdutos_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            DataRowView drFoto = (DataRowView)e.Item.DataItem;
+            Image img = (Image)e.Item.FindControl("imgFotoProduto");
+            if (img != null)
+            {
+                img.ImageUrl = string.Format("{0}App_Themes\\ActioAdms\\hd\\produtos\\album\\{1}\\{2}", this.CaminhoADMS, this.CodigoProduto.Value, drFoto["arquivo"]);
             }
         }
 
@@ -141,6 +174,19 @@ namespace Site
                 lblCondicoesPagto.Text = valorParcela.ToString("c2", new CultureInfo("pt-BR"));
                 #endregion
 
+                #region Busca Fotos do Produto
+                DataTable dtFotos = Produtos_Fotos.FotosDoProduto(this.CodigoProduto.Value);
+                rptFotosProduto.DataSource = dtFotos;
+                rptFotosProduto.DataBind();
+
+                if (dtFotos != null && dtFotos.Rows.Count > 0)
+                {
+                    DataRow drFoto1 = dtFotos.Rows[0];
+                    string arquivo = string.Format("{0}App_Themes\\ActioAdms\\hd\\produtos\\album\\{1}\\{2}", this.CaminhoADMS, this.CodigoProduto.Value, drFoto1["arquivo"]);
+                    imgFotoAmpliada.ImageUrl = arquivo;
+                }
+                #endregion
+
                 #region Busca Descrições do Produto
                 DataTable dtDescricoes = Produtos_Descricao.SelectByIDProduto(CodigoProduto.Value);
                 if (dtDescricoes != null && dtDescricoes.Rows.Count > 0)
@@ -170,6 +216,18 @@ namespace Site
                 ucSugestoes.CodigoCategoria = this.CodigoCategoria;
                 ucMesmaMarca.CodigoMarca = this.CodigoMarca;
                 #endregion
+
+                #region Busca avaliações do Produto
+                int mediaNotas = Produtos_Avaliacao.BuscaMediaAvaliacoes(this.CodigoProduto.Value);
+                rateReadOnly.CurrentRating = ratingCabecalho.CurrentRating = mediaNotas;
+
+                if (DtAvaliacoes != null && DtAvaliacoes.Rows.Count > 0)
+                {
+                    #region Número de avaliações e Quantidade de estrelas
+                    lblNumAvaliacoes.Text = DtAvaliacoes.Rows.Count.ToString();
+                    #endregion
+                }
+                #endregion
             }
             else
             {
@@ -177,11 +235,20 @@ namespace Site
             }
         }
 
-        public int CalculaMediaNotas()
+        /// <summary>
+        /// Retorna a quantidade de avaliações atribuídas com o número de estrelas informado.
+        /// </summary>
+        /// <param name="numEstrelas">Informar null para retornar a quantidade total de avaliações.</param>
+        /// <returns></returns>
+        public decimal RetornaQtdeAvaliacoes(int? numEstrelas)
         {
-            return 3;
+            string consulta = "1 = 1";
+
+            if (numEstrelas.HasValue)
+                consulta = string.Format("nota = {0}", numEstrelas.Value);
+
+            return ((DataRow[])DtAvaliacoes.Select(consulta)).Length;
         }
         #endregion
-
     }
 }

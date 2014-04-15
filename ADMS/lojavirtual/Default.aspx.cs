@@ -11,6 +11,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using Actio.Negocio;
+using System.Security.AccessControl;
 #endregion
 #region página
 public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
@@ -185,7 +186,7 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
         #endregion
         #endregion
         #region grava dados
-        Produtos.Novo(ddlCategoria.SelectedValue, rdb_SubCategorias.SelectedValue, Estoque.Text, CheckStatus.Checked ? "1" : "0", CheckDestaque.Checked ? "1" : "0", Resumo.Text, ProdDescricao_.Text, ProdValor_.Text, "CBR", "loja@rccbh.com.br", "BRL", Peso.Text, Extras.Text, HidIconeProduto.Value,  int.Parse(ddlMarca.SelectedValue));
+        Produtos.Novo(ddlCategoria.SelectedValue, rdb_SubCategorias.SelectedValue, Estoque.Text, CheckStatus.Checked ? "1" : "0", CheckDestaque.Checked ? "1" : "0", Resumo.Text, ProdDescricao_.Text, ProdValor_.Text, "CBR", "loja@rccbh.com.br", "BRL", Peso.Text, Extras.Text, HidIconeProduto.Value, int.Parse(ddlMarca.SelectedValue));
         #endregion
         #region comportamento da página
         mvProdutos.ActiveViewIndex = 0;
@@ -440,6 +441,10 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
             catch { }
             string nomeArquivo = string.Format("{0}_{1}.{2}", nextID.ToString("ActioFotoProduto"), newresult, extensao);
             string enderecoCompleto = Server.MapPath(string.Format("~/App_Themes/ActioAdms/hd/produtos/album/{0}/{1}", HidDono.Value, nomeArquivo));
+            if (!Directory.Exists(enderecoCompleto.Replace("\\" + nomeArquivo, "")))
+            {             
+                Directory.CreateDirectory(enderecoCompleto.Replace("\\" + nomeArquivo, ""));
+            }
             Anexo.PostedFile.SaveAs(enderecoCompleto);
             HidAnexo.Value = nomeArquivo;
         }
