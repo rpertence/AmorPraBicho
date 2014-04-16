@@ -397,6 +397,12 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td align="right" style="padding: 5px" valign="middle" width="100px">link do vídeo no Youtube:</td>
+                                    <td align="left" style="padding: 5px" valign="middle">
+                                        <asp:TextBox ID="txtLinkVideo" runat="server" Width="400px" MaxLength="100"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td align="right" style="padding: 5px" valign="middle" width="100px">icone:</td>
                                     <td align="left" style="padding: 5px" valign="middle">
                                         <asp:FileUpload ID="IconeProduto" runat="server" />

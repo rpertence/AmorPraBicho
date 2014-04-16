@@ -507,6 +507,15 @@ public partial class ActioAdms_LojaVirtual_Default {
     protected global::System.Web.UI.WebControls.HiddenField hidCoresIncluidas;
     
     /// <summary>
+    /// txtLinkVideo control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtLinkVideo;
+    
+    /// <summary>
     /// IconeProduto control.
     /// </summary>
     /// <remarks>

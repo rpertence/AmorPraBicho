@@ -128,6 +128,9 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
         Extras.Text = "";
         HidIconeProduto.Value = "";
         Resumo.Text = "";
+        txtLinkVideo.Text = "";
+        ddlMarca.SelectedIndex = -1;
+        lsbCoresDisponiveis.Items.Clear();
         #endregion
     }
     #endregion
@@ -186,11 +189,26 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
         #endregion
         #endregion
         #region grava dados
-        Produtos.Novo(ddlCategoria.SelectedValue, rdb_SubCategorias.SelectedValue, Estoque.Text, CheckStatus.Checked ? "1" : "0", CheckDestaque.Checked ? "1" : "0", Resumo.Text, ProdDescricao_.Text, ProdValor_.Text, "CBR", "loja@rccbh.com.br", "BRL", Peso.Text, Extras.Text, HidIconeProduto.Value, int.Parse(ddlMarca.SelectedValue));
+        int codigoProduto = Produtos.Novo(ddlCategoria.SelectedValue, 
+                        rdb_SubCategorias.SelectedValue, 
+                        Estoque.Text, 
+                        CheckStatus.Checked ? "1" : "0", 
+                        CheckDestaque.Checked ? "1" : "0", 
+                        Resumo.Text, 
+                        ProdDescricao_.Text, 
+                        ProdValor_.Text, 
+                        "CBR", 
+                        "loja@rccbh.com.br", 
+                        "BRL", 
+                        Peso.Text, 
+                        Extras.Text, 
+                        HidIconeProduto.Value, 
+                        int.Parse(ddlMarca.SelectedValue),
+                        string.IsNullOrEmpty(txtLinkVideo.Text.Trim()) ? null : txtLinkVideo.Text.Trim());
         #region Cores
         List<string> listaCores = RetornaCoresListadas();
         if (listaCores != null)
-            Produtos_Cores.InserirCores(int.Parse(Session["id"].ToString()), listaCores);
+            Produtos_Cores.InserirCores(codigoProduto, listaCores);
         #endregion
         #endregion
         #region comportamento da página
@@ -238,9 +256,10 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
         ProdDescricao_.Text = dr["ProdDescricao_"].ToString();
         ProdValor_.Text = dr["ProdValor_"].ToString();
         Peso.Text = dr["peso"].ToString();
-        Extras.Text = dr["extras"].ToString();
+        Extras.Text = dr["extras"].ToString();        
         HidIconeProduto.Value = dr["icone"].ToString();
         ImageSelecionadaProduto.ImageUrl = string.Format("~/App_Themes/ActioAdms/hd/produtos/icones/" + dr["icone"].ToString());
+        txtLinkVideo.Text = dr["endereco_video"].ToString();
 
         PreencheCoresCadastradas();
         #endregion
@@ -344,8 +363,8 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
             Peso.Text,
             Extras.Text,
             HidIconeProduto.Value,
-            int.Parse(ddlMarca.SelectedValue)
-            );
+            int.Parse(ddlMarca.SelectedValue),
+            string.IsNullOrEmpty(txtLinkVideo.Text.Trim()) ? null : txtLinkVideo.Text.Trim());
 
         #region Cores
         List<string> listaCores = RetornaCoresListadas();
@@ -1178,7 +1197,6 @@ public partial class ActioAdms_LojaVirtual_Default : System.Web.UI.Page
         return null;
     }
     #endregion
-
     #endregion
     #region cadastro de bancos para doação
     #region aparencia do site
