@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Actio.Negocio;
 
@@ -108,6 +109,24 @@ namespace Site
                 ViewState["DtAvaliacoes"] = value;
             }
         }
+
+        /// <summary>
+        /// Armazena o endereço do vídeo do produto.
+        /// </summary>
+        public string EnderecoVideo
+        {
+            get
+            {
+                if (ViewState["EnderecoVideo"] != null)
+                    return ViewState["EnderecoVideo"].ToString();
+
+                return "www.youtube.com";
+            }
+            set
+            {
+                ViewState["EnderecoVideo"] = value;
+            }
+        }
         #endregion
 
         #region Eventos
@@ -130,13 +149,23 @@ namespace Site
             }
         }
 
-        protected void rptProdutos_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        protected void rptFotosProduto_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             DataRowView drFoto = (DataRowView)e.Item.DataItem;
             Image img = (Image)e.Item.FindControl("imgFotoProduto");
             if (img != null)
             {
                 img.ImageUrl = string.Format("{0}App_Themes\\ActioAdms\\hd\\produtos\\album\\{1}\\{2}", this.CaminhoADMS, this.CodigoProduto.Value, drFoto["arquivo"]);
+            }
+        }
+
+        protected void rptCores_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            DataRowView drCor = (DataRowView)e.Item.DataItem;
+            HtmlControl div = (HtmlControl)e.Item.FindControl("divCor");
+            if (div != null)
+            {
+                div.Style["background-color"] = drCor["cor"].ToString();
             }
         }
 
@@ -174,7 +203,8 @@ namespace Site
                 lblCondicoesPagto.Text = valorParcela.ToString("c2", new CultureInfo("pt-BR"));
                 #endregion
 
-                #region Busca Fotos do Produto
+                #region Busca Fotos e vídeo do Produto
+                //Fotos
                 DataTable dtFotos = Produtos_Fotos.FotosDoProduto(this.CodigoProduto.Value);
                 rptFotosProduto.DataSource = dtFotos;
                 rptFotosProduto.DataBind();
@@ -184,6 +214,25 @@ namespace Site
                     DataRow drFoto1 = dtFotos.Rows[0];
                     string arquivo = string.Format("{0}App_Themes\\ActioAdms\\hd\\produtos\\album\\{1}\\{2}", this.CaminhoADMS, this.CodigoProduto.Value, drFoto1["arquivo"]);
                     imgFotoAmpliada.ImageUrl = arquivo;
+                }
+
+                //Vídeo
+                string enderecoVideo = drDetalhesProduto.IsNull("endereco_video") ? null : drDetalhesProduto["endereco_video"].ToString();
+                if (enderecoVideo == null)
+                    iconeVideo.Visible = false;
+                else
+                {
+                    //EnderecoVideo = "http://www.youtube.com/v/9z2zvcD6hoE?version=3&enablejsapi=1";
+                    EnderecoVideo = MontaLinkVideo(enderecoVideo);
+                }
+                #endregion
+
+                #region Busca Cores do Produto
+                DataTable dtCores = Produtos_Cores.SelectCoresByIDProduto(this.CodigoProduto.Value);
+                if (dtCores != null && dtCores.Rows.Count > 0)
+                {
+                    rptCores.DataSource = dtCores;
+                    rptCores.DataBind();
                 }
                 #endregion
 
@@ -233,6 +282,27 @@ namespace Site
             {
                 mvwProduto.SetActiveView(viewProdutoInexistente);
             }
+        }
+
+        /// <summary>
+        /// Monta a URL correta com o link para o vídeo escolhido de forma que
+        /// não haja erro na exibição de vídeo e fotos.
+        /// </summary>
+        /// <param name="enderecoVideo"></param>
+        /// <returns></returns>
+        private string MontaLinkVideo(string enderecoVideo)
+        {
+            string link = "http://www.youtube.com/v/{0}?version=3&enablejsapi=1";
+            string idVideo = string.Empty;
+            if (enderecoVideo.Contains("watch?v="))
+                idVideo = enderecoVideo.Substring(enderecoVideo.LastIndexOf("watch?v="), 19).Replace("watch?v=", "");
+            else if (enderecoVideo.Contains("youtu.be/"))
+                idVideo = enderecoVideo.Substring(enderecoVideo.LastIndexOf("youtu.be/"), 20).Replace("youtu.be/", "");
+
+            if (!string.IsNullOrEmpty(idVideo))
+                return string.Format(link, idVideo);
+
+            return "www.youtube.com";
         }
 
         /// <summary>

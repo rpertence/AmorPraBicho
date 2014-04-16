@@ -9,8 +9,13 @@
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
     <script src="Scripts/jquery.corner.js"></script>
     <script src="Scripts/jquery.als-1.4.min.js"></script>
+    <script type="text/javascript" src="http://www.youtube.com/player_api"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            //Esconde a div de exibição de vídeo por default.
+            $("#produtoVideo").hide();
+
+            //Tratamentos para scroll lists
             var numItensSugestoes = $("#my-als-list ul li").length;
             var numItensMesmaMarca = $("#my-als-list-2 ul li").length;
             var numItensFotos = $("#my-als-list-fotos ul li").length;
@@ -37,16 +42,35 @@
             });
 
             $("#my-als-list-fotos ul li").click(function () {
+                //Esconde a div de exibição do vídeo e pausa o mesmo.
+                $("#produtoVideo").hide();                
+                pauseVideo();
+                //Exibe a foto ampliada.
+                $("#produtoFotoAmpliada").show();
                 var img = $(this).find('img');
                 if (img != null) {
                     $("[id$='imgFotoAmpliada']").attr('src', img.attr('src'));
                 }
             });
+
+            $(".iconeVideo").click(function () {
+                //Esconde a div de exibição de fotos.
+                $("#produtoFotoAmpliada").hide();
+                //Exibe a div do vídeo.
+                $("#produtoVideo").show();
+            });
         });
+
+        function pauseVideo() {
+            $("object").each(function (index) {
+                obj = $(this).get(0);
+                if (obj.pauseVideo) obj.pauseVideo();
+            });
+        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:ToolkitScriptManager ID="ScriptManager1" runat="server"></asp:ToolkitScriptManager>
     <asp:MultiView ID="mvwProduto" runat="server" ActiveViewIndex="0">
         <asp:View ID="viewProduto" runat="server">
             <div id="produtoTopo">
@@ -56,7 +80,7 @@
                             <img src="App_Themes/Padrao/Imagens/seta-produto-cima.png" /></span>
                         <div class="als-viewport">
                             <ul class="als-wrapper">
-                                <asp:Repeater runat="server" ID="rptFotosProduto" OnItemDataBound="rptProdutos_ItemDataBound">
+                                <asp:Repeater runat="server" ID="rptFotosProduto" OnItemDataBound="rptFotosProduto_ItemDataBound">
                                     <ItemTemplate>
                                         <li class="als-item">
                                             <asp:Image ID="imgFotoProduto" runat="server" Width="48" Height="48" />
@@ -70,6 +94,12 @@
                     </div>
                     <div id="produtoFotoAmpliada">
                         <asp:Image ID="imgFotoAmpliada" runat="server" Width="330" Height="330" />
+                    </div>
+                    <div id="produtoVideo">
+                        <object id="frameVideo" data="<%= this.EnderecoVideo %>" width="330" height="330" type="application/x-shockwave-flash">
+                            <param name="allowscriptaccess" value="always" />
+                            <param name="allowFullScreen" value="true" />
+                        </object>
                     </div>
                 </div>
                 <div id="produtoInformacoes">
@@ -127,6 +157,21 @@
                         </div>
                     </div>
                 </div>
+                <div id="videoCoresRedesSociais">
+                    <div id="iconeVideo" runat="server" class="iconeVideo">
+                        <asp:Image ID="imgVideo" runat="server" ImageUrl="~/App_Themes/Padrao/Imagens/video.png" CssClass="ImageComOver" />
+                    </div>
+                    <div id="produtoCores">
+                        <div style="float: left; margin-right: 20px; margin-top: 2px;"><span>escolha a cor</span></div>
+                        <div>
+                            <asp:Repeater ID="rptCores" runat="server" OnItemDataBound="rptCores_ItemDataBound">
+                                <ItemTemplate>
+                                    <div id="divCor" runat="server" class="itemCor"></div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="produtoMeio">
                 <div id="produtoDescricao">
@@ -176,7 +221,7 @@
                                 <div class="textoBarra">
                                     <div style="float: left;"><span>5 estrelas</span></div>
                                     <div class="barraAvaliacao">
-                                        <div class="barraVerde" style="width: <%= (RetornaQtdeAvaliacoes(5) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
+                                        <div class="barraVerde" style="width: <%= RetornaQtdeAvaliacoes(null) == 0 ? 0 : (RetornaQtdeAvaliacoes(5) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
                                     </div>
                                     <div style="float: right;">
                                         <asp:Label ID="lblQtde5Estrelas" runat="server"><%= RetornaQtdeAvaliacoes(5) %></asp:Label>
@@ -185,7 +230,7 @@
                                 <div class="textoBarra">
                                     <div style="float: left;"><span>4 estrelas</span></div>
                                     <div class="barraAvaliacao">
-                                        <div class="barraVerde" style="width: <%= (RetornaQtdeAvaliacoes(4) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
+                                        <div class="barraVerde" style="width: <%= RetornaQtdeAvaliacoes(null) == 0 ? 0 : (RetornaQtdeAvaliacoes(4) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
                                     </div>
                                     <div style="float: right;">
                                         <asp:Label ID="lblQtde4Estrelas" runat="server"><%= RetornaQtdeAvaliacoes(4) %></asp:Label>
@@ -194,7 +239,7 @@
                                 <div class="textoBarra">
                                     <div style="float: left;"><span>3 estrelas</span></div>
                                     <div class="barraAvaliacao">
-                                        <div class="barraVerde" style="width: <%= (RetornaQtdeAvaliacoes(3) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
+                                        <div class="barraVerde" style="width: <%= RetornaQtdeAvaliacoes(null) == 0 ? 0 : (RetornaQtdeAvaliacoes(3) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
                                     </div>
                                     <div style="float: right;">
                                         <asp:Label ID="lblQtde3Estrelas" runat="server"><%= RetornaQtdeAvaliacoes(3) %></asp:Label>
@@ -203,7 +248,7 @@
                                 <div class="textoBarra">
                                     <div style="float: left;"><span>2 estrelas</span></div>
                                     <div class="barraAvaliacao">
-                                        <div class="barraVerde" style="width: <%= (RetornaQtdeAvaliacoes(2) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
+                                        <div class="barraVerde" style="width: <%= RetornaQtdeAvaliacoes(null) == 0 ? 0 : (RetornaQtdeAvaliacoes(2) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
                                     </div>
                                     <div style="float: right;">
                                         <asp:Label ID="lblQtde2Estrelas" runat="server"><%= RetornaQtdeAvaliacoes(2) %></asp:Label>
@@ -212,7 +257,7 @@
                                 <div class="textoBarra">
                                     <div style="float: left;"><span>1 estrela </span></div>
                                     <div class="barraAvaliacao" style="margin-left: 18px;">
-                                        <div class="barraVerde" style="width: <%= (RetornaQtdeAvaliacoes(1) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
+                                        <div class="barraVerde" style="width: <%= RetornaQtdeAvaliacoes(null) == 0 ? 0 : (RetornaQtdeAvaliacoes(1) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
                                     </div>
                                     <div style="float: right;">
                                         <asp:Label ID="lblQtde1Estrela" runat="server"><%= RetornaQtdeAvaliacoes(1) %></asp:Label>
