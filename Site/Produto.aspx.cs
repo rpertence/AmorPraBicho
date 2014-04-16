@@ -127,6 +127,8 @@ namespace Site
                 ViewState["EnderecoVideo"] = value;
             }
         }
+
+        
         #endregion
 
         #region Eventos
@@ -234,6 +236,8 @@ namespace Site
                     rptCores.DataSource = dtCores;
                     rptCores.DataBind();
                 }
+                else
+                    lblEscolhaCor.Visible = false;
                 #endregion
 
                 #region Busca Descrições do Produto

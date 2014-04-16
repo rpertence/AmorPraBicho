@@ -43,7 +43,7 @@
 
             $("#my-als-list-fotos ul li").click(function () {
                 //Esconde a div de exibição do vídeo e pausa o mesmo.
-                $("#produtoVideo").hide();                
+                $("#produtoVideo").hide();
                 pauseVideo();
                 //Exibe a foto ampliada.
                 $("#produtoFotoAmpliada").show();
@@ -58,6 +58,23 @@
                 $("#produtoFotoAmpliada").hide();
                 //Exibe a div do vídeo.
                 $("#produtoVideo").show();
+            });
+
+            //Selecionando cor
+            $(".divCorParent").click(function () {
+                //Seta a borda da cor selecionada e volta a borda das outras cores.
+                $(this).css('border', 'solid 1px #000');
+                var id = $(this).attr('id');
+                $(".divCorParent").each(function (i) {
+                    if ($(this).attr('id') != id)
+                        $(this).css('border', 'solid 1px #FFF');
+                });
+                //Recupera o código hexadecimal da cor.
+                var hexCor = $(this).children("div")[0].currentStyle['backgroundColor'];
+                var hiddenCor = $("[id$='hdfCor']");
+                if (hiddenCor != null) {
+                    hiddenCor.val(hexCor);
+                }
             });
         });
 
@@ -162,11 +179,15 @@
                         <asp:Image ID="imgVideo" runat="server" ImageUrl="~/App_Themes/Padrao/Imagens/video.png" CssClass="ImageComOver" />
                     </div>
                     <div id="produtoCores">
-                        <div style="float: left; margin-right: 20px; margin-top: 2px;"><span>escolha a cor</span></div>
+                        <div style="float: left; margin-right: 20px; margin-top: 2px;">
+                            <asp:Label ID="lblEscolhaCor" runat="server" Text="escolha a cor"></asp:Label></div>
                         <div>
+                            <asp:HiddenField ID="hdfCor" runat="server" />
                             <asp:Repeater ID="rptCores" runat="server" OnItemDataBound="rptCores_ItemDataBound">
                                 <ItemTemplate>
-                                    <div id="divCor" runat="server" class="itemCor"></div>
+                                    <div id="divCorParent" runat="server" class="divCorParent">
+                                        <div id="divCor" runat="server" class="itemCor"></div>
+                                    </div>
                                 </ItemTemplate>
                             </asp:Repeater>
                         </div>
