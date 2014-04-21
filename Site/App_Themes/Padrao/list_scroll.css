@@ -5,26 +5,50 @@
     position: relative;
     width: 100%;
     margin: 0px auto;
-
     /*henrique*/
     height: 270px;
     margin-top: 30px;
+}
+
+#produtoImagens .als-container {
+    position: relative;
+    width: 60px;
+    margin: 0px;
+    /*henrique*/
+    height: 100%;
 }
 
 .als-viewport {
     position: relative;
     overflow: hidden;
     margin: 0px auto;
-
     /*henrique*/
     height: 270px;
-    float:left;
-    margin-left:30px;
+    float: left;
+    margin-left: 30px;
+}
+
+#produtoImagens .als-viewport {
+    position: relative;
+    overflow: hidden;
+    margin: 0px auto;
+    /*henrique*/
+    margin: 10px 0 10px 0;
+    padding-bottom: 10px;
+    float: none;
+    clear: both;
 }
 
 .als-wrapper {
     position: relative;
     list-style: none;
+}
+
+#produtoImagens .als-wrapper {
+    position: relative;
+    list-style: none;
+    width: 60px;
+    margin-top: 10px;
 }
 
 .als-item {
@@ -35,12 +59,48 @@
     float: left;
 }
 
+#produtoImagens .als-item {
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    width: 60px;
+    margin: 4px 0 4px 0;
+    padding: 4px 0 4px 0;
+    border: solid 2px #ECECEC;
+}
+
 .als-prev, .als-next {
     position: absolute;
     cursor: pointer;
     clear: both;
-
-    /*henrique*/ 
+    /*henrique*/
     width: 31px;
     margin-top: 70px;
+}
+
+.als-prev {
+    float: left;
+}
+
+#produtoImagens .als-prev {
+    position: relative;
+    cursor: pointer;
+    clear: both;
+    /*henrique*/
+    width: 60px;
+    margin-top: 0;
+    text-align: center;
+}
+
+#produtoImagens .als-next {
+    cursor: pointer;
+    clear: both;
+    /*henrique*/
+    width: 60px;
+    margin-top: 0;
+    text-align: center;
+}
+
+#my-als-list-fotos {
+    float: left;
 }

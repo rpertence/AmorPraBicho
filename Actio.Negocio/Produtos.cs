@@ -22,16 +22,19 @@ namespace Actio.Negocio
     {
         #region comandos Básicos
         #region Novo
-        public static void Novo(string id_categoria, string id_subcategoria, string estoque, string status, string destaque, string resumo, string ProdDescricao_, string ProdValor_, string tipo, string email_cobranca, string moeda, string peso, string extras, string icone, int idMarca)
+        public static int Novo(string id_categoria, string id_subcategoria, string estoque, string status, string destaque, string resumo,
+                                string ProdDescricao_, string ProdValor_, string tipo, string email_cobranca, string moeda, string peso,
+                                string extras, string icone, int idMarca, string linkVideo)
         {
             string SQL = @"INSERT INTO produtos
-(id_categoria, id_subcategoria, estoque, status, destaque, resumo, ProdDescricao_, ProdValor_, tipo, email_cobranca, moeda, peso, extras, icone, id_marca)
-VALUES ({0}, {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', {14});";
+(id_categoria, id_subcategoria, estoque, status, destaque, resumo, ProdDescricao_, ProdValor_, tipo, email_cobranca, moeda, peso, extras, icone, id_marca {16})
+VALUES ({0}, {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', {14} {15});
+SELECT LAST_INSERT_ID();";
 
             SQL = string.Format(SQL, id_categoria, id_subcategoria, estoque, status, destaque, resumo, ProdDescricao_, ProdValor_, tipo, email_cobranca, moeda,
-                peso, extras, icone, idMarca);
+                peso, extras, icone, idMarca, linkVideo != null ? ", '" + linkVideo + "'" : "", linkVideo != null ? ", endereco_video" : "");
 
-            conexao.ExecuteNonQuery(SQL);
+            return int.Parse(conexao.ExecuteScalar(SQL));
         }
         #endregion
         #region seleciona todos os produtos
@@ -52,7 +55,10 @@ VALUES ({0}, {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}'
             string SQL = "SELECT " +
                 "(SELECT pc.`titulo` FROM produtos_categoria pc WHERE pc.`id` = p.`id_categoria`) categoria, " +
                 "(SELECT ps.`titulo` FROM produtos_subcategoria ps WHERE ps.`id` = p.`id_subcategoria`) subcategoria, " +
-                "p.`id`, p.`id_categoria`, p.`id_subcategoria`, p.`estoque`, p.`status`, p.`destaque`, p.`resumo`, p.`ProdDescricao_`, p.`ProdValor_`, p.`tipo`, p.`email_cobranca`, p.`moeda`, p.`peso`, p.`extras`, p.`icone` FROM produtos p WHERE p.`id` = '" + id + "';";
+                "p.`id`, p.`id_categoria`, p.`id_subcategoria`, p.`estoque`, p.`status`, p.`destaque`, p.`resumo`, p.`ProdDescricao_`, " +
+                "p.`ProdValor_`, p.`tipo`, p.`email_cobranca`, p.`moeda`, p.`peso`, p.`extras`, p.`icone`, p.`id_marca`, p.`endereco_video` " +
+                "FROM produtos p " +
+                "WHERE p.`id` = '" + id + "';";
             return conexao.Dados(SQL);
         }
         #endregion
@@ -77,7 +83,7 @@ VALUES ({0}, {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}'
             string sql = string.Format(@"select *
 from produtos
 where id_subcategoria = {0}
-    and id_marca = {1}
+	and id_marca = {1}
 order by cast(ProdValor_ as decimal(10, 2))", idSubcategoria, idMarca);
 
             return conexao.Dados(sql);
@@ -87,7 +93,7 @@ order by cast(ProdValor_ as decimal(10, 2))", idSubcategoria, idMarca);
             string sql = string.Format(@"select distinct p.id, p.proddescricao_, p.prodvalor_, p.icone
 from produtos p
   inner join produtos_categoria c on p.id_categoria = c.id
-    and p.status = 1
+	and p.status = 1
   inner join produtos_subcategoria sc on p.id_subcategoria = sc.id
   inner join marca m on p.id_marca = m.id
 where resumo like '%{0}%'
@@ -99,9 +105,16 @@ where resumo like '%{0}%'
             return conexao.Dados(sql);
         }
         #region Atualizar
-        public static void Update(string id, string id_categoria, string id_subcategoria, string estoque, string status, string destaque, string resumo, string ProdDescricao_, string ProdValor_, string tipo, string email_cobranca, string moeda, string peso, string extras, string icone, int idMarca)
+        public static void Update(string id, string id_categoria, string id_subcategoria, string estoque, string status, string destaque, 
+            string resumo, string ProdDescricao_, string ProdValor_, string tipo, string email_cobranca, string moeda, string peso, 
+            string extras, string icone, int idMarca, string linkVideo)
         {
-            string SQL = @"UPDATE produtos SET id_categoria = '" + id_categoria + "', estoque = '" + estoque + "', id_subcategoria = '" + id_subcategoria + "', status = '" + status + "', destaque = '" + destaque + "', ProdDescricao_ = '" + ProdDescricao_ + "', ProdValor_ = '" + ProdValor_ + "', tipo = '" + tipo + "', email_cobranca = '" + email_cobranca + "', moeda = '" + moeda + "', peso = '" + peso + "', extras = '" + extras + "', icone = '" + icone + "', id_marca = " + idMarca + " WHERE id = '" + id + "' LIMIT 1";
+            string SQL = string.Format(@"UPDATE produtos SET id_categoria = '" + id_categoria + "', estoque = '" + estoque + "', id_subcategoria = '" 
+                + id_subcategoria + "', status = '" + status + "', destaque = '" + destaque + "', ProdDescricao_ = '" + ProdDescricao_ + "', ProdValor_ = '" 
+                + ProdValor_ + "', tipo = '" + tipo + "', email_cobranca = '" + email_cobranca + "', moeda = '" + moeda + "', peso = '" + peso + "', extras = '"
+                + extras + "', icone = '" + icone + "', id_marca = " + idMarca + ", endereco_video = {0} WHERE id = '" + id + "' LIMIT 1", 
+                linkVideo != null ? "'" + linkVideo + "'" : "null");
+
             conexao.ExecuteNonQuery(SQL);
         }
         #endregion
@@ -164,6 +177,30 @@ where resumo like '%{0}%'
             string SQL = @"SELECT cast(p.ProdValor_ as decimal(10,2)) ValorProduto, p.icone NomeArquivo, p.proddescricao_ Nome
 FROM produtos p
 WHERE p.id_categoria = " + categoria + @"
+  AND p.destaque = '1'
+  AND p.status = '1'
+  AND p.estoque > '0'
+LIMIT 0, " + qtde;
+
+            return conexao.Dados(SQL);
+        }
+        public static DataTable SelectByDestaqueSubcategoria(int subcategoria, int qtde)
+        {
+            string SQL = @"SELECT cast(p.ProdValor_ as decimal(10,2)) ValorProduto, p.icone NomeArquivo, p.proddescricao_ Nome
+FROM produtos p
+WHERE p.id_subcategoria = " + subcategoria + @"
+  AND p.destaque = '1'
+  AND p.status = '1'
+  AND p.estoque > '0'
+LIMIT 0, " + qtde;
+
+            return conexao.Dados(SQL);
+        }
+        public static DataTable SelectByDestaqueMarca(int marca, int qtde)
+        {
+            string SQL = @"SELECT cast(p.ProdValor_ as decimal(10,2)) ValorProduto, p.icone NomeArquivo, p.proddescricao_ Nome
+FROM produtos p
+WHERE p.id_marca = " + marca + @"
   AND p.destaque = '1'
   AND p.status = '1'
   AND p.estoque > '0'

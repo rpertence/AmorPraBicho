@@ -408,6 +408,114 @@ public partial class ActioAdms_LojaVirtual_Default {
     protected global::System.Web.UI.WebControls.TextBox Extras;
     
     /// <summary>
+    /// hidColor control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HiddenField hidColor;
+    
+    /// <summary>
+    /// colorPicker control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::AjaxControlToolkit.ColorPickerExtender colorPicker;
+    
+    /// <summary>
+    /// imbColor control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ImageButton imbColor;
+    
+    /// <summary>
+    /// txtColor control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtColor;
+    
+    /// <summary>
+    /// divColor control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl divColor;
+    
+    /// <summary>
+    /// rfvColor control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvColor;
+    
+    /// <summary>
+    /// imbIncluirCor control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ImageButton imbIncluirCor;
+    
+    /// <summary>
+    /// imbRetirarCor control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ImageButton imbRetirarCor;
+    
+    /// <summary>
+    /// lsbCoresDisponiveis control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ListBox lsbCoresDisponiveis;
+    
+    /// <summary>
+    /// rfvCoresIncluidas control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCoresIncluidas;
+    
+    /// <summary>
+    /// hidCoresIncluidas control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HiddenField hidCoresIncluidas;
+    
+    /// <summary>
+    /// txtLinkVideo control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtLinkVideo;
+    
+    /// <summary>
     /// IconeProduto control.
     /// </summary>
     /// <remarks>

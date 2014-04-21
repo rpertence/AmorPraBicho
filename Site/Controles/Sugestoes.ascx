@@ -2,7 +2,7 @@
 <%@ Register Src="~/Controles/Produto.ascx" TagPrefix="uc1" TagName="Produto" %>
 
 <span class="als-prev">
-    <img src="../App_Themes/Padrao/Imagens/seta-produto-esquerda.png" alt="prev" title="previous" />
+    <img src="../App_Themes/Padrao/Imagens/seta-produto-esquerda.png" alt="anterior" />
 </span>
 <div class="als-viewport">
     <ul class="als-wrapper">
@@ -16,5 +16,5 @@
     </ul>
 </div>
 <span class="als-next">
-    <img src="../App_Themes/Padrao/Imagens/seta-produto-direita.png" alt="prev" title="previous" />
+    <img src="../App_Themes/Padrao/Imagens/seta-produto-direita.png" alt="próximo" />
 </span>
