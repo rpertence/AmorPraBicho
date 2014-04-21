@@ -96,6 +96,7 @@
     <Content Include="BemVindo\Default.aspx" />
     <Content Include="controles\MenuLateral.ascx" />
     <Content Include="Default.aspx" />
+    <Content Include="DuvidasFrequentes\Default.aspx" />
     <Content Include="imagens\Actio.jpg" />
     <Content Include="imagens\adms.jpg" />
     <Content Include="imagens\adms.png" />
@@ -198,6 +199,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DuvidasFrequentes\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DuvidasFrequentes\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login\ucLoginADMs.ascx.cs">

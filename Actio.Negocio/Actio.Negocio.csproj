@@ -64,6 +64,7 @@
     <Compile Include="clsUtil.cs" />
     <Compile Include="Banner.cs" />
     <Compile Include="BannerP.cs" />
+    <Compile Include="DuvidaFrequente.cs" />
     <Compile Include="Marca.cs" />
     <Compile Include="Produtos.cs" />
     <Compile Include="Produtos_Avaliacao.cs" />
