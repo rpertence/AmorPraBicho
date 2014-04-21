@@ -174,7 +174,7 @@ where resumo like '%{0}%'
         }
         public static DataTable SelectByDestaque(int categoria, int qtde)
         {
-            string SQL = @"SELECT cast(p.ProdValor_ as decimal(10,2)) ValorProduto, p.icone NomeArquivo, p.proddescricao_ Nome
+            string SQL = @"SELECT cast(p.ProdValor_ as decimal(10,2)) ValorProduto, p.icone NomeArquivo, p.proddescricao_ Nome, p.id
 FROM produtos p
 WHERE p.id_categoria = " + categoria + @"
   AND p.destaque = '1'

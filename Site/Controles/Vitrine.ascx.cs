@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -21,6 +22,11 @@ namespace Site.Controles
                 rptProdutos.DataSource = Produtos.SelectByDestaque(BuscaCategoria(), QtdeProdutos);
                 rptProdutos.DataBind();
             }
+        }
+
+        protected int FormataCodigoProduto(object item)
+        {
+            return int.Parse(((DataRowView)item)["id"].ToString());
         }
 
         private string BuscaUrlBicho()

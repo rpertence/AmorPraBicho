@@ -96,7 +96,7 @@
         <asp:Repeater runat="server" ID="rptResultado">
             <ItemTemplate>
                 <div style="float: left; padding-bottom: 40px;">
-                    <uc1:Produto runat="server" ID="Produto" ImageURL='<%# Bind("icone") %>' NomeProduto='<%# Bind("ProdDescricao_") %>' ValorProduto='<%# Valor(Container.DataItem) %>' />
+                    <uc1:Produto runat="server" ID="Produto" ImageURL='<%# Bind("icone") %>' NomeProduto='<%# Bind("ProdDescricao_") %>' ValorProduto='<%# Valor(Container.DataItem) %>' CodigoProduto='<%# Codigo(Container.DataItem) %>' />
                 </div>
             </ItemTemplate>
         </asp:Repeater>

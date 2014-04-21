@@ -148,6 +148,11 @@ namespace Site.Controles
             return decimal.Parse(((DataRowView)item)["ProdValor_"].ToString());
         }
 
+        protected int Codigo(object item)
+        {
+            return int.Parse(((DataRowView)item)["id"].ToString());
+        }
+
         private int IdSubCategoria
         {
             get { return (int)ViewState["IdSubCategoria"]; }

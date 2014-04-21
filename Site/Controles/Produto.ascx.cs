@@ -14,6 +14,7 @@ namespace Site.Controles
 
         }
 
+        public int CodigoProduto { get; set; }
         public string ImageURL { get; set; }
         public string NomeProduto { get; set; }
         public decimal ValorProduto { get; set; }

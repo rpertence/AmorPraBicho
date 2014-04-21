@@ -421,3 +421,12 @@
 .fb-comments {
     top: -109px;
 }
+.ProdutoItem {
+    width: 180px;
+    text-align: center;
+    line-height: 20px;
+}
+    .ProdutoItem a {
+        text-decoration: none;
+        color: black;
+    }

@@ -5,7 +5,7 @@
 <asp:Repeater runat="server" ID="rptProdutos">
     <ItemTemplate>
         <div style="float: left;">
-            <uc1:Produto runat="server" ID="Produto" ImageURL='<%# Bind("NomeArquivo") %>' NomeProduto='<%# Bind("Nome") %>' ValorProduto='<%# Bind("ValorProduto") %>' />
+            <uc1:Produto runat="server" ID="Produto" ImageURL='<%# Bind("NomeArquivo") %>' NomeProduto='<%# Bind("Nome") %>' ValorProduto='<%# Bind("ValorProduto") %>' CodigoProduto='<%# FormataCodigoProduto(Container.DataItem) %>' />
         </div>
     </ItemTemplate>
 </asp:Repeater>
