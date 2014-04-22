@@ -53,6 +53,10 @@
                 }
             });
 
+            //Esconde a div de miniaturas se não houver fotos cadastradas para o produto.
+            if ($("#my-als-list-fotos ul li").length == 0)
+                $("#my-als-list-fotos").hide();
+
             $(".iconeVideo").click(function () {
                 //Esconde a div de exibição de fotos.
                 $("#produtoFotoAmpliada").hide();
@@ -60,21 +64,16 @@
                 $("#produtoVideo").show();
             });
 
-            //Selecionando cor
+            //Selecionando cor default
+            var hiddenCor = $("[id$='hdfCor']");
+            if (hiddenCor != null && hiddenCor.val() == "" && $(".divCorParent") != null)
+                selecionarCor($(".divCorParent").first());
+            else if (hiddenCor != null && hiddenCor.val != "")
+                selecionarCorByHex(hiddenCor.val());
+
+            //Evento de seleção de cor
             $(".divCorParent").click(function () {
-                //Seta a borda da cor selecionada e volta a borda das outras cores.
-                $(this).css('border', 'solid 1px #000');
-                var id = $(this).attr('id');
-                $(".divCorParent").each(function (i) {
-                    if ($(this).attr('id') != id)
-                        $(this).css('border', 'solid 1px #FFF');
-                });
-                //Recupera o código hexadecimal da cor.
-                var hexCor = $(this).children("div")[0].currentStyle['backgroundColor'];
-                var hiddenCor = $("[id$='hdfCor']");
-                if (hiddenCor != null) {
-                    hiddenCor.val(hexCor);
-                }
+                selecionarCor($(this));
             });
         });
 
@@ -82,6 +81,31 @@
             $("object").each(function (index) {
                 obj = $(this).get(0);
                 if (obj.pauseVideo) obj.pauseVideo();
+            });
+        }
+
+        function selecionarCor(divCor) {
+            //Seta a borda da cor selecionada e volta a borda das outras cores.
+            divCor.css('border', 'solid 1px #000');
+            var id = divCor.attr('id');
+            $(".divCorParent").each(function (i) {
+                if ($(this).attr('id') != id)
+                    $(this).css('border', 'solid 1px #FFF');
+            });
+            //Recupera o código hexadecimal da cor e seta valor do hidden field.
+            var hexCor = divCor.children("div")[0].currentStyle['backgroundColor'];
+            var hiddenCor = $("[id$='hdfCor']");
+            if (hiddenCor != null) {
+                hiddenCor.val(hexCor);
+            }
+        }
+
+        function selecionarCorByHex(hexCor) {
+            $(".divCorParent").each(function (i) {
+                if ($(this).children("div")[0].currentStyle['backgroundColor'] == hexCor) {
+                    selecionarCor($(this));
+                    return false;
+                }
             });
         }
     </script>
@@ -152,7 +176,7 @@
                             </p>
                         </div>
                         <div id="produtoComprar">
-                            <img src="App_Themes/Padrao/Imagens/botao-comprar.png" />
+                            <asp:ImageButton ID="imbComprar" runat="server" ImageUrl="~/App_Themes/Padrao/Imagens/botao-comprar.png" OnClick="imbComprar_Click" />
                         </div>
                     </div>
                     <div id="produtoFretePrazoContainer" style="display: none;">
@@ -180,7 +204,8 @@
                     </div>
                     <div id="produtoCores">
                         <div style="float: left; margin-right: 20px; margin-top: 2px;">
-                            <asp:Label ID="lblEscolhaCor" runat="server" Text="escolha a cor"></asp:Label></div>
+                            <asp:Label ID="lblEscolhaCor" runat="server" Text="escolha a cor"></asp:Label>
+                        </div>
                         <div>
                             <asp:HiddenField ID="hdfCor" runat="server" />
                             <asp:Repeater ID="rptCores" runat="server" OnItemDataBound="rptCores_ItemDataBound">

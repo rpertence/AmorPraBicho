@@ -128,7 +128,7 @@ namespace Site
             }
         }
 
-        
+
         #endregion
 
         #region Eventos
@@ -174,6 +174,11 @@ namespace Site
         protected void btnSalvarAvaliacao_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void imbComprar_Click(object sender, ImageClickEventArgs e)
+        {
+            string cor = hdfCor.Value;
         }
         #endregion
 
@@ -323,6 +328,6 @@ namespace Site
 
             return ((DataRow[])DtAvaliacoes.Select(consulta)).Length;
         }
-        #endregion
+        #endregion        
     }
 }
