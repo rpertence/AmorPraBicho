@@ -22,14 +22,15 @@ namespace Actio.Negocio
     {
         #region produtos_vendas
         #region Novo Produto Venda
-        public static void Inserir(string pedido, string transacao, string Tipo_Frete, string status_descricao, string forma_pagamento, string frete, string anotacao, string email)
+        public static int Inserir(string pedido, string transacao, string Tipo_Frete, string status_descricao, string forma_pagamento, string frete, string anotacao, string email)
         {
             string SQL = @"INSERT INTO `produtos_vendas` 
                           (`pedido`, `transacao`, `Tipo_Frete`,`status_descricao`, `forma_pagamento`, `frete`, `anotacao`, `email`) 
                           VALUES
-                          ('" + pedido + "','" + transacao + "','" + Tipo_Frete + "','" + status_descricao + "', '" + forma_pagamento + "', '" + frete + "', '" + anotacao + "', '" + email + "');";
+                          ('" + pedido + "','" + transacao + "','" + Tipo_Frete + "','" + status_descricao + "', '" + forma_pagamento + "', '" + frete + "', '" + anotacao + "', '" + email + "');" +
+                            "SELECT LAST_INSERT_ID();";
 
-            conexao.ExecuteNonQuery(SQL);
+            return int.Parse(conexao.ExecuteScalar(SQL));
         }
         #endregion
         #region seleciona todos os produtos_vendas

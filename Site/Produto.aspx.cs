@@ -9,6 +9,9 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Actio.Negocio;
+using Uol.PagSeguro.Constants;
+using Uol.PagSeguro.Domain;
+using Uol.PagSeguro.Resources;
 
 namespace Site
 {
@@ -88,6 +91,29 @@ namespace Site
         }
 
         /// <summary>
+        /// Armazena os dados do produto exibido na tela.
+        /// </summary>
+        public DataTable DtProduto
+        {
+            get
+            {
+                if (this.CodigoProduto.HasValue)
+                {
+                    if (ViewState["DtProduto"] == null)
+                        ViewState["DtProduto"] = Produtos.SelectById(this.CodigoProduto.Value);
+
+                    return (DataTable)ViewState["DtProduto"];
+                }
+
+                return null;
+            }
+            set
+            {
+                ViewState["DtProduto"] = value;
+            }
+        }
+
+        /// <summary>
         /// Armazena todas as avaliações feitas para o produto.
         /// </summary>
         public DataTable DtAvaliacoes
@@ -127,8 +153,6 @@ namespace Site
                 ViewState["EnderecoVideo"] = value;
             }
         }
-
-
         #endregion
 
         #region Eventos
@@ -178,7 +202,61 @@ namespace Site
 
         protected void imbComprar_Click(object sender, ImageClickEventArgs e)
         {
-            string cor = hdfCor.Value;
+            if (DtProduto != null && DtProduto.Rows.Count > 0)
+            {
+                #region Criando Requisição de Pagamento PagSeguro
+                PaymentRequest p = new PaymentRequest();
+
+                //Cria objeto do tipo Item para adicionar na requisição
+                DataRow drDetalhesProduto = DtProduto.Rows[0];
+                string nomeProduto = drDetalhesProduto["ProdDescricao_"].ToString();
+                decimal valor = drDetalhesProduto.IsNull("ProdValor_") ? 0 : decimal.Parse(drDetalhesProduto["ProdValor_"].ToString().Replace('.', ','));
+                long? peso = drDetalhesProduto.IsNull("peso") ? null : (long?)Convert.ToInt64(drDetalhesProduto["peso"]);
+                Item i = new Item(this.CodigoProduto.Value.ToString(), nomeProduto, 1, valor, peso, 0);
+
+                //Adiciona o produto na requisição.
+                p.Items.Add(i);
+
+                //Cria parâmetro de cor do produto para ser adicionado ao item.
+                //Uol.PagSeguro.Domain.Parameter param = new Uol.PagSeguro.Domain.Parameter();
+                //p.AddIndexedParameter("itemColor", hdfCor.Value, this.CodigoProduto.Value);
+
+                //Cria objeto do tipo Sender para identificar o comprador.
+                string nome = "João Batista";
+                string email = "joao.batista@email.com.br";
+                Phone phone = new Phone("31", "84771166");
+                Sender s = new Sender(nome, email, phone);
+
+                //Adiciona CPF do comprador
+                string cpf = "12345678901";
+                SenderDocument doc = new SenderDocument("CPF", cpf);
+                s.Documents.Add(doc);
+
+                //Associa comprador à requisição de pagamento.
+                p.Sender = s;
+
+                //Informa moeda da transação (R$)
+                p.Currency = Currency.Brl;
+
+                //TODO: descomentar
+                /*
+                //Insere venda na tabela 'produtos_vendas'
+                int idVenda = Produtos_Vendas.Inserir(string.Empty, string.Empty, string.Empty, "Aguardando Pagto", string.Empty, string.Empty, "Usuário redirecionado para o PagSeguro", email);
+
+                //Cria referência para a compra na base de dados do site.
+                p.Reference = idVenda.ToString();
+                */
+
+                //Configura credenciais de acesso
+                AccountCredentials credentials = PagSeguroConfiguration.Credentials;
+
+                //Faz a chamada ao método Register, que retorna a URL necessária para direcionar o comprador ao PagSeguro
+                Uri redirectURL = p.Register(credentials);
+
+                //Redireciona o comprador para a página do PagSeguro.
+                Response.Redirect(redirectURL.AbsoluteUri);
+                #endregion
+            }
         }
         #endregion
 
@@ -188,18 +266,18 @@ namespace Site
         /// </summary>
         private void PreencheDadosProduto()
         {
-            DataTable dtProduto = Produtos.SelectById(CodigoProduto.Value);
-            if (dtProduto != null && dtProduto.Rows.Count > 0)
+            DtProduto = Produtos.SelectById(CodigoProduto.Value);
+            if (DtProduto != null && DtProduto.Rows.Count > 0)
             {
                 #region Dados básicos do produto
-                DataRow drDetalhesProduto = dtProduto.Rows[0];
+                DataRow drDetalhesProduto = DtProduto.Rows[0];
 
                 CodigoCategoria = Convert.ToInt32(drDetalhesProduto["id_categoria"]);
                 CodigoSubcategoria = Convert.ToInt32(drDetalhesProduto["id_subcategoria"]);
                 CodigoMarca = Convert.ToInt32(drDetalhesProduto["id_marca"]);
                 string nomeProduto = drDetalhesProduto["ProdDescricao_"].ToString();
                 string resumoProduto = drDetalhesProduto["resumo"].ToString();
-                decimal valor = drDetalhesProduto.IsNull("ProdValor_") ? 0 : Convert.ToDecimal(drDetalhesProduto["ProdValor_"]);
+                decimal valor = drDetalhesProduto.IsNull("ProdValor_") ? 0 : decimal.Parse(drDetalhesProduto["ProdValor_"].ToString().Replace('.',','));
                 decimal valorParcela = valor / 3;
                 #endregion
 
@@ -328,6 +406,6 @@ namespace Site
 
             return ((DataRow[])DtAvaliacoes.Select(consulta)).Length;
         }
-        #endregion        
+        #endregion
     }
 }
