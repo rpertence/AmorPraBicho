@@ -128,6 +128,9 @@
     <Content Include="App_Themes\Padrao\Imagens\video.png" />
     <Content Include="App_Themes\Padrao\rating.css" />
     <Content Include="Caes.aspx" />
+    <Content Include="Configuration\PagSeguroConfig.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Controles\AvaliacaoLeitura.ascx" />
     <Content Include="Controles\Banners.ascx" />
     <Content Include="Controles\banner\images\bx_loader.gif" />
@@ -285,6 +288,10 @@
     <ProjectReference Include="..\Actio.Negocio\Actio.Negocio.csproj">
       <Project>{4bec26fa-8935-49cf-bbfb-abd0d71586d6}</Project>
       <Name>Actio.Negocio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Uol.PagSeguro\Uol.PagSeguro.csproj">
+      <Project>{babc5658-6afd-4f8e-81f1-434553663d99}</Project>
+      <Name>Uol.PagSeguro</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

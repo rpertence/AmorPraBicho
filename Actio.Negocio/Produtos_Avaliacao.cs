@@ -49,5 +49,14 @@ namespace Actio.Negocio
             return 0;
         }
         #endregion
+
+        #region Nova Avaliação
+        public static void SalvarAvaliacao(int idProduto, int nota, string depoimento)
+        {
+            string SQL = string.Format(@"INSERT INTO produtos_avaliacao(id_produto, nota, depoimento, `Data`)
+                                         VALUES({0}, {1}, '{2}', CURDATE());", idProduto, nota, depoimento);
+            conexao.ExecuteNonQuery(SQL);
+        }
+        #endregion
     }
 }
