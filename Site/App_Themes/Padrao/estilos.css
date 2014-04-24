@@ -144,6 +144,16 @@
     float: left;
 }
 
+#produtoRedesSociais {
+    width: 400px;
+    margin: 40px 0 0 80px;
+}
+
+.linkRedeSocial {
+    float:left;
+    margin-right:20px;
+}
+
 .iconeVideo {
     width: 60px;
     height: 60px;

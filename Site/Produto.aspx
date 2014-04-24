@@ -6,9 +6,17 @@
 <%@ Register Src="~/Controles/LeituraAvaliacao.ascx" TagPrefix="uc1" TagName="LeituraAvaliacao" %>
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
+    <title>PRODUTO TESTE</title>
+    <%--<link rel="canonical" />--%>
     <script src="Scripts/jquery.corner.js"></script>
     <script src="Scripts/jquery.als-1.4.min.js"></script>
     <script type="text/javascript" src="http://www.youtube.com/player_api"></script>
+
+    <%--Facebook--%>
+    <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+    <%--Twitter--%>
+    <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             //Esconde a div de exibição de vídeo por default.
@@ -75,6 +83,9 @@
                 selecionarCor($(this));
             });
 
+            //Montando link para compartilhar nas redes sociais
+
+
             //Salvar Avaliação do Produto
             $("[id$='btnSalvarAvaliacao']").click(function () {
                 //Validações
@@ -102,7 +113,7 @@
                     $(this).css('border', 'solid 1px #FFF');
             });
             //Recupera o código hexadecimal da cor e seta valor do hidden field.
-            var hexCor = divCor.find("div")[0].style['backgroundColor'];
+            var hexCor = colorToHex(divCor.find("div")[0].style['backgroundColor']);
             var hiddenCor = $("[id$='hdfCor']");
             if (hiddenCor != null) {
                 hiddenCor.val(hexCor);
@@ -111,15 +122,27 @@
 
         function selecionarCorByHex(hexCor) {
             $(".divCorParent").each(function (i) {
-                if ($(this).find("div")[0].style['backgroundColor'] == hexCor) {
+                if (colorToHex($(this).find("div")[0].style['backgroundColor']) == hexCor) {
                     selecionarCor($(this));
                     return false;
                 }
             });
         }
+
+        //converte cor no formato rgb(r,g,b) para hexadecimal (#rrggbb)
+        function colorToHex(color) {
+            var parts = color.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+            delete (parts[0]);
+            for (var i = 1; i <= 3; ++i) {
+                parts[i] = parseInt(parts[i]).toString(16);
+                if (parts[i].length == 1) parts[i] = '0' + parts[i];
+            }
+            return '#' + parts.join('');
+        };
     </script>
 </asp:Content>
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
+    <meta property="og:title" content="This is the Title of the Page" />
     <asp:ToolkitScriptManager ID="ScriptManager1" runat="server"></asp:ToolkitScriptManager>
     <asp:MultiView ID="mvwProduto" runat="server" ActiveViewIndex="0">
         <asp:View ID="viewProduto" runat="server">
@@ -224,6 +247,28 @@
                                     </div>
                                 </ItemTemplate>
                             </asp:Repeater>
+                        </div>
+                    </div>
+                    <br />
+                    <div id="produtoRedesSociais">
+                        <%--<div class="fb-like" data-href="https://www.facebook.com/amorprabicho" data-width="100" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"
+                            data-colorscheme="light" data-header="true" data-stream="false" data-show-border="true">
+                        </div>--%>
+                        <%--<div class="fb-share-button" data-width="100" data-type="button_count"></div>--%>
+                        <div class="linkRedeSocial" style="width:65px;">
+                            <a id="link_share_fb" href="javascript: void(0);" style="width:125px;"
+                                onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'facebook-share-dialog', 'toolbar=0, status=0, width=650, height=450');">
+                                <img src="App_Themes/Padrao/Imagens/facebook.png" class="ImageComOver" /></a>
+                        </div>
+                        <div class="linkRedeSocial">
+                            <a href="https://twitter.com/share" class="twitter-share-button" data-lang="pt" data-dnt="true">
+                                <img src="App_Themes/Padrao/Imagens/twitter.png" class="ImageComOver" /></a>
+                        </div>
+                        <div class="linkRedeSocial">
+                            <g:plusone href=""></g:plusone>
+                        </div>
+                        <div class="linkRedeSocial">
+                            <img src="App_Themes/Padrao/Imagens/email.png" class="ImageComOver" />
                         </div>
                     </div>
                 </div>
@@ -369,4 +414,16 @@
             </div>
         </asp:View>
     </asp:MultiView>
+    <%--Google Plus--%>
+    <script type="text/javascript">
+        window.___gcfg = {
+            lang: 'pt-BR',
+            parsetags: 'onload'
+        };
+        (function () {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+    </script>
 </asp:Content>
