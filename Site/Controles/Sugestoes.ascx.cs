@@ -22,12 +22,12 @@ namespace Site.Controles
                 {
                     case TipoSugestao.MesmaCategoria:
                         if (this.CodigoCategoria.HasValue)
-                            dt = Produtos.SelectByDestaque(this.CodigoCategoria.Value, this.QtdeProdutos);
+                            dt = Produtos.SelectByDestaqueCategoria(this.CodigoProduto.Value, this.CodigoCategoria.Value, this.QtdeProdutos, true);
                         break;
 
                     case TipoSugestao.MesmaMarca:
                         if (this.CodigoMarca.HasValue)
-                            dt = Produtos.SelectByDestaqueMarca(this.CodigoMarca.Value, this.QtdeProdutos);
+                            dt = Produtos.SelectByDestaqueMarca(this.CodigoProduto.Value, this.CodigoMarca.Value, this.QtdeProdutos, true);
                         break;
 
                     case TipoSugestao.MesmaSubcategoria:
@@ -55,6 +55,7 @@ namespace Site.Controles
 
         public TipoSugestao Tipo { get; set; }
         public int QtdeProdutos { get; set; }
+        public int? CodigoProduto { get; set; }
         public int? CodigoCategoria { get; set; }
         public int? CodigoSubcategoria { get; set; }
         public int? CodigoMarca { get; set; }

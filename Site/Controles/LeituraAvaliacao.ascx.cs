@@ -7,15 +7,18 @@ using System.Web.UI.WebControls;
 
 namespace Site.Controles
 {
-    public partial class AvaliacaoLeitura : System.Web.UI.UserControl
+    public partial class LeituraAvaliacao : System.Web.UI.UserControl
     {
         public int Nota { get; set; }
-        public string Titulo { get; set; }
+        public string TituloAvaliacao { get; set; }
+        public string NomeUsuario { get; set; }
+        public DateTime DataAvaliacao { get; set; }
         public string Depoimento { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+                rateReadOnly.CurrentRating = this.Nota;
         }
     }
 }

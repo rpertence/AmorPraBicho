@@ -3,8 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <%@ Register Src="~/Controles/Sugestoes.ascx" TagPrefix="uc1" TagName="Sugestoes" %>
-<%@ Register Src="~/Controles/AvaliacaoLeitura.ascx" TagPrefix="uc1" TagName="AvaliacaoLeitura" %>
-
+<%@ Register Src="~/Controles/LeituraAvaliacao.ascx" TagPrefix="uc1" TagName="LeituraAvaliacao" %>
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
     <script src="Scripts/jquery.corner.js"></script>
@@ -75,6 +74,16 @@
             $(".divCorParent").click(function () {
                 selecionarCor($(this));
             });
+
+            //Salvar Avaliação do Produto
+            $("[id$='btnSalvarAvaliacao']").click(function () {
+                //Validações
+                var nota = $("[id$='rateEnabled']").find("span.ratingItem.Filled").length;
+                if (nota == 0) {
+                    alert('Preencha uma nota para o produto.');
+                    return false;
+                }
+            });
         });
 
         function pauseVideo() {
@@ -93,7 +102,7 @@
                     $(this).css('border', 'solid 1px #FFF');
             });
             //Recupera o código hexadecimal da cor e seta valor do hidden field.
-            var hexCor = divCor.children("div")[0].currentStyle['backgroundColor'];
+            var hexCor = divCor.find("div")[0].style['backgroundColor'];
             var hiddenCor = $("[id$='hdfCor']");
             if (hiddenCor != null) {
                 hiddenCor.val(hexCor);
@@ -102,7 +111,7 @@
 
         function selecionarCorByHex(hexCor) {
             $(".divCorParent").each(function (i) {
-                if ($(this).children("div")[0].currentStyle['backgroundColor'] == hexCor) {
+                if ($(this).find("div")[0].style['backgroundColor'] == hexCor) {
                     selecionarCor($(this));
                     return false;
                 }
@@ -148,7 +157,7 @@
                         <asp:Label ID="lblNomeProduto" runat="server"></asp:Label>
                     </div>
                     <div id="produtoEstrelas">
-                        <div style="float: left; width: 80px;">
+                        <div style="float: left; width: 80px; margin-top: 2px;">
                             <asp:Rating ID="ratingCabecalho" runat="server" ReadOnly="true" MaxRating="5"
                                 CssClass="ratingStar" StarCssClass="ratingItem" WaitingStarCssClass="Saved" FilledStarCssClass="Filled"
                                 EmptyStarCssClass="Empty" AutoPostBack="false">
@@ -254,97 +263,102 @@
                         <div class="tituloSugerimosMesmaMarca"><span>Opiniões dos Clientes</span></div>
                         <div class="bordaPontilhada" style="width: 690px;">&nbsp;</div>
                     </div>
-                    <div id="produtoRating">
-                        <div id="produtoRatingEsquerda" style="float: left;">
-                            <div>
-                                <asp:Rating ID="rateReadOnly" runat="server" ReadOnly="true" MaxRating="5"
-                                    CssClass="ratingStar" StarCssClass="ratingItem" WaitingStarCssClass="Saved" FilledStarCssClass="Filled"
-                                    EmptyStarCssClass="Empty" AutoPostBack="false">
-                                </asp:Rating>
-                            </div>
-                            <br />
-                            <div class="barras">
-                                <div class="textoBarra">
-                                    <div style="float: left;"><span>5 estrelas</span></div>
-                                    <div class="barraAvaliacao">
-                                        <div class="barraVerde" style="width: <%= RetornaQtdeAvaliacoes(null) == 0 ? 0 : (RetornaQtdeAvaliacoes(5) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
-                                    </div>
-                                    <div style="float: right;">
-                                        <asp:Label ID="lblQtde5Estrelas" runat="server"><%= RetornaQtdeAvaliacoes(5) %></asp:Label>
-                                    </div>
+                    <div style="border-bottom: solid 2px #ECECEC;">
+                        <div id="produtoRating">
+                            <div id="produtoRatingEsquerda" style="float: left;">
+                                <div>
+                                    <asp:Rating ID="rateReadOnly" runat="server" ReadOnly="true" MaxRating="5"
+                                        CssClass="ratingStar" StarCssClass="ratingItem" WaitingStarCssClass="Saved" FilledStarCssClass="Filled"
+                                        EmptyStarCssClass="Empty" AutoPostBack="false">
+                                    </asp:Rating>
                                 </div>
-                                <div class="textoBarra">
-                                    <div style="float: left;"><span>4 estrelas</span></div>
-                                    <div class="barraAvaliacao">
-                                        <div class="barraVerde" style="width: <%= RetornaQtdeAvaliacoes(null) == 0 ? 0 : (RetornaQtdeAvaliacoes(4) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
+                                <br />
+                                <div class="barras">
+                                    <div class="textoBarra">
+                                        <div style="float: left;"><span>5 estrelas</span></div>
+                                        <div class="barraAvaliacao">
+                                            <div class="barraVerde" style="width: <%= RetornaQtdeAvaliacoes(null) == 0 ? 0 : (RetornaQtdeAvaliacoes(5) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
+                                        </div>
+                                        <div style="float: right;">
+                                            <asp:Label ID="lblQtde5Estrelas" runat="server"><%= RetornaQtdeAvaliacoes(5) %></asp:Label>
+                                        </div>
                                     </div>
-                                    <div style="float: right;">
-                                        <asp:Label ID="lblQtde4Estrelas" runat="server"><%= RetornaQtdeAvaliacoes(4) %></asp:Label>
+                                    <div class="textoBarra">
+                                        <div style="float: left;"><span>4 estrelas</span></div>
+                                        <div class="barraAvaliacao">
+                                            <div class="barraVerde" style="width: <%= RetornaQtdeAvaliacoes(null) == 0 ? 0 : (RetornaQtdeAvaliacoes(4) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
+                                        </div>
+                                        <div style="float: right;">
+                                            <asp:Label ID="lblQtde4Estrelas" runat="server"><%= RetornaQtdeAvaliacoes(4) %></asp:Label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="textoBarra">
-                                    <div style="float: left;"><span>3 estrelas</span></div>
-                                    <div class="barraAvaliacao">
-                                        <div class="barraVerde" style="width: <%= RetornaQtdeAvaliacoes(null) == 0 ? 0 : (RetornaQtdeAvaliacoes(3) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
+                                    <div class="textoBarra">
+                                        <div style="float: left;"><span>3 estrelas</span></div>
+                                        <div class="barraAvaliacao">
+                                            <div class="barraVerde" style="width: <%= RetornaQtdeAvaliacoes(null) == 0 ? 0 : (RetornaQtdeAvaliacoes(3) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
+                                        </div>
+                                        <div style="float: right;">
+                                            <asp:Label ID="lblQtde3Estrelas" runat="server"><%= RetornaQtdeAvaliacoes(3) %></asp:Label>
+                                        </div>
                                     </div>
-                                    <div style="float: right;">
-                                        <asp:Label ID="lblQtde3Estrelas" runat="server"><%= RetornaQtdeAvaliacoes(3) %></asp:Label>
+                                    <div class="textoBarra">
+                                        <div style="float: left;"><span>2 estrelas</span></div>
+                                        <div class="barraAvaliacao">
+                                            <div class="barraVerde" style="width: <%= RetornaQtdeAvaliacoes(null) == 0 ? 0 : (RetornaQtdeAvaliacoes(2) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
+                                        </div>
+                                        <div style="float: right;">
+                                            <asp:Label ID="lblQtde2Estrelas" runat="server"><%= RetornaQtdeAvaliacoes(2) %></asp:Label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="textoBarra">
-                                    <div style="float: left;"><span>2 estrelas</span></div>
-                                    <div class="barraAvaliacao">
-                                        <div class="barraVerde" style="width: <%= RetornaQtdeAvaliacoes(null) == 0 ? 0 : (RetornaQtdeAvaliacoes(2) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
+                                    <div class="textoBarra">
+                                        <div style="float: left;"><span>1 estrela </span></div>
+                                        <div class="barraAvaliacao" style="margin-left: 18px;">
+                                            <div class="barraVerde" style="width: <%= RetornaQtdeAvaliacoes(null) == 0 ? 0 : (RetornaQtdeAvaliacoes(1) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
+                                        </div>
+                                        <div style="float: right;">
+                                            <asp:Label ID="lblQtde1Estrela" runat="server"><%= RetornaQtdeAvaliacoes(1) %></asp:Label>
+                                        </div>
                                     </div>
-                                    <div style="float: right;">
-                                        <asp:Label ID="lblQtde2Estrelas" runat="server"><%= RetornaQtdeAvaliacoes(2) %></asp:Label>
-                                    </div>
-                                </div>
-                                <div class="textoBarra">
-                                    <div style="float: left;"><span>1 estrela </span></div>
-                                    <div class="barraAvaliacao" style="margin-left: 18px;">
-                                        <div class="barraVerde" style="width: <%= RetornaQtdeAvaliacoes(null) == 0 ? 0 : (RetornaQtdeAvaliacoes(1) / RetornaQtdeAvaliacoes(null)) * 100 %>%;"></div>
-                                    </div>
-                                    <div style="float: right;">
-                                        <asp:Label ID="lblQtde1Estrela" runat="server"><%= RetornaQtdeAvaliacoes(1) %></asp:Label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="produtoRatingDireita">
-                            <div id="deSuaOpiniao">
-                                <div id="labelDeSuaOpiniao"><span>Dê sua opinião! O que achou do Produto?</span></div>
-                                <div id="imagemAvaliarProduto">
-                                    <img id="avaliarProduto" src="App_Themes/Padrao/Imagens/botao-avaliar-o-produto.png" class="ImageComOver" />
                                 </div>
                             </div>
-                            <div id="cadastroOpiniao">
-                                <span>Nota: </span>
-                                <br />
-                                <br />
-                                <asp:Rating ID="rateEnabled" runat="server" MaxRating="5" CurrentRating="0"
-                                    CssClass="ratingStar" StarCssClass="ratingItem" WaitingStarCssClass="Saved" FilledStarCssClass="Filled"
-                                    EmptyStarCssClass="Empty" AutoPostBack="false">
-                                </asp:Rating>
-                                <br />
-                                <span>Comente sobre o produto:</span>
-                                <br />
-                                <br />
-                                <div style="float: left; margin-right: 10px;">
-                                    <asp:TextBox ID="txtOpiniaoProduto" runat="server" Width="350px" Height="60px" TextMode="MultiLine" MaxLength="500"></asp:TextBox>
+                            <div id="produtoRatingDireita">
+                                <div id="deSuaOpiniao">
+                                    <div id="labelDeSuaOpiniao"><span>Dê sua opinião! O que achou do Produto?</span></div>
+                                    <div id="imagemAvaliarProduto">
+                                        <img id="avaliarProduto" src="App_Themes/Padrao/Imagens/botao-avaliar-o-produto.png" class="ImageComOver" />
+                                    </div>
                                 </div>
-                                <div style="margin-top: 40px;">
-                                    <asp:Button ID="btnSalvarAvaliacao" runat="server" Text="Salvar" OnClick="btnSalvarAvaliacao_Click" />
+                                <div id="cadastroOpiniao">
+                                    <span>Nota: </span>
+                                    <br />
+                                    <br />
+                                    <asp:Rating ID="rateEnabled" runat="server" MaxRating="5" CurrentRating="0"
+                                        CssClass="ratingStar" StarCssClass="ratingItem" WaitingStarCssClass="Saved" FilledStarCssClass="Filled"
+                                        EmptyStarCssClass="Empty" AutoPostBack="false">
+                                    </asp:Rating>
+                                    <br />
+                                    <span>Comente sobre o produto:</span>
+                                    <br />
+                                    <br />
+                                    <div style="float: left; margin-right: 10px;">
+                                        <asp:TextBox ID="txtOpiniaoProduto" runat="server" Width="350px" Height="60px" TextMode="MultiLine" MaxLength="500"></asp:TextBox>
+                                    </div>
+                                    <div style="margin-top: 40px;">
+                                        <asp:Button ID="btnSalvarAvaliacao" runat="server" Text="Salvar" OnClick="btnSalvarAvaliacao_Click" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div id="produtoLeituraAvaliacoes">
-                        <%--<asp:Repeater ID="rptAvaliacoes" runat="server">
-                    <ItemTemplate>
-                        <uc1:AvaliacaoLeitura runat="server" ID="ucAvaliacao" />
-                    </ItemTemplate>
-                </asp:Repeater>--%>
+                        <asp:Repeater ID="rptAvaliacoes" runat="server">
+                            <ItemTemplate>
+                                <div>
+                                    <uc1:LeituraAvaliacao runat="server" ID="LeituraAvaliacao" Nota='<%# Bind("nota") %>' TituloAvaliacao='<%# Bind("titulo") %>'
+                                        NomeUsuario='<%# Bind("nomeUsuario") %>' DataAvaliacao='<%# Bind("data") %>' Depoimento='<%# Bind("depoimento") %>' />
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </div>
                 </div>
             </div>

@@ -359,7 +359,7 @@
 #produtoRating {
     margin-top: 15px;
     margin-left: 20px;
-    height: 400px;
+    height: 200px;
     width: 100%;
 }
 
@@ -403,6 +403,14 @@
     float: right;
 }
 
+#avaliacaoLeituraContainer {
+    font-family: Roboto;
+    font-size: 11pt;
+    margin-top: 10px;
+    padding-bottom: 25px;
+    border-bottom: solid 2px #ECECEC;
+}
+
 #produtoInexistente {
     font-family: Roboto;
     font-size: 15pt;
@@ -421,11 +429,13 @@
 .fb-comments {
     top: -109px;
 }
+
 .ProdutoItem {
     width: 180px;
     text-align: center;
     line-height: 20px;
 }
+
     .ProdutoItem a {
         text-decoration: none;
         color: black;

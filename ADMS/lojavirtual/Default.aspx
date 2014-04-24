@@ -291,7 +291,7 @@
                                 <tr>
                                     <td align="right" style="padding: 5px" valign="middle" width="100px">marca:</td>
                                     <td align="left" style="padding: 5px" valign="middle">
-                                        <asp:DropDownList runat="server" ID="ddlMarca" DataSourceID="odsMarca" AppendDataBoundItems="true" DataValueField="id" DataTextField="descricao">
+                                        <asp:DropDownList runat="server" ID="ddlMarca" DataSourceID="odsMarca" DataValueField="id" DataTextField="descricao">
                                             <asp:ListItem></asp:ListItem>
                                         </asp:DropDownList>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"

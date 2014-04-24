@@ -131,7 +131,7 @@
     <Content Include="Configuration\PagSeguroConfig.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Controles\AvaliacaoLeitura.ascx" />
+    <Content Include="Controles\LeituraAvaliacao.ascx" />
     <Content Include="Controles\Banners.ascx" />
     <Content Include="Controles\banner\images\bx_loader.gif" />
     <Content Include="Controles\banner\images\controls.png" />
@@ -171,12 +171,12 @@
     <Compile Include="Caes.aspx.designer.cs">
       <DependentUpon>Caes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Controles\AvaliacaoLeitura.ascx.cs">
-      <DependentUpon>AvaliacaoLeitura.ascx</DependentUpon>
+    <Compile Include="Controles\LeituraAvaliacao.ascx.cs">
+      <DependentUpon>LeituraAvaliacao.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controles\AvaliacaoLeitura.ascx.designer.cs">
-      <DependentUpon>AvaliacaoLeitura.ascx</DependentUpon>
+    <Compile Include="Controles\LeituraAvaliacao.ascx.designer.cs">
+      <DependentUpon>LeituraAvaliacao.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controles\Banners.ascx.cs">
       <DependentUpon>Banners.ascx</DependentUpon>

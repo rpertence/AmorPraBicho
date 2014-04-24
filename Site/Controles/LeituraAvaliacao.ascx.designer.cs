@@ -10,7 +10,7 @@
 namespace Site.Controles {
     
     
-    public partial class AvaliacaoLeitura {
+    public partial class LeituraAvaliacao {
         
         /// <summary>
         /// rateReadOnly control.
@@ -20,23 +20,5 @@ namespace Site.Controles {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.Rating rateReadOnly;
-        
-        /// <summary>
-        /// lblTituloAvaliacao control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTituloAvaliacao;
-        
-        /// <summary>
-        /// lblDepoimentoAvaliacao control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDepoimentoAvaliacao;
     }
 }

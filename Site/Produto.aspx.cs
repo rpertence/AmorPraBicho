@@ -123,7 +123,7 @@ namespace Site
                 if (this.CodigoProduto.HasValue)
                 {
                     if (ViewState["DtAvaliacoes"] == null)
-                        ViewState["DtAvaliacoes"] = Produtos_Avaliacao.BuscaTodasAvaliacoes(this.CodigoProduto.Value);
+                        ViewState["DtAvaliacoes"] = Produtos_Avaliacao.BuscaAvaliacoesProduto(this.CodigoProduto.Value);
 
                     return (DataTable)ViewState["DtAvaliacoes"];
                 }
@@ -197,65 +197,99 @@ namespace Site
 
         protected void btnSalvarAvaliacao_Click(object sender, EventArgs e)
         {
+            #region Valida e configura dados inseridos pelo usuário
+            int nota = rateEnabled.CurrentRating;
+            if (nota == 0)
+            {
+                this.ExibeAlerta("Preencha uma nota para o produto.");
+                return;
+            }
 
+            string depoimento = string.IsNullOrEmpty(txtOpiniaoProduto.Text) ? null : txtOpiniaoProduto.Text;
+            #endregion
+
+            #region Salva avaliação
+            try
+            {
+                Produtos_Avaliacao.SalvarAvaliacao(this.CodigoProduto.Value, nota, depoimento);
+                BuscaAvaliacoesProduto();
+            }
+            catch
+            {
+                this.ExibeAlerta("Erro ao salvar avaliação do produto. Tente novamente mais tarde.");
+                return;
+            }
+            #endregion
+
+            this.ExibeAlerta("Avaliação cadastrada com sucesso.");
         }
 
         protected void imbComprar_Click(object sender, ImageClickEventArgs e)
         {
-            if (DtProduto != null && DtProduto.Rows.Count > 0)
+            try
             {
-                #region Criando Requisição de Pagamento PagSeguro
-                PaymentRequest p = new PaymentRequest();
+                if (DtProduto != null && DtProduto.Rows.Count > 0)
+                {
+                    #region Criando Requisição de Pagamento do PagSeguro
+                    PaymentRequest p = new PaymentRequest();
 
-                //Cria objeto do tipo Item para adicionar na requisição
-                DataRow drDetalhesProduto = DtProduto.Rows[0];
-                string nomeProduto = drDetalhesProduto["ProdDescricao_"].ToString();
-                decimal valor = drDetalhesProduto.IsNull("ProdValor_") ? 0 : decimal.Parse(drDetalhesProduto["ProdValor_"].ToString().Replace('.', ','));
-                long? peso = drDetalhesProduto.IsNull("peso") ? null : (long?)Convert.ToInt64(drDetalhesProduto["peso"]);
-                Item i = new Item(this.CodigoProduto.Value.ToString(), nomeProduto, 1, valor, peso, 0);
+                    //Cria objeto do tipo Item para adicionar na requisição
+                    DataRow drDetalhesProduto = DtProduto.Rows[0];
+                    string nomeProduto = drDetalhesProduto["ProdDescricao_"].ToString();
+                    decimal valor = drDetalhesProduto.IsNull("ProdValor_") ? 0 : decimal.Parse(drDetalhesProduto["ProdValor_"].ToString().Replace('.', ','));
+                    long? peso = drDetalhesProduto.IsNull("peso") ? null : (long?)Convert.ToInt64(drDetalhesProduto["peso"]);
+                    Item i = new Item(this.CodigoProduto.Value.ToString(), nomeProduto, 1, valor, peso, 0);
 
-                //Adiciona o produto na requisição.
-                p.Items.Add(i);
+                    //Adiciona o produto na requisição.
+                    p.Items.Add(i);
 
-                //Cria parâmetro de cor do produto para ser adicionado ao item.
-                //Uol.PagSeguro.Domain.Parameter param = new Uol.PagSeguro.Domain.Parameter();
-                //p.AddIndexedParameter("itemColor", hdfCor.Value, this.CodigoProduto.Value);
+                    //TODO: descomentar
+                    /*
+                    //Cria parâmetro de cor do produto para ser adicionado ao item.
+                    Uol.PagSeguro.Domain.Parameter param = new Uol.PagSeguro.Domain.Parameter();
+                    p.AddIndexedParameter("itemColor", hdfCor.Value, this.CodigoProduto.Value);
 
-                //Cria objeto do tipo Sender para identificar o comprador.
-                string nome = "João Batista";
-                string email = "joao.batista@email.com.br";
-                Phone phone = new Phone("31", "84771166");
-                Sender s = new Sender(nome, email, phone);
+                    //Cria objeto do tipo Sender para identificar o comprador.
+                    string nome = "João Batista";
+                    string email = "joao.batista@email.com.br";
+                    Phone phone = new Phone("31", "84771166");
+                    Sender s = new Sender(nome, email, phone);
 
-                //Adiciona CPF do comprador
-                string cpf = "12345678901";
-                SenderDocument doc = new SenderDocument("CPF", cpf);
-                s.Documents.Add(doc);
+                    //Adiciona CPF do comprador
+                    string cpf = "12345678901";
+                    SenderDocument doc = new SenderDocument("CPF", cpf);
+                    s.Documents.Add(doc);
 
-                //Associa comprador à requisição de pagamento.
-                p.Sender = s;
+                    //Associa comprador à requisição de pagamento.
+                    p.Sender = s;
+                    */
 
-                //Informa moeda da transação (R$)
-                p.Currency = Currency.Brl;
+                    //Informa moeda da transação (R$)
+                    p.Currency = Currency.Brl;
 
-                //TODO: descomentar
-                /*
-                //Insere venda na tabela 'produtos_vendas'
-                int idVenda = Produtos_Vendas.Inserir(string.Empty, string.Empty, string.Empty, "Aguardando Pagto", string.Empty, string.Empty, "Usuário redirecionado para o PagSeguro", email);
+                    //TODO: descomentar
+                    /*
+                    //Insere venda na tabela 'produtos_vendas'
+                    int idVenda = Produtos_Vendas.Inserir(string.Empty, string.Empty, string.Empty, "Aguardando Pagto", string.Empty, string.Empty, "Usuário redirecionado para o PagSeguro", email);
 
-                //Cria referência para a compra na base de dados do site.
-                p.Reference = idVenda.ToString();
-                */
+                    //Cria referência para a compra na base de dados do site.
+                    p.Reference = idVenda.ToString();
+                    */
 
-                //Configura credenciais de acesso
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials;
+                    //Configura credenciais de acesso
+                    AccountCredentials credentials = PagSeguroConfiguration.Credentials;
 
-                //Faz a chamada ao método Register, que retorna a URL necessária para direcionar o comprador ao PagSeguro
-                Uri redirectURL = p.Register(credentials);
+                    //Faz a chamada ao método Register, que retorna a URL necessária para direcionar o comprador ao PagSeguro
+                    Uri redirectURL = p.Register(credentials);
 
-                //Redireciona o comprador para a página do PagSeguro.
-                Response.Redirect(redirectURL.AbsoluteUri);
-                #endregion
+                    //Redireciona o comprador para a página do PagSeguro.
+                    Response.Redirect(redirectURL.AbsoluteUri);
+                    #endregion
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ExibeAlerta(string.Format("Ocorreu um erro ao enviar a requisição para o PagSeguro. \\n{0}", ex.Message));
             }
         }
         #endregion
@@ -277,7 +311,7 @@ namespace Site
                 CodigoMarca = Convert.ToInt32(drDetalhesProduto["id_marca"]);
                 string nomeProduto = drDetalhesProduto["ProdDescricao_"].ToString();
                 string resumoProduto = drDetalhesProduto["resumo"].ToString();
-                decimal valor = drDetalhesProduto.IsNull("ProdValor_") ? 0 : decimal.Parse(drDetalhesProduto["ProdValor_"].ToString().Replace('.',','));
+                decimal valor = drDetalhesProduto.IsNull("ProdValor_") ? 0 : decimal.Parse(drDetalhesProduto["ProdValor_"].ToString().Replace('.', ','));
                 decimal valorParcela = valor / 3;
                 #endregion
 
@@ -349,20 +383,14 @@ namespace Site
                 #endregion
 
                 #region Configura exibição de sugestões
+                ucSugestoes.CodigoProduto = this.CodigoProduto;
                 ucSugestoes.CodigoCategoria = this.CodigoCategoria;
+                ucMesmaMarca.CodigoProduto = this.CodigoProduto;
                 ucMesmaMarca.CodigoMarca = this.CodigoMarca;
                 #endregion
 
                 #region Busca avaliações do Produto
-                int mediaNotas = Produtos_Avaliacao.BuscaMediaAvaliacoes(this.CodigoProduto.Value);
-                rateReadOnly.CurrentRating = ratingCabecalho.CurrentRating = mediaNotas;
-
-                if (DtAvaliacoes != null && DtAvaliacoes.Rows.Count > 0)
-                {
-                    #region Número de avaliações e Quantidade de estrelas
-                    lblNumAvaliacoes.Text = DtAvaliacoes.Rows.Count.ToString();
-                    #endregion
-                }
+                BuscaAvaliacoesProduto();
                 #endregion
             }
             else
@@ -390,6 +418,39 @@ namespace Site
                 return string.Format(link, idVideo);
 
             return "www.youtube.com";
+        }
+
+        /// <summary>
+        /// Busca o número de avaliações feitas para o produto, a média das notas dadas pelos usuários
+        /// e lista os depoimentos na parte inferior da tela.
+        /// </summary>
+        private void BuscaAvaliacoesProduto()
+        {
+            int mediaNotas = Produtos_Avaliacao.BuscaMediaAvaliacoes(this.CodigoProduto.Value);
+            rateReadOnly.CurrentRating = ratingCabecalho.CurrentRating = mediaNotas;
+
+            DtAvaliacoes = Produtos_Avaliacao.BuscaAvaliacoesProduto(this.CodigoProduto.Value);
+            if (DtAvaliacoes != null && DtAvaliacoes.Rows.Count > 0)
+            {
+                lblNumAvaliacoes.Text = DtAvaliacoes.Rows.Count.ToString();
+
+                #region Preenche as avaliações dos usuários
+                //DataTable dtRepeater = DtAvaliacoes.Clone();
+
+                //int qtde = 0;
+                //foreach (DataRow dr in DtAvaliacoes.Rows)
+                //{
+                //    if (qtde < 5)
+                //    {
+                //        dtRepeater.Rows.Add(dr);
+                //        qtde++;
+                //    }
+                //}
+
+                rptAvaliacoes.DataSource = DtAvaliacoes;
+                rptAvaliacoes.DataBind();
+                #endregion
+            }
         }
 
         /// <summary>

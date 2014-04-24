@@ -17,11 +17,12 @@ namespace Actio.Negocio
         /// <param name="idProduto"></param>
         /// <returns></returns>
         [DataObjectMethodAttribute(DataObjectMethodType.Select, true)]
-        public static DataTable BuscaTodasAvaliacoes(int idProduto)
+        public static DataTable BuscaAvaliacoesProduto(int idProduto)
         {
-            string SQL = string.Format(@"SELECT id, id_produto, nota, depoimento, `data`
+            string SQL = string.Format(@"SELECT id, id_produto, nota, 'titulo' as `titulo`, 'usuario' as `nomeUsuario`, depoimento, `data`
                                         FROM produtos_avaliacao p
-                                        WHERE p.id_produto = {0};", idProduto);
+                                        WHERE p.id_produto = {0}
+                                        ORDER BY `data` DESC;", idProduto);
             return conexao.Dados(SQL);
         }
         #endregion

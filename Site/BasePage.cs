@@ -20,5 +20,10 @@ namespace Site
                 return caminho;
             }
         }
+
+        public void ExibeAlerta(string mensagem)
+        {
+            this.ClientScript.RegisterClientScriptBlock(typeof(Page), "alerta", string.Format("alert('{0}');", mensagem), true);
+        }
     }
 }
