@@ -292,6 +292,11 @@ namespace Site
                 this.ExibeAlerta(string.Format("Ocorreu um erro ao enviar a requisição para o PagSeguro. \\n{0}", ex.Message));
             }
         }
+
+        protected void btnEnviar_Click(object sender, EventArgs e)
+        {
+
+        }
         #endregion
 
         #region Métodos auxiliares

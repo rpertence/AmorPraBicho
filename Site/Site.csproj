@@ -154,6 +154,7 @@
     <Content Include="Scripts\jquery-1.11.0.min.js" />
     <Content Include="Scripts\jquery.als-1.4.min.js" />
     <Content Include="Scripts\jquery.corner.js" />
+    <Content Include="Scripts\jquery.placeholder.js" />
     <Content Include="Scripts\scripts.js" />
     <Content Include="Web.config" />
   </ItemGroup>
