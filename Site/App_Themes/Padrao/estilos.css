@@ -187,6 +187,10 @@
     position: relative;
 }
 
+#carregando, #respostaEmail {
+    display: none;
+}
+
 .divTextBox {
     margin-bottom: 10px;
 }

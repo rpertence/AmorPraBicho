@@ -127,7 +127,7 @@
                     </div>
                     <br />
                     <div id="produtoRedesSociais">
-                        <div class="linkRedeSocial" style="margin-right:40px;">
+                        <div class="linkRedeSocial" style="margin-right: 40px;">
                             <%--<a id="link_share_fb" href="javascript: void(0);" style="width: 125px;"
                                 onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'facebook-share-dialog', 'toolbar=0, status=0, width=650, height=450');">
                                 <img src="App_Themes/Padrao/Imagens/facebook.png" class="ImageComOver" /></a>--%>
@@ -147,7 +147,16 @@
                 </div>
             </div>
             <div id="produtoFormulario">
-                <div style="width: 50%; float: left; height: 330px;"></div>
+                <div style="width: 50%; float: left; height: 330px; text-align: center;">
+                    <div id="carregando">
+                        <span>Enviando e-mail...</span><img src='App_Themes/Padrao/Imagens/loading.gif' title='Enviando e-mail...' width='30' height='30' />
+                    </div>
+                    <div id="respostaEmail">
+                        <img id="imgRespostaEmail" src="App_Themes/Padrao/Imagens/email_success.png" />
+                        <br />
+                        <span id="spanRespostaEmail"></span>
+                    </div>
+                </div>
                 <div id="formularioEmail">
                     <span>Gostou deste produto? Indique para um amigo!</span>
                     <br />
@@ -173,7 +182,7 @@
                         <span id="vldEmail" class="validador">Preencha um e-mail válido</span>
                     </div>
                     <div>
-                        <asp:Button ID="btnEnviar" runat="server" Text="Enviar" CssClass="btnEnviarEmail" OnClick="btnEnviar_Click" />
+                        <asp:Button ID="btnEnviar" runat="server" Text="Enviar" CssClass="btnEnviarEmail" />
                     </div>
                 </div>
             </div>

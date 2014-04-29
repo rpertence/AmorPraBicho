@@ -60,6 +60,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Themes\Padrao\Imagens\email_error.png" />
+    <Content Include="App_Themes\Padrao\Imagens\email_success.png" />
+    <Content Include="App_Themes\Padrao\Imagens\loading.gif" />
     <Content Include="App_Themes\Padrao\list_scroll.css" />
     <Content Include="App_Themes\Padrao\cssreset.css" />
     <Content Include="App_Themes\Padrao\estilos.css" />
@@ -228,6 +231,7 @@
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Mail.cs" />
     <Compile Include="Master\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

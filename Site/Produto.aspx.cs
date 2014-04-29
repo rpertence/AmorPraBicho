@@ -4,7 +4,9 @@ using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -292,11 +294,6 @@ namespace Site
                 this.ExibeAlerta(string.Format("Ocorreu um erro ao enviar a requisição para o PagSeguro. \\n{0}", ex.Message));
             }
         }
-
-        protected void btnEnviar_Click(object sender, EventArgs e)
-        {
-
-        }
         #endregion
 
         #region Métodos auxiliares
@@ -471,6 +468,13 @@ namespace Site
                 consulta = string.Format("nota = {0}", numEstrelas.Value);
 
             return ((DataRow[])DtAvaliacoes.Select(consulta)).Length;
+        }
+
+        [WebMethod]
+        public static string EnviarEmail(string nomeRemetente, string emailRemetente, string nomeDestinatario, string emailDestinatario, string mensagem, 
+            string nomeProduto, string descricaoProduto, string linkProduto)
+        {
+            return Mail.EnviarEmail(nomeRemetente, emailRemetente, nomeDestinatario, emailDestinatario, mensagem, nomeProduto, descricaoProduto, linkProduto);
         }
         #endregion
     }

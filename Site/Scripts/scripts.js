@@ -131,7 +131,7 @@ $(document).ready(function () {
     //Texto default das caixas de texto do formulário de e-mail
     $(".textBoxFormulario").placeholder();
 
-    //Validação para envio de e-mail.
+    //Validação e envio de e-mail.
     $(".btnEnviarEmail").click(function () {
         var address1 = $("[id$='txtEmailAmigo']").val();
         var address2 = $("[id$='txtEmail']").val();
@@ -167,8 +167,40 @@ $(document).ready(function () {
         else
             $("#vldNome").hide();
 
-        if (erro)
-            return false;
+        if (!erro) {
+            var mensagem = $("[id$='txtMensagem']").val();
+            var nomeProduto = $("[id$='lblNomeProduto']").text();
+            var descricaoProduto = $("[id$='lblResumoProduto']").text();
+            var linkProduto = window.location.href;
+
+            $.ajax({
+                type: "POST",
+                url: "Produto.aspx/EnviarEmail",
+                data: "{nomeRemetente: '" + nome2 + "', emailRemetente: '" + address2 + "', nomeDestinatario: '" + nome1 + "', emailDestinatario: '" + address1 +
+                    "', mensagem: '" + mensagem + "', nomeProduto: '" + nomeProduto + "', descricaoProduto: '" + descricaoProduto + "', linkProduto: '" + linkProduto + "'}",
+                contentType: "application/json; charset=utf-8",
+                beforeSend: function () {
+                    $("#carregando").show();
+                    $("#respostaEmail").hide();
+                },
+                success: function (data) {
+                    if (data.d == "sucesso") {
+                        $("#carregando").hide();
+                        $("#respostaEmail").show();
+                        $("#spanRespostaEmail").text("Sua mensagem foi enviada com sucesso!");
+                        $("#imgRespostaEmail").attr('src', 'App_Themes/Padrao/Imagens/email_success.png');
+                    }
+                },
+                error: function (data) {
+                    $("#carregando").hide();
+                    $("#respostaEmail").show();
+                    $("#spanRespostaEmail").text("Ocorreu um erro ao enviar sua mensagem. Tente novamente mais tarde.");
+                    $("#imgRespostaEmail").attr('src', 'App_Themes/Padrao/Imagens/email_error.png');
+                }
+            });
+        }
+
+        return false;
     });
 });
 
