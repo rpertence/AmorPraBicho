@@ -92,7 +92,7 @@ Link para visualizar o produto:
 Atenciosamente,<br /><br />
 
 Atendimento Pet Shop Amor Pra Bicho<br /><br />
-<img src='http://i59.tinypic.com/2vdmvrl.png' border='0' alt='Pet Shop Amor Pra Bicho'>", nomeDestinatario, nomeRemetente, string.IsNullOrEmpty(mensagem) ? "&nbsp;" : mensagem, 
+<a href='{5}'><img src='http://i59.tinypic.com/2vdmvrl.png' border='0' alt='Pet Shop Amor Pra Bicho' /></a>", nomeDestinatario, nomeRemetente, string.IsNullOrEmpty(mensagem) ? "&nbsp;" : mensagem, 
                                                                                         nomeProduto, descricaoProduto, linkProduto);
 
             return objEmail;

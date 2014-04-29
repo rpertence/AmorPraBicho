@@ -6,7 +6,6 @@
 <%@ Register Src="~/Controles/LeituraAvaliacao.ascx" TagPrefix="uc1" TagName="LeituraAvaliacao" %>
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
-    <title>PRODUTO TESTE</title>
     <script src="Scripts/jquery.corner.js"></script>
     <script src="Scripts/jquery.als-1.4.min.js"></script>
     <script src="Scripts/jquery.placeholder.js"></script>
@@ -17,6 +16,13 @@
     <%--Twitter--%>
     <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
 
+    <meta name="title" content="Pet Shop Amor Pra Bicho" />
+    <meta name="description" content="Tudo em produtos para seu bichinho" />
+    
+<%--    <meta property="og:url"             content="www.google.com.br" /> 
+    <meta property="og:title"           content="Chocolate Pecan Pie" /> 
+    <meta property="og:image"           content="https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.2178-6/851565_496755187057665_544240989_n.jpg" /> 
+    <meta property="og:description"     content="Breve descrição do produto" />--%>
 </asp:Content>
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
     <asp:ToolkitScriptManager ID="ScriptManager1" runat="server"></asp:ToolkitScriptManager>
