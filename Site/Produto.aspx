@@ -69,7 +69,7 @@
                             </asp:Rating>
                         </div>
                         <div id="produtoNumAvaliacoes">
-                            <asp:Label ID="lblNumAvaliacoes" runat="server"></asp:Label><span> avaliações</span>
+                            <asp:Label ID="lblNumAvaliacoes" runat="server" Text="0"></asp:Label><span> avaliações</span>
                         </div>
                     </div>
                     <div id="produtoResumo">

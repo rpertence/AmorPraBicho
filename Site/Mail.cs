@@ -23,24 +23,20 @@ namespace Site
             smtp.EnableSsl = true;
             smtp.Credentials = new NetworkCredential("suporte@actiocubic.com.br", "sw0rdfish");
 
-            string retorno = string.Empty;
-
-            //enviamos o e-mail através do método .Send()
             try
             {
+                //enviamos o e-mail através do método .Send()
                 smtp.Send(email);
 
-                retorno = "sucesso";
+                //excluímos o objeto de e-mail da memória
+                email.Dispose();
+
+                return "sucesso";
             }
             catch
             {
-                retorno = "erro";
+                throw;
             }
-
-            //excluímos o objeto de e-mail da memória
-            email.Dispose();
-
-            return retorno;
         }
 
         /// <summary>
@@ -83,10 +79,10 @@ namespace Site
 {2}
 </div><br /><br />
 
-{3}<br />
+<span style='font-weight:bold;font-size:14pt;'>{3}</span><br />
 {4}<br /><br />
 
-Link para visualizar o produto:
+Link para visualizar o produto:<br />
 {5}<br /><br />
 
 Atenciosamente,<br /><br />

@@ -18,15 +18,12 @@ using System.Reflection;
 namespace Actio.Negocio
 {
     [DataObject(true)]
-    public class Protudo_Finaliza
+    public class Produto_Finaliza
     {
         #region botão de compra
-        public static void comprar(string item_id, string item_descr, string item_quant, decimal item_valor, string peso)
+        public static void Comprar(string item_id, string item_descr, int item_quant, decimal item_valor, long peso, decimal valorFrete)
         {
-            string ValorFrete = "";
-            string valor = item_valor.ToString();
-            string valorfinal = valor.Replace(",", ".");
-
+            string emailCadastroPagSeguro = ConfigurationManager.AppSettings["emailPagSeguro"];
 
             var context = HttpContext.Current;
             context.Response.Clear();
@@ -34,19 +31,18 @@ namespace Actio.Negocio
             context.Response.Write(string.Format("</head><body onload=\"document.{0}.submit()\">", "pagseguro"));
             context.Response.Write(string.Format("<form name=\"{0}\" method=\"{1}\" action=\"{2}\" >", "pagseguro", "post", "https://pagseguro.uol.com.br/v2/checkout/cart.html?action=add"));
             context.Response.Write(string.Format("<input type=\"hidden\" name=\"encoding\" value=\"utf-8\">"));
-            context.Response.Write(string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">", HttpUtility.HtmlEncode("receiverEmail"), HttpUtility.HtmlEncode("rccshopping@rccbh.com.br")));
+            context.Response.Write(string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">", HttpUtility.HtmlEncode("receiverEmail"), HttpUtility.HtmlEncode(emailCadastroPagSeguro)));
             context.Response.Write(string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">", HttpUtility.HtmlEncode("currency"), HttpUtility.HtmlEncode("BRL")));
             context.Response.Write(string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">", HttpUtility.HtmlEncode("itemId"), HttpUtility.HtmlEncode(item_id)));
             context.Response.Write(string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">", HttpUtility.HtmlEncode("itemDescription"), HttpUtility.HtmlEncode(item_descr)));
             context.Response.Write(string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">", HttpUtility.HtmlEncode("itemQuantity"), HttpUtility.HtmlEncode(item_quant)));
-            context.Response.Write(string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">", HttpUtility.HtmlEncode("itemAmount"), HttpUtility.HtmlEncode(valorfinal)));
+            context.Response.Write(string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">", HttpUtility.HtmlEncode("itemAmount"), HttpUtility.HtmlEncode(item_valor.ToString("f2").Replace(",", "."))));
             context.Response.Write(string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">", HttpUtility.HtmlEncode("itemWeight"), HttpUtility.HtmlEncode(peso)));
-            context.Response.Write(string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">", HttpUtility.HtmlEncode("itemShippingCost"), HttpUtility.HtmlEncode(ValorFrete)));
+            context.Response.Write(string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">", HttpUtility.HtmlEncode("itemShippingCost"), HttpUtility.HtmlEncode(valorFrete == 0 ? string.Empty : valorFrete.ToString())));
 
             context.Response.Write("</form>");
             context.Response.Write("</body></html>");
             context.Response.End();
-
         }
         #endregion
         #region ver carrinho

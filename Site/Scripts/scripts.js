@@ -103,9 +103,9 @@ $(document).ready(function () {
 
     //Selecionando cor default
     var hiddenCor = $("[id$='hdfCor']");
-    if (hiddenCor != null && hiddenCor.val() == "" && $(".divCorParent") != null)
+    if (hiddenCor != null && hiddenCor.val() == "" && $(".divCorParent") != null && $(".divCorParent").find("div")[0] != null)
         selecionarCor($(".divCorParent").first());
-    else if (hiddenCor != null && hiddenCor.val != "")
+    else if (hiddenCor != null && hiddenCor.val() != "")
         selecionarCorByHex(hiddenCor.val());
 
     //Evento de seleção de cor
