@@ -39,7 +39,6 @@ namespace Actio.Negocio
             context.Response.Write(string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">", HttpUtility.HtmlEncode("itemAmount"), HttpUtility.HtmlEncode(item_valor.ToString("f2").Replace(",", "."))));
             context.Response.Write(string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">", HttpUtility.HtmlEncode("itemWeight"), HttpUtility.HtmlEncode(peso)));
             context.Response.Write(string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">", HttpUtility.HtmlEncode("itemShippingCost"), HttpUtility.HtmlEncode(valorFrete == 0 ? string.Empty : valorFrete.ToString())));
-
             context.Response.Write("</form>");
             context.Response.Write("</body></html>");
             context.Response.End();
