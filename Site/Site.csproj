@@ -131,9 +131,6 @@
     <Content Include="App_Themes\Padrao\Imagens\video.png" />
     <Content Include="App_Themes\Padrao\rating.css" />
     <Content Include="Caes.aspx" />
-    <Content Include="Configuration\PagSeguroConfig.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Controles\LeituraAvaliacao.ascx" />
     <Content Include="Controles\Banners.ascx" />
     <Content Include="Controles\banner\images\bx_loader.gif" />
@@ -159,7 +156,9 @@
     <Content Include="Scripts\jquery.corner.js" />
     <Content Include="Scripts\jquery.placeholder.js" />
     <Content Include="Scripts\scripts.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasePage.cs">
@@ -280,6 +279,7 @@
     <Content Include="Master\Site.Master" />
     <Content Include="Controles\banner\bower.json" />
     <Content Include="Controles\banner\readme.md" />
+    <None Include="Properties\PublishProfiles\Henrique.pubxml" />
     <None Include="Properties\PublishProfiles\publish.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -293,10 +293,6 @@
     <ProjectReference Include="..\Actio.Negocio\Actio.Negocio.csproj">
       <Project>{4bec26fa-8935-49cf-bbfb-abd0d71586d6}</Project>
       <Name>Actio.Negocio</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Uol.PagSeguro\Uol.PagSeguro.csproj">
-      <Project>{babc5658-6afd-4f8e-81f1-434553663d99}</Project>
-      <Name>Uol.PagSeguro</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

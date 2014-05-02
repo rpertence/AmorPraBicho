@@ -18,8 +18,8 @@
 
     <meta name="title" content="Pet Shop Amor Pra Bicho" />
     <meta name="description" content="Tudo em produtos para seu bichinho" />
-    
-<%--    <meta property="og:url"             content="www.google.com.br" /> 
+
+    <%--    <meta property="og:url"             content="www.google.com.br" /> 
     <meta property="og:title"           content="Chocolate Pecan Pie" /> 
     <meta property="og:image"           content="https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.2178-6/851565_496755187057665_544240989_n.jpg" /> 
     <meta property="og:description"     content="Breve descrição do produto" />--%>
@@ -318,7 +318,7 @@
                         <asp:Repeater ID="rptAvaliacoes" runat="server">
                             <ItemTemplate>
                                 <div>
-                                    <uc1:LeituraAvaliacao runat="server" ID="LeituraAvaliacao" Nota='<%# Bind("nota") %>' TituloAvaliacao='<%# Bind("titulo") %>'
+                                    <uc1:LeituraAvaliacao runat="server" ID="ucLeituraAvaliacao" Nota='<%# Bind("nota") %>' TituloAvaliacao='<%# Bind("titulo") %>'
                                         NomeUsuario='<%# Bind("nomeUsuario") %>' DataAvaliacao='<%# Bind("data") %>' Depoimento='<%# Bind("depoimento") %>' />
                                 </div>
                             </ItemTemplate>

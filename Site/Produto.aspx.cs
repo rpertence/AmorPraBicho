@@ -11,9 +11,8 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Actio.Negocio;
-using Uol.PagSeguro.Constants;
-using Uol.PagSeguro.Domain;
-using Uol.PagSeguro.Resources;
+using AjaxControlToolkit;
+using Site.Controles;
 
 namespace Site
 {
@@ -490,6 +489,18 @@ namespace Site
             return ((DataRow[])DtAvaliacoes.Select(consulta)).Length;
         }
 
+        /// <summary>
+        /// Envia e-mail de recomendação do produto a um amigo.
+        /// </summary>
+        /// <param name="nomeRemetente"></param>
+        /// <param name="emailRemetente"></param>
+        /// <param name="nomeDestinatario"></param>
+        /// <param name="emailDestinatario"></param>
+        /// <param name="mensagem"></param>
+        /// <param name="nomeProduto"></param>
+        /// <param name="descricaoProduto"></param>
+        /// <param name="linkProduto"></param>
+        /// <returns></returns>
         [WebMethod]
         public static string EnviarEmail(string nomeRemetente, string emailRemetente, string nomeDestinatario, string emailDestinatario, string mensagem,
             string nomeProduto, string descricaoProduto, string linkProduto)
@@ -497,5 +508,21 @@ namespace Site
             return Mail.EnviarEmail(nomeRemetente, emailRemetente, nomeDestinatario, emailDestinatario, mensagem, nomeProduto, descricaoProduto, linkProduto);
         }
         #endregion
+
+        //protected void rptAvaliacoes_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        //{
+        //    DataRowView drv = (DataRowView)e.Item.DataItem;
+        //    int nota = Convert.ToInt32(drv["nota"]);
+
+        //    LeituraAvaliacao ucLeituraAvaliacao = (LeituraAvaliacao)((Repeater)sender).Controls[0].FindControl("ucLeituraAvaliacao");
+        //    if (ucLeituraAvaliacao != null)
+        //    {
+        //        ucLeituraAvaliacao.Nota = nota;
+
+        //        Rating rating = (Rating)ucLeituraAvaliacao.FindControl("rateReadOnly");
+        //        if (rating != null)
+        //            rating.CurrentRating = nota;
+        //    }
+        //}
     }
 }
