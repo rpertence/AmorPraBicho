@@ -46,6 +46,11 @@ namespace Site.Controles
             }
         }
 
+        protected int FormataCodigoProduto(object item)
+        {
+            return int.Parse(((DataRowView)item)["id"].ToString());
+        }
+
         public enum TipoSugestao
         {
             MesmaCategoria,

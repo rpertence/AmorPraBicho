@@ -198,7 +198,7 @@ LIMIT 0, " + qtde;
         }
         public static DataTable SelectByDestaqueSubcategoria(int subcategoria, int qtde)
         {
-            string SQL = @"SELECT cast(p.ProdValor_ as decimal(10,2)) ValorProduto, p.icone NomeArquivo, p.proddescricao_ Nome
+            string SQL = @"SELECT cast(p.ProdValor_ as decimal(10,2)) ValorProduto, p.icone NomeArquivo, p.proddescricao_ Nome, p.id
 FROM produtos p
 WHERE p.id_subcategoria = " + subcategoria + @"
   AND p.destaque = '1'
@@ -210,7 +210,7 @@ LIMIT 0, " + qtde;
         }
         public static DataTable SelectByDestaqueMarca(int idProduto, int marca, int qtde, bool somenteOutrosProdutos)
         {
-            string SQL = @"SELECT cast(p.ProdValor_ as decimal(10,2)) ValorProduto, p.icone NomeArquivo, p.proddescricao_ Nome
+            string SQL = @"SELECT cast(p.ProdValor_ as decimal(10,2)) ValorProduto, p.icone NomeArquivo, p.proddescricao_ Nome, p.id
 FROM produtos p
 WHERE p.id_marca = " + marca + @"
   AND p.destaque = '1'
