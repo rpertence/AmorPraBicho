@@ -425,6 +425,32 @@ namespace Site
                 #region Busca avaliações do Produto
                 BuscaAvaliacoesProduto();
                 #endregion
+
+                #region Cria meta tags para compartilhamento em redes sociais
+                //Title
+                HtmlMeta metaTitle = new HtmlMeta();
+                string propriedade = "title";
+                metaTitle.Name = string.Format("og:{0}", propriedade);
+                metaTitle.Attributes.Add("property", string.Format("og:{0}", propriedade));
+                metaTitle.Content = nomeProduto;
+                MetaPlaceHolder.Controls.Add(metaTitle);
+
+                //Description
+                HtmlMeta metaDescription = new HtmlMeta();
+                propriedade = "description";
+                metaDescription.Name = string.Format("og:{0}", propriedade);
+                metaDescription.Attributes.Add("property", string.Format("og:{0}", propriedade));
+                metaDescription.Content = resumoProduto;
+                MetaPlaceHolder.Controls.Add(metaDescription);
+
+                //Image
+                HtmlMeta metaImage = new HtmlMeta();
+                propriedade = "image";
+                metaImage.Name = string.Format("og:{0}", propriedade);
+                metaImage.Attributes.Add("property", string.Format("og:{0}", propriedade));
+                metaImage.Content = imgFotoAmpliada.ImageUrl;
+                MetaPlaceHolder.Controls.Add(metaImage);
+                #endregion
             }
             else
             {

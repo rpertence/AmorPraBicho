@@ -11,24 +11,17 @@
     <script src="Scripts/jquery.placeholder.js"></script>
     <script type="text/javascript" src="http://www.youtube.com/player_api"></script>
 
-    <%--Facebook--%>
-    <%--<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>--%>
     <%--Twitter--%>
     <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
 
-    <meta name="title" content="Pet Shop Amor Pra Bicho" />
-    <meta name="description" content="Tudo em produtos para seu bichinho" />
-
-    <%--    <meta property="og:url"             content="www.google.com.br" /> 
-    <meta property="og:title"           content="Chocolate Pecan Pie" /> 
-    <meta property="og:image"           content="https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.2178-6/851565_496755187057665_544240989_n.jpg" /> 
-    <meta property="og:description"     content="Breve descrição do produto" />--%>
+    <asp:PlaceHolder id="MetaPlaceHolder" runat="server"></asp:PlaceHolder>
 </asp:Content>
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
     <asp:ToolkitScriptManager ID="ScriptManager1" runat="server"></asp:ToolkitScriptManager>
     <asp:MultiView ID="mvwProduto" runat="server" ActiveViewIndex="0">
         <asp:View ID="viewProduto" runat="server">
-            <div id="produtoTopo">
+            <%-- Tags "itemscope" e "itemtype" são utilizadas no snippet de compartilhamento do Google + --%>
+            <div id="produtoTopo" itemscope itemtype="http://schema.org/Product">
                 <div id="produtoImagens">
                     <div class="als-container" id="my-als-list-fotos">
                         <span class="als-prev">
@@ -48,7 +41,7 @@
                             <img src="App_Themes/Padrao/Imagens/seta-produto-baixo.png" /></span>
                     </div>
                     <div id="produtoFotoAmpliada">
-                        <asp:Image ID="imgFotoAmpliada" runat="server" Width="330" Height="330" />
+                        <asp:Image ID="imgFotoAmpliada" runat="server" Width="330" Height="330" itemprop="image" />
                     </div>
                     <div id="produtoVideo">
                         <object id="frameVideo" data="<%= this.EnderecoVideo %>" width="330" height="330" type="application/x-shockwave-flash">
@@ -59,7 +52,7 @@
                 </div>
                 <div id="produtoInformacoes">
                     <div id="produtoNome">
-                        <asp:Label ID="lblNomeProduto" runat="server"></asp:Label>
+                        <asp:Label ID="lblNomeProduto" runat="server" itemprop="name"></asp:Label>
                     </div>
                     <div id="produtoEstrelas">
                         <div style="float: left; width: 80px; margin-top: 2px;">
@@ -73,7 +66,7 @@
                         </div>
                     </div>
                     <div id="produtoResumo">
-                        <asp:Label ID="lblResumoProduto" runat="server"></asp:Label>
+                        <asp:Label ID="lblResumoProduto" runat="server" itemprop="description"></asp:Label>
                     </div>
                     <div id="produtoVejaMais">
                         <a href="#produtoDescricao">Veja mais características</a>
