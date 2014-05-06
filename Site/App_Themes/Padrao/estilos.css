@@ -478,3 +478,10 @@
         text-decoration: none;
         color: black;
     }
+
+
+#divRetornoSucesso {
+    font-family: Roboto;
+    font-size: 14pt;
+    line-height: 10px;
+}
