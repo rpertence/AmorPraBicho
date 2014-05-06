@@ -6,9 +6,6 @@
 <%@ Register Src="~/Controles/LeituraAvaliacao.ascx" TagPrefix="uc1" TagName="LeituraAvaliacao" %>
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
-    <script src="Scripts/jquery.corner.js"></script>
-    <script src="Scripts/jquery.als-1.4.min.js"></script>
-    <script src="Scripts/jquery.placeholder.js"></script>
     <script type="text/javascript" src="http://www.youtube.com/player_api"></script>
 
     <%--Twitter--%>
