@@ -150,6 +150,7 @@
     <Content Include="Peixes.aspx" />
     <Content Include="Produto.aspx" />
     <Content Include="ResultadoBusca.aspx" />
+    <Content Include="RetornoPagSeguro.aspx" />
     <Content Include="Roedores.aspx" />
     <Content Include="Scripts\jquery-1.11.0.min.js" />
     <Content Include="Scripts\jquery.als-1.4.min.js" />
@@ -266,6 +267,13 @@
     </Compile>
     <Compile Include="ResultadoBusca.aspx.designer.cs">
       <DependentUpon>ResultadoBusca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RetornoPagSeguro.aspx.cs">
+      <DependentUpon>RetornoPagSeguro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RetornoPagSeguro.aspx.designer.cs">
+      <DependentUpon>RetornoPagSeguro.aspx</DependentUpon>
     </Compile>
     <Compile Include="Roedores.aspx.cs">
       <DependentUpon>Roedores.aspx</DependentUpon>
