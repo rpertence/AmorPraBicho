@@ -308,7 +308,7 @@
                         </div>
                     </div>
                     <div id="produtoLeituraAvaliacoes">
-                        <asp:Repeater ID="rptAvaliacoes" runat="server">
+                        <asp:Repeater ID="rptAvaliacoes" runat="server" OnItemDataBound="rptAvaliacoes_ItemDataBound">
                             <ItemTemplate>
                                 <div>
                                     <uc1:LeituraAvaliacao runat="server" ID="ucLeituraAvaliacao" Nota='<%# Bind("nota") %>' TituloAvaliacao='<%# Bind("titulo") %>'

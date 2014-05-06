@@ -17,8 +17,7 @@ namespace Site.Controles
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-                rateReadOnly.CurrentRating = this.Nota;
+
         }
     }
 }

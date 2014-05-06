@@ -213,6 +213,8 @@ namespace Site
             try
             {
                 Produtos_Avaliacao.SalvarAvaliacao(this.CodigoProduto.Value, nota, depoimento);
+                rateEnabled.CurrentRating = 0;
+                txtOpiniaoProduto.Text = string.Empty;
                 BuscaAvaliacoesProduto();
             }
             catch
@@ -325,6 +327,23 @@ namespace Site
                 this.ExibeAlerta(string.Format("Ocorreu um erro ao enviar a requisição para o PagSeguro. \\n{0}", ex.Message));
             }
         }
+
+        protected void rptAvaliacoes_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            DataRowView drv = (DataRowView)e.Item.DataItem;
+            int nota = Convert.ToInt32(drv["nota"]);
+
+            LeituraAvaliacao ucAvaliacoes = (LeituraAvaliacao)((Repeater)sender).Controls[((Repeater)sender).Controls.Count - 1].FindControl("ucLeituraAvaliacao");
+            if (ucAvaliacoes != null)
+            {
+                ucAvaliacoes.Nota = nota;
+
+                Rating rating = (Rating)ucAvaliacoes.FindControl("rateReadOnly");
+                if (rating != null)
+                    rating.CurrentRating = nota;
+            }
+        }
+
         #endregion
 
         #region Métodos auxiliares
@@ -493,8 +512,9 @@ namespace Site
             {
                 lblNumAvaliacoes.Text = DtAvaliacoes.Rows.Count.ToString();
 
-                #region Preenche as avaliações dos usuários
-                rptAvaliacoes.DataSource = DtAvaliacoes;
+                #region Preenche as quatro avaliações mais recentes dos usuários
+                DataTable dtNew = DtAvaliacoes.AsEnumerable().Take(4).CopyToDataTable();
+                rptAvaliacoes.DataSource = dtNew;
                 rptAvaliacoes.DataBind();
                 #endregion
             }
@@ -534,21 +554,5 @@ namespace Site
             return Mail.EnviarEmail(nomeRemetente, emailRemetente, nomeDestinatario, emailDestinatario, mensagem, nomeProduto, descricaoProduto, linkProduto);
         }
         #endregion
-
-        //protected void rptAvaliacoes_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        //{
-        //    DataRowView drv = (DataRowView)e.Item.DataItem;
-        //    int nota = Convert.ToInt32(drv["nota"]);
-
-        //    LeituraAvaliacao ucLeituraAvaliacao = (LeituraAvaliacao)((Repeater)sender).Controls[0].FindControl("ucLeituraAvaliacao");
-        //    if (ucLeituraAvaliacao != null)
-        //    {
-        //        ucLeituraAvaliacao.Nota = nota;
-
-        //        Rating rating = (Rating)ucLeituraAvaliacao.FindControl("rateReadOnly");
-        //        if (rating != null)
-        //            rating.CurrentRating = nota;
-        //    }
-        //}
     }
 }

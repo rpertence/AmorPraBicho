@@ -22,7 +22,7 @@ namespace Actio.Negocio
             string SQL = string.Format(@"SELECT id, id_produto, nota, 'titulo' as `titulo`, 'usuario' as `nomeUsuario`, depoimento, `data`
                                         FROM produtos_avaliacao p
                                         WHERE p.id_produto = {0}
-                                        ORDER BY `data` DESC;", idProduto);
+                                        ORDER BY `data` DESC, `id` DESC;", idProduto);
             return conexao.Dados(SQL);
         }
         #endregion
