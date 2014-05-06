@@ -8,6 +8,8 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,100italic' rel='stylesheet' type='text/css' />
     <script src="../Scripts/jquery-1.11.0.min.js"></script>
     <script src="../Scripts/jquery.corner.js"></script>
+    <script src="../Scripts/jquery.als-1.4.min.js"></script>
+    <script src="../Scripts/jquery.placeholder.js"></script>
     <script src="../Scripts/scripts.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
