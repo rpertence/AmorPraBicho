@@ -4,14 +4,15 @@ using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Actio.Negocio;
-using Uol.PagSeguro.Constants;
-using Uol.PagSeguro.Domain;
-using Uol.PagSeguro.Resources;
+using AjaxControlToolkit;
+using Site.Controles;
 
 namespace Site
 {
@@ -123,7 +124,7 @@ namespace Site
                 if (this.CodigoProduto.HasValue)
                 {
                     if (ViewState["DtAvaliacoes"] == null)
-                        ViewState["DtAvaliacoes"] = Produtos_Avaliacao.BuscaTodasAvaliacoes(this.CodigoProduto.Value);
+                        ViewState["DtAvaliacoes"] = Produtos_Avaliacao.BuscaAvaliacoesProduto(this.CodigoProduto.Value);
 
                     return (DataTable)ViewState["DtAvaliacoes"];
                 }
@@ -197,67 +198,152 @@ namespace Site
 
         protected void btnSalvarAvaliacao_Click(object sender, EventArgs e)
         {
+            #region Valida e configura dados inseridos pelo usuário
+            int nota = rateEnabled.CurrentRating;
+            if (nota == 0)
+            {
+                this.ExibeAlerta("Preencha uma nota para o produto.");
+                return;
+            }
 
+            string depoimento = string.IsNullOrEmpty(txtOpiniaoProduto.Text) ? null : txtOpiniaoProduto.Text;
+            #endregion
+
+            #region Salva avaliação
+            try
+            {
+                Produtos_Avaliacao.SalvarAvaliacao(this.CodigoProduto.Value, nota, depoimento);
+                rateEnabled.CurrentRating = 0;
+                txtOpiniaoProduto.Text = string.Empty;
+                BuscaAvaliacoesProduto();
+            }
+            catch
+            {
+                this.ExibeAlerta("Erro ao salvar avaliação do produto. Tente novamente mais tarde.");
+                return;
+            }
+            #endregion
+
+            this.ExibeAlerta("Avaliação cadastrada com sucesso.");
         }
 
         protected void imbComprar_Click(object sender, ImageClickEventArgs e)
         {
-            if (DtProduto != null && DtProduto.Rows.Count > 0)
+            try
             {
-                #region Criando Requisição de Pagamento PagSeguro
-                PaymentRequest p = new PaymentRequest();
+                if (DtProduto != null && DtProduto.Rows.Count > 0)
+                {
+                    //Configurando dados do produto para o Carrinho de compras do PagSeguro
+                    DataRow drDetalhesProduto = DtProduto.Rows[0];
 
-                //Cria objeto do tipo Item para adicionar na requisição
-                DataRow drDetalhesProduto = DtProduto.Rows[0];
-                string nomeProduto = drDetalhesProduto["ProdDescricao_"].ToString();
-                decimal valor = drDetalhesProduto.IsNull("ProdValor_") ? 0 : decimal.Parse(drDetalhesProduto["ProdValor_"].ToString().Replace('.', ','));
-                long? peso = drDetalhesProduto.IsNull("peso") ? null : (long?)Convert.ToInt64(drDetalhesProduto["peso"]);
-                Item i = new Item(this.CodigoProduto.Value.ToString(), nomeProduto, 1, valor, peso, 0);
+                    //O id do produto enviado para o PagSeguro pode conter o nome da Cor selecionada no final.
+                    string idProduto = drDetalhesProduto["id"].ToString();
 
-                //Adiciona o produto na requisição.
-                p.Items.Add(i);
+                    string nomeProduto = drDetalhesProduto["ProdDescricao_"].ToString();
+                    Encoding iso = Encoding.GetEncoding("ISO-8859-1");
+                    Encoding utf8 = Encoding.UTF8;
+                    byte[] utfBytes = utf8.GetBytes(nomeProduto);
+                    byte[] isoBytes = Encoding.Convert(utf8, iso, utfBytes);
+                    string nomeProdutoISO = iso.GetString(isoBytes);
 
-                //Cria parâmetro de cor do produto para ser adicionado ao item.
-                //Uol.PagSeguro.Domain.Parameter param = new Uol.PagSeguro.Domain.Parameter();
-                //p.AddIndexedParameter("itemColor", hdfCor.Value, this.CodigoProduto.Value);
+                    decimal valor = drDetalhesProduto.IsNull("ProdValor_") ? 0 : decimal.Parse(drDetalhesProduto["ProdValor_"].ToString().Replace('.', ','));
 
-                //Cria objeto do tipo Sender para identificar o comprador.
-                string nome = "João Batista";
-                string email = "joao.batista@email.com.br";
-                Phone phone = new Phone("31", "84771166");
-                Sender s = new Sender(nome, email, phone);
+                    long peso = drDetalhesProduto.IsNull("peso") ? 0 : Convert.ToInt64(drDetalhesProduto["peso"]);
 
-                //Adiciona CPF do comprador
-                string cpf = "12345678901";
-                SenderDocument doc = new SenderDocument("CPF", cpf);
-                s.Documents.Add(doc);
+                    //Configurando cor do produto
+                    if (!string.IsNullOrEmpty(hdfCor.Value))
+                    {
+                        idProduto = idProduto + " - " + hdfCor.Value;
+                        nomeProduto = nomeProduto + " - Cor " + hdfCor.Value;
+                    }
 
-                //Associa comprador à requisição de pagamento.
-                p.Sender = s;
+                    Produto_Finaliza.Comprar(idProduto, nomeProduto, 1, valor, peso, 0);
 
-                //Informa moeda da transação (R$)
-                p.Currency = Currency.Brl;
+                    #region Criando Requisição de Pagamento do PagSeguro (não utilizado pois não direciona para o carrinho)
+                    //PaymentRequest p = new PaymentRequest();
 
-                //TODO: descomentar
-                /*
-                //Insere venda na tabela 'produtos_vendas'
-                int idVenda = Produtos_Vendas.Inserir(string.Empty, string.Empty, string.Empty, "Aguardando Pagto", string.Empty, string.Empty, "Usuário redirecionado para o PagSeguro", email);
+                    ////Cria objeto do tipo Item para adicionar na requisição
+                    //DataRow drDetalhesProduto = DtProduto.Rows[0];
 
-                //Cria referência para a compra na base de dados do site.
-                p.Reference = idVenda.ToString();
-                */
+                    //string nomeProduto = drDetalhesProduto["ProdDescricao_"].ToString();
+                    //Encoding iso = Encoding.GetEncoding("ISO-8859-1");
+                    //Encoding utf8 = Encoding.UTF8;
+                    //byte[] utfBytes = utf8.GetBytes(nomeProduto);
+                    //byte[] isoBytes = Encoding.Convert(utf8, iso, utfBytes);
+                    //string nomeProdutoISO = iso.GetString(isoBytes);
 
-                //Configura credenciais de acesso
-                AccountCredentials credentials = PagSeguroConfiguration.Credentials;
+                    //decimal valor = drDetalhesProduto.IsNull("ProdValor_") ? 0 : decimal.Parse(drDetalhesProduto["ProdValor_"].ToString().Replace('.', ','));
+                    //long? peso = drDetalhesProduto.IsNull("peso") ? null : (long?)Convert.ToInt64(drDetalhesProduto["peso"]);
+                    //Item i = new Item(this.CodigoProduto.Value.ToString(), nomeProdutoISO, 1, valor, peso, 0);
 
-                //Faz a chamada ao método Register, que retorna a URL necessária para direcionar o comprador ao PagSeguro
-                Uri redirectURL = p.Register(credentials);
+                    ////Adiciona o produto na requisição.
+                    //p.Items.Add(i);
 
-                //Redireciona o comprador para a página do PagSeguro.
-                Response.Redirect(redirectURL.AbsoluteUri);
-                #endregion
+                    ////Cria parâmetro de cor do produto para ser adicionado ao item.
+                    //Uol.PagSeguro.Domain.Parameter param = new Uol.PagSeguro.Domain.Parameter();
+                    //p.AddIndexedParameter("itemColor", hdfCor.Value, this.CodigoProduto.Value);
+
+                    ////Cria objeto do tipo Sender para identificar o comprador.
+                    //string nome = "João Batista";
+                    //string email = "joao.batista@email.com.br";
+                    //Phone phone = new Phone("31", "84771166");
+                    //Sender s = new Sender(nome, email, phone);
+
+                    ///* CPF está com problema no momento de enviar a requisição de pagamento
+                    ////Adiciona CPF do comprador
+                    //string cpf = "12345678901";
+                    //SenderDocument doc = new SenderDocument(Documents.GetDocumentByType("CPF"), cpf);
+                    //s.Documents.Add(doc);
+                    //*/
+
+                    ////Associa comprador à requisição de pagamento.
+                    //p.Sender = s;
+
+                    ////Informa moeda da transação (R$)
+                    //p.Currency = Currency.Brl;
+
+                    ////Insere venda na tabela 'produtos_vendas'
+                    //int idVenda = Produtos_Vendas.Inserir(string.Empty, string.Empty, string.Empty, "Aguardando Pagto", string.Empty, string.Empty, "Usuário redirecionado para o PagSeguro", email);
+
+                    ////Cria referência para a compra na base de dados do site.
+                    //p.Reference = idVenda.ToString();
+
+                    ////URL que o Pagseguro redirecionará o usuario depois da transação
+                    //p.RedirectUri = new Uri("http://www.google.com");
+
+                    ////Configura credenciais de acesso
+                    //AccountCredentials credentials = PagSeguroConfiguration.Credentials;
+
+                    ////Faz a chamada ao método Register, que retorna a URL necessária para direcionar o comprador ao PagSeguro
+                    //Uri redirectURL = p.Register(credentials);
+
+                    ////Redireciona o comprador para a página do PagSeguro.
+                    //Response.Redirect(redirectURL.AbsoluteUri);
+                    #endregion
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ExibeAlerta(string.Format("Ocorreu um erro ao enviar a requisição para o PagSeguro. \\n{0}", ex.Message));
             }
         }
+
+        protected void rptAvaliacoes_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            DataRowView drv = (DataRowView)e.Item.DataItem;
+            int nota = Convert.ToInt32(drv["nota"]);
+
+            LeituraAvaliacao ucAvaliacoes = (LeituraAvaliacao)((Repeater)sender).Controls[((Repeater)sender).Controls.Count - 1].FindControl("ucLeituraAvaliacao");
+            if (ucAvaliacoes != null)
+            {
+                ucAvaliacoes.Nota = nota;
+
+                Rating rating = (Rating)ucAvaliacoes.FindControl("rateReadOnly");
+                if (rating != null)
+                    rating.CurrentRating = nota;
+            }
+        }
+
         #endregion
 
         #region Métodos auxiliares
@@ -277,7 +363,7 @@ namespace Site
                 CodigoMarca = Convert.ToInt32(drDetalhesProduto["id_marca"]);
                 string nomeProduto = drDetalhesProduto["ProdDescricao_"].ToString();
                 string resumoProduto = drDetalhesProduto["resumo"].ToString();
-                decimal valor = drDetalhesProduto.IsNull("ProdValor_") ? 0 : decimal.Parse(drDetalhesProduto["ProdValor_"].ToString().Replace('.',','));
+                decimal valor = drDetalhesProduto.IsNull("ProdValor_") ? 0 : decimal.Parse(drDetalhesProduto["ProdValor_"].ToString().Replace('.', ','));
                 decimal valorParcela = valor / 3;
                 #endregion
 
@@ -349,20 +435,40 @@ namespace Site
                 #endregion
 
                 #region Configura exibição de sugestões
+                ucSugestoes.CodigoProduto = this.CodigoProduto;
                 ucSugestoes.CodigoCategoria = this.CodigoCategoria;
+                ucMesmaMarca.CodigoProduto = this.CodigoProduto;
                 ucMesmaMarca.CodigoMarca = this.CodigoMarca;
                 #endregion
 
                 #region Busca avaliações do Produto
-                int mediaNotas = Produtos_Avaliacao.BuscaMediaAvaliacoes(this.CodigoProduto.Value);
-                rateReadOnly.CurrentRating = ratingCabecalho.CurrentRating = mediaNotas;
+                BuscaAvaliacoesProduto();
+                #endregion
 
-                if (DtAvaliacoes != null && DtAvaliacoes.Rows.Count > 0)
-                {
-                    #region Número de avaliações e Quantidade de estrelas
-                    lblNumAvaliacoes.Text = DtAvaliacoes.Rows.Count.ToString();
-                    #endregion
-                }
+                #region Cria meta tags para compartilhamento em redes sociais
+                //Title
+                HtmlMeta metaTitle = new HtmlMeta();
+                string propriedade = "title";
+                metaTitle.Name = string.Format("og:{0}", propriedade);
+                metaTitle.Attributes.Add("property", string.Format("og:{0}", propriedade));
+                metaTitle.Content = nomeProduto;
+                MetaPlaceHolder.Controls.Add(metaTitle);
+
+                //Description
+                HtmlMeta metaDescription = new HtmlMeta();
+                propriedade = "description";
+                metaDescription.Name = string.Format("og:{0}", propriedade);
+                metaDescription.Attributes.Add("property", string.Format("og:{0}", propriedade));
+                metaDescription.Content = resumoProduto;
+                MetaPlaceHolder.Controls.Add(metaDescription);
+
+                //Image
+                HtmlMeta metaImage = new HtmlMeta();
+                propriedade = "image";
+                metaImage.Name = string.Format("og:{0}", propriedade);
+                metaImage.Attributes.Add("property", string.Format("og:{0}", propriedade));
+                metaImage.Content = imgFotoAmpliada.ImageUrl;
+                MetaPlaceHolder.Controls.Add(metaImage);
                 #endregion
             }
             else
@@ -393,6 +499,28 @@ namespace Site
         }
 
         /// <summary>
+        /// Busca o número de avaliações feitas para o produto, a média das notas dadas pelos usuários
+        /// e lista os depoimentos na parte inferior da tela.
+        /// </summary>
+        private void BuscaAvaliacoesProduto()
+        {
+            int mediaNotas = Produtos_Avaliacao.BuscaMediaAvaliacoes(this.CodigoProduto.Value);
+            rateReadOnly.CurrentRating = ratingCabecalho.CurrentRating = mediaNotas;
+
+            DtAvaliacoes = Produtos_Avaliacao.BuscaAvaliacoesProduto(this.CodigoProduto.Value);
+            if (DtAvaliacoes != null && DtAvaliacoes.Rows.Count > 0)
+            {
+                lblNumAvaliacoes.Text = DtAvaliacoes.Rows.Count.ToString();
+
+                #region Preenche as quatro avaliações mais recentes dos usuários
+                DataTable dtNew = DtAvaliacoes.AsEnumerable().Take(4).CopyToDataTable();
+                rptAvaliacoes.DataSource = dtNew;
+                rptAvaliacoes.DataBind();
+                #endregion
+            }
+        }
+
+        /// <summary>
         /// Retorna a quantidade de avaliações atribuídas com o número de estrelas informado.
         /// </summary>
         /// <param name="numEstrelas">Informar null para retornar a quantidade total de avaliações.</param>
@@ -405,6 +533,25 @@ namespace Site
                 consulta = string.Format("nota = {0}", numEstrelas.Value);
 
             return ((DataRow[])DtAvaliacoes.Select(consulta)).Length;
+        }
+
+        /// <summary>
+        /// Envia e-mail de recomendação do produto a um amigo.
+        /// </summary>
+        /// <param name="nomeRemetente"></param>
+        /// <param name="emailRemetente"></param>
+        /// <param name="nomeDestinatario"></param>
+        /// <param name="emailDestinatario"></param>
+        /// <param name="mensagem"></param>
+        /// <param name="nomeProduto"></param>
+        /// <param name="descricaoProduto"></param>
+        /// <param name="linkProduto"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public static string EnviarEmail(string nomeRemetente, string emailRemetente, string nomeDestinatario, string emailDestinatario, string mensagem,
+            string nomeProduto, string descricaoProduto, string linkProduto)
+        {
+            return Mail.EnviarEmail(nomeRemetente, emailRemetente, nomeDestinatario, emailDestinatario, mensagem, nomeProduto, descricaoProduto, linkProduto);
         }
         #endregion
     }

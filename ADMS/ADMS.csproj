@@ -256,6 +256,7 @@
   <ItemGroup>
     <Content Include="MasterPage\MasterPage.master" />
     <Content Include="App_Themes\ActioAdms\sknDefault.skin" />
+    <None Include="Properties\PublishProfiles\Henrique.pubxml" />
     <None Include="Properties\PublishProfiles\publish.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

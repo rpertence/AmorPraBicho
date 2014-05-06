@@ -60,6 +60,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Themes\Padrao\Imagens\email_error.png" />
+    <Content Include="App_Themes\Padrao\Imagens\email_success.png" />
+    <Content Include="App_Themes\Padrao\Imagens\loading.gif" />
     <Content Include="App_Themes\Padrao\list_scroll.css" />
     <Content Include="App_Themes\Padrao\cssreset.css" />
     <Content Include="App_Themes\Padrao\estilos.css" />
@@ -128,10 +131,7 @@
     <Content Include="App_Themes\Padrao\Imagens\video.png" />
     <Content Include="App_Themes\Padrao\rating.css" />
     <Content Include="Caes.aspx" />
-    <Content Include="Configuration\PagSeguroConfig.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Controles\AvaliacaoLeitura.ascx" />
+    <Content Include="Controles\LeituraAvaliacao.ascx" />
     <Content Include="Controles\Banners.ascx" />
     <Content Include="Controles\banner\images\bx_loader.gif" />
     <Content Include="Controles\banner\images\controls.png" />
@@ -154,8 +154,11 @@
     <Content Include="Scripts\jquery-1.11.0.min.js" />
     <Content Include="Scripts\jquery.als-1.4.min.js" />
     <Content Include="Scripts\jquery.corner.js" />
+    <Content Include="Scripts\jquery.placeholder.js" />
     <Content Include="Scripts\scripts.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasePage.cs">
@@ -171,12 +174,12 @@
     <Compile Include="Caes.aspx.designer.cs">
       <DependentUpon>Caes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Controles\AvaliacaoLeitura.ascx.cs">
-      <DependentUpon>AvaliacaoLeitura.ascx</DependentUpon>
+    <Compile Include="Controles\LeituraAvaliacao.ascx.cs">
+      <DependentUpon>LeituraAvaliacao.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controles\AvaliacaoLeitura.ascx.designer.cs">
-      <DependentUpon>AvaliacaoLeitura.ascx</DependentUpon>
+    <Compile Include="Controles\LeituraAvaliacao.ascx.designer.cs">
+      <DependentUpon>LeituraAvaliacao.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controles\Banners.ascx.cs">
       <DependentUpon>Banners.ascx</DependentUpon>
@@ -227,6 +230,7 @@
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Mail.cs" />
     <Compile Include="Master\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -275,6 +279,7 @@
     <Content Include="Master\Site.Master" />
     <Content Include="Controles\banner\bower.json" />
     <Content Include="Controles\banner\readme.md" />
+    <None Include="Properties\PublishProfiles\Henrique.pubxml" />
     <None Include="Properties\PublishProfiles\publish.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -288,10 +293,6 @@
     <ProjectReference Include="..\Actio.Negocio\Actio.Negocio.csproj">
       <Project>{4bec26fa-8935-49cf-bbfb-abd0d71586d6}</Project>
       <Name>Actio.Negocio</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Uol.PagSeguro\Uol.PagSeguro.csproj">
-      <Project>{babc5658-6afd-4f8e-81f1-434553663d99}</Project>
-      <Name>Uol.PagSeguro</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

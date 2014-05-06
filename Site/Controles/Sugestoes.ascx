@@ -9,7 +9,7 @@
         <asp:Repeater runat="server" ID="rptProdutos">
             <ItemTemplate>
                 <li class="als-item">
-                    <uc1:Produto runat="server" ID="Produto" ImageURL='<%# Bind("NomeArquivo") %>' NomeProduto='<%# Bind("Nome") %>' ValorProduto='<%# Bind("ValorProduto") %>' />
+                    <uc1:Produto runat="server" ID="Produto" ImageURL='<%# Bind("NomeArquivo") %>' NomeProduto='<%# Bind("Nome") %>' ValorProduto='<%# Bind("ValorProduto") %>' CodigoProduto='<%# FormataCodigoProduto(Container.DataItem) %>' />
                 </li>
             </ItemTemplate>
         </asp:Repeater>

@@ -184,9 +184,21 @@ LIMIT 0, " + qtde;
 
             return conexao.Dados(SQL);
         }
+        public static DataTable SelectByDestaqueCategoria(int idProduto, int categoria, int qtde, bool somenteOutrosProdutos)
+        {
+            string SQL = @"SELECT cast(p.ProdValor_ as decimal(10,2)) ValorProduto, p.icone NomeArquivo, p.proddescricao_ Nome, p.id
+FROM produtos p
+WHERE p.id_categoria = " + categoria + @"
+  AND p.destaque = '1'
+  AND p.status = '1'
+  AND p.estoque > '0'" + (somenteOutrosProdutos ? "AND p.id <> " + idProduto : "") + @"
+LIMIT 0, " + qtde;
+
+            return conexao.Dados(SQL);
+        }
         public static DataTable SelectByDestaqueSubcategoria(int subcategoria, int qtde)
         {
-            string SQL = @"SELECT cast(p.ProdValor_ as decimal(10,2)) ValorProduto, p.icone NomeArquivo, p.proddescricao_ Nome
+            string SQL = @"SELECT cast(p.ProdValor_ as decimal(10,2)) ValorProduto, p.icone NomeArquivo, p.proddescricao_ Nome, p.id
 FROM produtos p
 WHERE p.id_subcategoria = " + subcategoria + @"
   AND p.destaque = '1'
@@ -196,14 +208,14 @@ LIMIT 0, " + qtde;
 
             return conexao.Dados(SQL);
         }
-        public static DataTable SelectByDestaqueMarca(int marca, int qtde)
+        public static DataTable SelectByDestaqueMarca(int idProduto, int marca, int qtde, bool somenteOutrosProdutos)
         {
-            string SQL = @"SELECT cast(p.ProdValor_ as decimal(10,2)) ValorProduto, p.icone NomeArquivo, p.proddescricao_ Nome
+            string SQL = @"SELECT cast(p.ProdValor_ as decimal(10,2)) ValorProduto, p.icone NomeArquivo, p.proddescricao_ Nome, p.id
 FROM produtos p
 WHERE p.id_marca = " + marca + @"
   AND p.destaque = '1'
   AND p.status = '1'
-  AND p.estoque > '0'
+  AND p.estoque > '0'" + (somenteOutrosProdutos ? "AND p.id <> " + idProduto : "") + @"
 LIMIT 0, " + qtde;
 
             return conexao.Dados(SQL);
