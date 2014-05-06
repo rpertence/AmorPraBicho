@@ -124,9 +124,6 @@
                     <br />
                     <div id="produtoRedesSociais">
                         <div class="linkRedeSocial" style="margin-right: 40px;">
-                            <%--<a id="link_share_fb" href="javascript: void(0);" style="width: 125px;"
-                                onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'facebook-share-dialog', 'toolbar=0, status=0, width=650, height=450');">
-                                <img src="App_Themes/Padrao/Imagens/facebook.png" class="ImageComOver" /></a>--%>
                             <div class="fb-share-button" data-width="100" data-type="button_count"></div>
                         </div>
                         <div class="linkRedeSocial">
@@ -188,9 +185,6 @@
                     <div id="produtoConteudoDescricao">
                         <span id="spanConteudoDescricao" runat="server"></span>
                     </div>
-                </div>
-                <div id="produtoComentariosFacebook">
-                    AQUI VIRÁ O PLUGIN DO FACEBOOK
                 </div>
             </div>
             <div id="produtoFooter">

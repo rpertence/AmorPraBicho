@@ -324,14 +324,8 @@
 }
 
 #produtoDescricao {
-    width: 50%;
+    width: 100%;
     float: left;
-}
-
-#produtoComentariosFacebook {
-    width: 48%;
-    float: right;
-    padding-left: 15px;
 }
 
 #produtoAbaDescricao {
