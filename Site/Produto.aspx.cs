@@ -159,6 +159,9 @@ namespace Site
         #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Esta linha deve ser removida para que seja utilizado o ambiente real do PagSeguro
+            this.VendaPagSeguro1.UrlPagSeguro = "http://localhost:9090/checkout/checkout.jhtml";
+
             if (!IsPostBack)
             {
                 this.MaintainScrollPositionOnPostBack = true;
@@ -257,7 +260,20 @@ namespace Site
                         nomeProduto = nomeProduto + " - Cor " + hdfCor.Value;
                     }
 
-                    Produto_Finaliza.Comprar(idProduto, nomeProduto, 1, valor, peso, 0);
+                    #region Teste Venda PagSeguro
+                    //TODO: RETIRAR TODA ESTA REGION.. UTILIZAR SOMENTE PARA TESTES
+                    UOL.PagSeguro.Produto p = new UOL.PagSeguro.Produto();
+                    p.Codigo = idProduto.ToString();
+                    p.Descricao = nomeProduto;
+                    p.Quantidade = 1;
+                    p.Valor = (double)valor;
+                    this.VendaPagSeguro1.Produtos.Add(p);
+                    this.VendaPagSeguro1.CodigoReferencia = "1";
+                    this.VendaPagSeguro1.Executar(this.Response);
+                    #endregion
+
+                    //TODO: DESCOMENTAR
+                    //Produto_Finaliza.Comprar(idProduto, nomeProduto, 1, valor, peso, 0);
 
                     #region Criando Requisição de Pagamento do PagSeguro (não utilizado pois não direciona para o carrinho)
                     //PaymentRequest p = new PaymentRequest();

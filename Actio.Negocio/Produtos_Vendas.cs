@@ -22,12 +22,13 @@ namespace Actio.Negocio
     {
         #region produtos_vendas
         #region Novo Produto Venda
-        public static int Inserir(string pedido, string transacao, string Tipo_Frete, string status_descricao, string forma_pagamento, string frete, string anotacao, string email)
+        public static int Inserir(string pedido, string transacao, string Tipo_Frete, string status_descricao, string forma_pagamento, string frete,
+            string anotacao, string email, string num_itens)
         {
             string SQL = @"INSERT INTO `produtos_vendas` 
-                          (`pedido`, `transacao`, `Tipo_Frete`,`status_descricao`, `forma_pagamento`, `frete`, `anotacao`, `email`) 
+                          (`pedido`, `transacao`, `Tipo_Frete`,`status_descricao`, `forma_pagamento`, `frete`, `anotacao`, `email`, `itens`) 
                           VALUES
-                          ('" + pedido + "','" + transacao + "','" + Tipo_Frete + "','" + status_descricao + "', '" + forma_pagamento + "', '" + frete + "', '" + anotacao + "', '" + email + "');" +
+                          ('" + pedido + "','" + transacao + "','" + Tipo_Frete + "','" + status_descricao + "', '" + forma_pagamento + "', '" + frete + "', '" + anotacao + "', '" + email + "', '" + num_itens + "');" +
                             "SELECT LAST_INSERT_ID();";
 
             return int.Parse(conexao.ExecuteScalar(SQL));
@@ -38,7 +39,7 @@ namespace Actio.Negocio
         public static DataTable selectAll()
         {
             string SQL = "SELECT p.`id`, p.`pedido`, p.`transacao`, p.`Tipo_Frete`, p.`status_descricao`, p.`forma_pagamento`, p.`frete`, p.`anotacao`, p.`email` FROM produtos_vendas p ORDER BY p.`pedido` ASC;";
-                return conexao.Dados(SQL);
+            return conexao.Dados(SQL);
         }
         #endregion
         #region seleciona todos as vendas da loja
@@ -108,9 +109,9 @@ namespace Actio.Negocio
         }
         #endregion
         #region Atualizar
-        public static void UpdateById(string id, string pedido, string transacao, string status, string status_descricao, string forma_pagamento, string frete, string anotacao, string email)
+        public static void UpdateById(string id, string pedido, string transacao, string status_descricao, string forma_pagamento, string frete, string anotacao, string email)
         {
-            string SQL = @"UPDATE produtos_vendas SET transacao = '" + transacao + "', pedido = '" + pedido + "', status = '" + status + "', status_descricao = '" + status_descricao + "', forma_pagamento = '" + forma_pagamento + "', frete = '" + frete + "', anotacao = '" + anotacao + "', email = '" + email + "' WHERE id = '" + id + "' LIMIT 1";
+            string SQL = @"UPDATE produtos_vendas SET transacao = '" + transacao + "', pedido = '" + pedido + "', status_descricao = '" + status_descricao + "', forma_pagamento = '" + forma_pagamento + "', frete = '" + frete + "', anotacao = '" + anotacao + "', email = '" + email + "' WHERE id = '" + id + "' LIMIT 1";
             conexao.ExecuteNonQuery(SQL);
         }
         #endregion

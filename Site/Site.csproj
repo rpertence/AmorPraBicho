@@ -58,6 +58,10 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="UOL.PagSeguro, Version=1.3.0.7, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Users\Henrique\Dropbox\Projetos\_Serviços Actio\PagSeguro\UOL.PagSeguro.dll_v1.4.0.0\UOL.PagSeguro.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Themes\Padrao\Imagens\email_error.png" />
