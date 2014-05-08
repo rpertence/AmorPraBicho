@@ -12,11 +12,11 @@
         <p>Você também poderá acessar sua conta no PagSeguro para mais informações.</p>
         <p style="line-height: 50px;"><a href="Home.aspx">Clique aqui para retornar à página inicial</a></p>
     </div>
-    <cc1:RetornoPagSeguro ID="RetornoPagSeguro1" runat="server"
+    <%--<cc1:RetornoPagSeguro ID="RetornoPagSeguro1" runat="server"
         OnVendaEfetuada="RetornoPagSeguro1_VendaEfetuada"
         OnVendaNaoAutenticada="RetornoPagSeguro1_VendaNaoAutenticada"
         OnFalhaProcessarRetorno="RetornoPagSeguro1_FalhaProcessarRetorno"
         OnRetornoVerificado="RetornoPagSeguro1_RetornoVerificado"
         UrlNPI="https://pagseguro.uol.com.br/pagseguro-ws/checkout/NPI.jhtml">
-    </cc1:RetornoPagSeguro>
+    </cc1:RetornoPagSeguro>--%>
 </asp:Content>

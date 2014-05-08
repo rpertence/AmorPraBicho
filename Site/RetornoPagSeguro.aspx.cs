@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -15,10 +16,9 @@ namespace Site
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            RetornoPagSeguro1.Token = ConfigurationManager.AppSettings["tokenPagSeguro"];
-
-            //TODO:Esta linha deve ser removida para que seja utilizado o ambiente real do PagSeguro
+            //TODO:Esta primeira linha deve ser removida para que seja utilizado o ambiente real do PagSeguro
             //this.RetornoPagSeguro1.UrlNPI = "http://localhost:9090/pagseguro-ws/checkout/NPI.jhtml";
+            //this.RetornoPagSeguro1.Token = ConfigurationManager.AppSettings["tokenPagSeguro"];
 
             if (Request.HttpMethod == "POST")
             {
@@ -26,7 +26,6 @@ namespace Site
 
                 string Token = ConfigurationManager.AppSettings["tokenPagSeguro"];
                 string Pagina = "https://pagseguro.uol.com.br/pagseguro-ws/checkout/NPI.jhtml";
-                //string Pagina = "http://localhost:9090/pagseguro-ws/checkout/NPI.jhtml";
                 string Dados = HttpContext.Current.Request.Form.ToString() + "&Comando=validar" + "&Token=" + Token;
 
                 System.Net.HttpWebRequest req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(Pagina);
@@ -43,66 +42,69 @@ namespace Site
                 string Result = stIn.ReadToEnd();
                 stIn.Close();
 
+                #region Recuperando dados retornados pelo PagSeguro
+
+                #region Detalhes da Transação
+                //Obtendo o número do Pedido
+                string codigo_pedido = Request.Params["Referencia"];
+
+                //Obtendo o código da transação no PagSeguro
+                string codigo_transacao_pagseguro = Request.Params["TransacaoID"];
+
+                //Obtendo o novo status da transação
+                string statusDescricao = Request.Params["StatusTransacao"];
+
+                //Obtendo a data da transação
+                DateTime dataTransacao = Convert.ToDateTime(Request.Params["DataTransacao"]);
+                #endregion
+
+                #region Detalhes do Pedido
+                //Obtendo a forma de pagamento utilizada
+                string tipo_pagamento_descricao = Request.Params["TipoPagamento"];
+
+                //Obtendo o tipo do frete
+                string tipoFreteDescricao = Request.Params["TipoFrete"];
+
+                //Obtendo o valor pago pelo frete
+                double frete_cobrado = Convert.ToDouble(Request.Params["ValorFrete"]);
+
+                //Obtendo extras
+                double extras = Convert.ToDouble(Request.Params["Extras"]);
+
+                //Obtendo a anotação deixada pelo cliente no momento do pagamento
+                string anotacao_cliente = Request.Params["Anotacao"];
+
+                //Obtendo o número de itens vendidos
+                int numItens = Convert.ToInt32(Request.Params["NumItens"]);
+
+                //Configura lista de produtos pedidos
+                List<UOL.PagSeguro.Produto> listaProdutos = RetornaListaProdutos(numItens);
+                #endregion
+
+                #region Detalhes do Cliente
+                string cliBairro = Request.Params["CliBairro"];
+                string cliCep = Request.Params["CliCEP"];
+                string cliCidade = Request.Params["CliCidade"];
+                string cliComplementoEndereco = Request.Params["CliComplemento"];
+                string cliEmail = Request.Params["CliEmail"];
+                string cliEndereco = Request.Params["CliEndereco"];
+                string cliNome = Request.Params["CliNome"];
+                string cliNumero = Request.Params["CliNumero"];
+                string cliPais = Request.Params["CliPais"];
+                string cliTelefone = Request.Params["CliTelefone"];
+                string cliUf = Request.Params["CliEstado"];
+                #endregion
+
+                string emailVendedor = ConfigurationManager.AppSettings["emailPagSeguro"];
+                #endregion
+
                 if (Result == "VERIFICADO")
                 {
-                    #region Recuperando dados retornados pelo PagSeguro
-
-                    #region Detalhes da Transação
-                    //Obtendo o número do Pedido
-                    string codigo_pedido = Request.Params["Referencia"];// retornoVenda.CodigoReferencia;
-
-                    //Obtendo o código da transação no PagSeguro
-                    string codigo_transacao_pagseguro = Request.Params["TransacaoID"];
-
-                    //Obtendo o novo status da transação
-                    string statusDescricao = Request.Params["StatusTransacao"];
-
-                    //Obtendo a data da transação
-                    DateTime dataTransacao = Convert.ToDateTime(Request.Params["DataTransacao"]);
-                    #endregion
-
-                    #region Detalhes do Pedido
-                    //Obtendo a forma de pagamento utilizada
-                    string tipo_pagamento_descricao = Request.Params["TipoPagamento"];
-
-                    //Obtendo o tipo do frete
-                    string tipoFreteDescricao = Request.Params["TipoFrete"];
-
-                    //Obtendo o valor pago pelo frete
-                    double frete_cobrado = Convert.ToDouble(Request.Params["ValorFrete"]);
-
-                    //Obtendo extras
-                    double extras = Convert.ToDouble(Request.Params["Extras"]);
-
-                    //Obtendo a anotação deixada pelo cliente no momento do pagamento
-                    string anotacao_cliente = Request.Params["Anotacao"];
-
-                    //Obtendo o número de itens vendidos
-                    int numItens = Convert.ToInt32(Request.Params["NumItens"]);
-
-                    //Configura lista de produtos pedidos
-                    List<UOL.PagSeguro.Produto> listaProdutos = RetornaListaProdutos(numItens);
-                    #endregion
-
-                    #region Detalhes do Cliente
-                    string cliBairro = Request.Params["CliBairro"];
-                    string cliCep = Request.Params["CliCEP"];
-                    string cliCidade = Request.Params["CliCidade"];
-                    string cliComplementoEndereco = Request.Params["CliComplemento"];
-                    //int cliDdd = Request.Params["CliDDD"];
-                    string cliEmail = Request.Params["CliEmail"];
-                    string cliEndereco = Request.Params["CliEndereco"];
-                    string cliNome = Request.Params["CliNome"];
-                    string cliNumero = Request.Params["CliNumero"];
-                    string cliPais = Request.Params["CliPais"];
-                    string cliTelefone = Request.Params["CliTelefone"];
-                    string cliUf = Request.Params["CliEstado"];
-                    #endregion
-
-                    #endregion
-
                     #region Atualiza registros no banco de dados
                     bool erro = false;
+                    StringBuilder msgErro = new StringBuilder();
+                    int? idVenda = null;
+
                     #region Tabela produtos_vendas
                     try
                     {
@@ -110,54 +112,85 @@ namespace Site
                         if (dtVendaExistente != null && dtVendaExistente.Rows.Count == 0)
                         {
                             //Nova venda
-                            Produtos_Vendas.Inserir(null, codigo_transacao_pagseguro, tipoFreteDescricao, statusDescricao, tipo_pagamento_descricao, frete_cobrado.ToString("f2"), anotacao_cliente,
+                            idVenda = Produtos_Vendas.Inserir(null, codigo_transacao_pagseguro, tipoFreteDescricao, statusDescricao, tipo_pagamento_descricao, frete_cobrado.ToString("f2"), anotacao_cliente,
                                                                         cliEmail, numItens.ToString(), listaProdutos);
                         }
                         else
                         {
                             //Atualizar dados da venda
                             DataRow drVenda = dtVendaExistente.Rows[0];
-                            string idVenda = drVenda["id"].ToString();
+                            idVenda = Convert.ToInt32(drVenda["id"]);
                             string statusTransacaoAntigo = drVenda["status_descricao"].ToString().ToLower();
 
-                            Produtos_Vendas.UpdateById(idVenda, null, codigo_transacao_pagseguro, statusDescricao, tipo_pagamento_descricao, frete_cobrado.ToString("f2"), anotacao_cliente, cliEmail,
+                            Produtos_Vendas.UpdateById(idVenda.ToString(), null, codigo_transacao_pagseguro, statusDescricao, tipo_pagamento_descricao, frete_cobrado.ToString("f2"), anotacao_cliente, cliEmail,
                                 listaProdutos, statusTransacaoAntigo);
                         }
                     }
-                    catch
+                    catch (Exception ex)
                     {
                         erro = true;
+                        msgErro.Append(@"Ocorreu um erro ao gravar os dados da transação:<br>
+                                         Verifique o status da transação e principalmente o seu estoque.<br>
+                                         Informe a Actio Comunicação sobre o seguinte erro:<br> " + ex.ToString());
                     }
                     #endregion
 
                     #region Tabela Cliente
                     if (!erro)
                     {
-                        DataTable dtClienteExistente = Clientes.SelectByEmail(cliEmail);
-                        if (dtClienteExistente != null && dtClienteExistente.Rows.Count == 0)
+                        try
                         {
-                            //Novo Cliente
-                            Clientes.Inserir(cliNome, cliEmail, cliEndereco, cliNumero, cliComplementoEndereco, cliBairro, cliCidade, cliUf, cliCep, cliTelefone, "1", "1");
+                            DataTable dtClienteExistente = Clientes.SelectByEmail(cliEmail);
+                            if (dtClienteExistente != null && dtClienteExistente.Rows.Count == 0)
+                            {
+                                //Novo Cliente
+                                Clientes.Inserir(cliNome, cliEmail, cliEndereco, cliNumero, cliComplementoEndereco, cliBairro, cliCidade, cliUf, cliCep, cliTelefone, "1", "1");
+                            }
+                            else
+                            {
+                                //Atualizar Dados do Cliente
+                                DataRow drcliente = dtClienteExistente.Rows[0];
+                                string idCliente = drcliente["cliente_id"].ToString();
+                                Clientes.Atualizar(idCliente, cliNome, cliEmail, cliEndereco, cliNumero, cliComplementoEndereco, cliBairro, cliCidade, cliUf, cliCep, cliTelefone, "1", "1");
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            //Atualizar Dados do Cliente
-                            DataRow drcliente = dtClienteExistente.Rows[0];
-                            string idCliente = drcliente["cliente_id"].ToString();
-                            Clientes.Atualizar(idCliente, cliNome, cliEmail, cliEndereco, cliNumero, cliComplementoEndereco, cliBairro, cliCidade, cliUf, cliCep, cliTelefone, "1", "1");
+                            msgErro.Append("Ocorreu um erro ao gravar os dados do cliente:<br><br>" + ex.ToString());
                         }
                     }
                     #endregion
+                    #endregion
 
+                    #region Notifica vendedor
+                    Mail.EnviarEmail(cliNome, cliEmail, cliTelefone, statusDescricao, codigo_transacao_pagseguro, dataTransacao, numItens, msgErro.ToString(), emailVendedor, Mail.TipoNotificacao.Movimentacao);
                     #endregion
                 }
                 else if (Result == "FALSO")
                 {
                     //o post nao foi validado
+
+                    #region Notifica vendedor
+                    string mensagem = @"Houve uma falha no processamento automático de retorno do PagSeguro, verifique o status da transação e principalmente o seu estoque. 
+                                        <br><br>Informe a Actio Comunicação sobre o erro:
+                                        <br>O POST não foi validado.";
+
+                    //Notifica a loja
+                    Mail.EnviarEmail(cliNome, cliEmail, cliTelefone, statusDescricao, codigo_transacao_pagseguro, dataTransacao, numItens, mensagem, emailVendedor, Mail.TipoNotificacao.PostNaoValidado);
+                    #endregion
                 }
                 else
                 {
                     //erro na integração com PagSeguro.
+
+                    #region Notifica vendedor
+                    string mensagem = @"Houve uma falha na integração com o PagSeguro, verifique o status da transação e principalmente o seu estoque. 
+                                        <br><br>Informe a Actio Comunicação sobre o erro:
+                                        <br>Erro não integração com o PagSeguro.";
+
+                    //Notifica a loja
+                    Mail.EnviarEmail(cliNome, cliEmail, cliTelefone, statusDescricao, codigo_transacao_pagseguro, dataTransacao, numItens, mensagem, emailVendedor, Mail.TipoNotificacao.ErroIntegracaoPagSeguro);
+                    #endregion
                 }
             }
             else if (Request.HttpMethod == "GET")
@@ -180,7 +213,7 @@ namespace Site
             {
                 UOL.PagSeguro.Produto p = new UOL.PagSeguro.Produto();
                 p.Codigo = Request.Params[string.Format("ProdID_{0}", i + 1)];
-                p.Quantidade = Convert.ToInt32(Request.Params[string.Format("ProdQuantidade_{0}", i+1)]);
+                p.Quantidade = Convert.ToInt32(Request.Params[string.Format("ProdQuantidade_{0}", i + 1)]);
 
                 listaProdutos.Add(p);
             }
@@ -298,6 +331,7 @@ namespace Site
             #endregion
         }
 
+        /*
         protected void RetornoPagSeguro1_VendaNaoAutenticada(object sender, UOL.PagSeguro.VendaNaoAutenticadaEventArgs e)
         {
             //Aqui dispara quando o PagSeguro retorna algo diferente de verificado
@@ -312,5 +346,6 @@ namespace Site
         {
             //Aqui dispara quando é obtido o retorno VERIFICADO do PagSeguro. Este método é disparado antes do RetornoPagSeguro1_VendaEfetuada
         }
+         * */
     }
 }

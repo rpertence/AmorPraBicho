@@ -260,7 +260,9 @@ namespace Site
                         nomeProduto = nomeProduto + " - Cor " + hdfCor.Value;
                     }
 
-                    #region Teste Venda PagSeguro
+                    Produto_Finaliza.Comprar(idProduto, nomeProduto, 1, valor, peso, 0);
+
+                    #region Teste Venda PagSeguro (não utilizo o controle VendaPagSeguro pois ocorrem os erros 115, 130, etc na requisição ao pagseguro).
                     //UOL.PagSeguro.Produto p = new UOL.PagSeguro.Produto();
                     //p.Codigo = idProduto.ToString();
                     //p.Descricao = nomeProduto;
@@ -288,8 +290,6 @@ namespace Site
 
                     //this.VendaPagSeguro1.Executar(this.Response);
                     #endregion
-
-                    Produto_Finaliza.Comprar(idProduto, nomeProduto, 1, valor, peso, 0);
 
                     #region Criando Requisição de Pagamento do PagSeguro (não utilizado pois não direciona para o carrinho)
                     //PaymentRequest p = new PaymentRequest();

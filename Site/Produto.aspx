@@ -17,7 +17,7 @@
 </asp:Content>
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
     <asp:ToolkitScriptManager ID="ScriptManager1" runat="server"></asp:ToolkitScriptManager>
-    <cc1:VendaPagSeguro ID="VendaPagSeguro1" runat="server" EmailCobranca="henrique.bp87@gmail.com"></cc1:VendaPagSeguro>
+    <%--<cc1:VendaPagSeguro ID="VendaPagSeguro1" runat="server" EmailCobranca="henrique.bp87@gmail.com"></cc1:VendaPagSeguro>--%>
     <asp:MultiView ID="mvwProduto" runat="server" ActiveViewIndex="0">
         <asp:View ID="viewProduto" runat="server">
             <%-- Tags "itemscope" e "itemtype" são utilizadas no snippet de compartilhamento do Google + --%>

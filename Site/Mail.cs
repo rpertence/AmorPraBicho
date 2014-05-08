@@ -11,11 +11,53 @@ namespace Site
 {
     public class Mail
     {
+        /// <summary>
+        /// Envia e-mail com indicação de um produto para um amigo.
+        /// </summary>
+        /// <param name="nomeRemetente"></param>
+        /// <param name="emailRemetente"></param>
+        /// <param name="nomeDestinatario"></param>
+        /// <param name="emailDestinatario"></param>
+        /// <param name="mensagem"></param>
+        /// <param name="nomeProduto"></param>
+        /// <param name="descricaoProduto"></param>
+        /// <param name="linkProduto"></param>
+        /// <returns></returns>
         public static string EnviarEmail(string nomeRemetente, string emailRemetente, string nomeDestinatario, string emailDestinatario,
             string mensagem, string nomeProduto, string descricaoProduto, string linkProduto)
         {
-            MailMessage email = FormataEmail(nomeRemetente, emailRemetente, nomeDestinatario, emailDestinatario, mensagem, nomeProduto, descricaoProduto, linkProduto);
+            MailMessage email = FormataEmailIndicacaoProduto(nomeRemetente, emailRemetente, nomeDestinatario, emailDestinatario, mensagem, nomeProduto, descricaoProduto, linkProduto);
 
+            return EnviarEmail(email);
+        }
+
+        /// <summary>
+        /// Envia e-mail de notificação quando ocorre uma movimentação do pagseguro.
+        /// </summary>
+        /// <param name="nomeCliente"></param>
+        /// <param name="emailCliente"></param>
+        /// <param name="telefoneCliente"></param>
+        /// <param name="statusTransacao"></param>
+        /// <param name="codigoTransacao"></param>
+        /// <param name="dataTransacao"></param>
+        /// <param name="numItens"></param>
+        /// <param name="observacao"></param>
+        /// <returns></returns>
+        public static string EnviarEmail(string nomeCliente, string emailCliente, string telefoneCliente, string statusTransacao, string codigoTransacao,
+                                                                DateTime dataTransacao, int numItens, string observacao, string emailVendedor, TipoNotificacao tipoNotificacao)
+        {
+            MailMessage email = FormataEmailNotificacao(nomeCliente, emailCliente, telefoneCliente, statusTransacao, codigoTransacao, dataTransacao, numItens, observacao, emailVendedor, tipoNotificacao);
+
+            return EnviarEmail(email);
+        }
+
+        /// <summary>
+        /// Envia mensagem de e-mail já formatada.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        private static string EnviarEmail(MailMessage email)
+        {
             //cria objeto com os dados do SMTP
             SmtpClient smtp = new SmtpClient("smtp.gmail.com");
             // descomentar para usar o gmail
@@ -39,11 +81,60 @@ namespace Site
             }
         }
 
+        private static MailMessage FormataEmailNotificacao(string nomeCliente, string emailCliente, string telefoneCliente, string statusTransacao, string codigoTransacao,
+                                                                DateTime dataTransacao, int numItens, string observacao, string emailVendedor, TipoNotificacao tipoNotificacao)
+        {
+            //cria objeto com dados do e-mail
+            MailMessage objEmail = new MailMessage();
+
+            // Para evitar problemas de caracteres "estranhos", configuramos o charset para "ISO-8859-1"
+            objEmail.SubjectEncoding = System.Text.Encoding.GetEncoding("ISO-8859-1");
+            objEmail.BodyEncoding = System.Text.Encoding.GetEncoding("ISO-8859-1");
+
+            //remetente do e-mail
+            objEmail.From = new System.Net.Mail.MailAddress("suporte@actiocubic.com.br", "Contato - Loja Virtual Actio");
+
+            //destinatários do e-mail
+            objEmail.To.Add(new MailAddress(emailVendedor));
+            objEmail.Bcc.Add(new MailAddress("contato@actio.net.br", "Leo"));
+
+            //prioridade do e-mail
+            objEmail.Priority = System.Net.Mail.MailPriority.High;
+
+            //formato do e-mail HTML (caso não queira HTML alocar valor false)
+            objEmail.IsBodyHtml = true;
+
+            //título do e-mail
+            objEmail.Subject = string.Format("Pet Shop Amor Pra Bicho - Aviso de {0} no PagSeguro - Pedido: {1}",
+                tipoNotificacao == TipoNotificacao.Movimentacao ? "Movimentação" : tipoNotificacao == TipoNotificacao.PostNaoValidado ? "Post Não Validado" : "Erro na Integração",
+                codigoTransacao);
+
+            //responder para
+            objEmail.ReplyToList.Add(new MailAddress(emailCliente));
+
+            //corpo do e-mail
+            objEmail.Body = string.Format(@"<br>Movimentação realizada pelo PagSeguro
+                            <br><br>Cliente: {0}
+                            <br><br>Email do Cliente: {1}
+                            <br><br>Telefone do Cliente: {2}
+                            <br><br><EM><FONT color=#ff0000 size=5>Status do Pedido: {3}</FONT></EM>
+                            <br><br>Código da Transação PagSeguro: {4}
+                            <br><br>Data da Transação: {5}
+                            <br><br>Quantidade de Itens: {6}
+                            <br><br><span style='font-size:20pt; color:red;'>OBSERVAÇÕES:</span>
+                            <br><div style='background-color:#ECECEC; color:#000;'>{7}</div>
+                            <br><br>Você pode verificar o status deste pedido no PagSeguro. 
+                            <br><br>Caso queira fazer contato com o cliente clique em responder esta mensagem.",
+                            nomeCliente, emailCliente, telefoneCliente, statusTransacao, codigoTransacao, dataTransacao.ToString("dd/MM/yyyy HH:mm:ss"), numItens, observacao);
+
+            return objEmail;
+        }
+
         /// <summary>
         /// Formata o objeto de e-mail com os parâmetros necessários.
         /// </summary>
         /// <returns></returns>
-        public static MailMessage FormataEmail(string nomeRemetente, string emailRemetente, string nomeDestinatario, string emailDestinatario,
+        private static MailMessage FormataEmailIndicacaoProduto(string nomeRemetente, string emailRemetente, string nomeDestinatario, string emailDestinatario,
             string mensagem, string nomeProduto, string descricaoProduto, string linkProduto)
         {
             //cria objeto com dados do e-mail
@@ -88,7 +179,7 @@ Link para visualizar o produto:<br />
 Atenciosamente,<br /><br />
 
 Atendimento Pet Shop Amor Pra Bicho<br /><br />
-<a href='{5}'><img src='http://i59.tinypic.com/2vdmvrl.png' border='0' alt='Pet Shop Amor Pra Bicho' /></a>", nomeDestinatario, nomeRemetente, string.IsNullOrEmpty(mensagem) ? "&nbsp;" : mensagem, 
+<a href='{5}'><img src='http://i59.tinypic.com/2vdmvrl.png' border='0' alt='Pet Shop Amor Pra Bicho' /></a>", nomeDestinatario, nomeRemetente, string.IsNullOrEmpty(mensagem) ? "&nbsp;" : mensagem,
                                                                                         nomeProduto, descricaoProduto, linkProduto);
 
             return objEmail;
@@ -144,6 +235,13 @@ Atendimento Pet Shop Amor Pra Bicho<br /><br />
                 invalid = true;
             }
             return match.Groups[1].Value + domainName;
+        }
+
+        public enum TipoNotificacao
+        {
+            Movimentacao,
+            PostNaoValidado,
+            ErroIntegracaoPagSeguro
         }
     }
 }

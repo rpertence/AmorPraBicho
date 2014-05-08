@@ -9,7 +9,7 @@
             </asp:Rating>
         </div>
         <div style="color: #36A9E1; font-size: 15pt; font-weight: bold;">
-            <span><%= this.TituloAvaliacao %></span>
+            <%--<span><%= this.TituloAvaliacao %></span>--%>&nbsp;
         </div>
     </div>
     <div id="nomeUsuarioAvaliacao" style="margin-bottom: 20px;">
