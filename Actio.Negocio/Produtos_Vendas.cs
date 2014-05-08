@@ -14,6 +14,7 @@ using MySql.Data.MySqlClient;
 using MySql.Data.Types;
 using System.Text;
 using System.Reflection;
+using UOL.PagSeguro;
 
 namespace Actio.Negocio
 {
@@ -23,15 +24,49 @@ namespace Actio.Negocio
         #region produtos_vendas
         #region Novo Produto Venda
         public static int Inserir(string pedido, string transacao, string Tipo_Frete, string status_descricao, string forma_pagamento, string frete,
-            string anotacao, string email, string num_itens)
+            string anotacao, string email, string num_itens, List<UOL.PagSeguro.Produto> listaProdutos)
         {
-            string SQL = @"INSERT INTO `produtos_vendas` 
+            MySqlConnection conn = conexao.getConn();
+            conn.Open();
+            MySqlTransaction tran = conn.BeginTransaction();
+
+            using (conn)
+            {
+                try
+                {
+                    //Insere nova venda
+                    string SQL = @"INSERT INTO `produtos_vendas` 
                           (`pedido`, `transacao`, `Tipo_Frete`,`status_descricao`, `forma_pagamento`, `frete`, `anotacao`, `email`, `itens`) 
                           VALUES
                           ('" + pedido + "','" + transacao + "','" + Tipo_Frete + "','" + status_descricao + "', '" + forma_pagamento + "', '" + frete + "', '" + anotacao + "', '" + email + "', '" + num_itens + "');" +
-                            "SELECT LAST_INSERT_ID();";
+                                    "SELECT LAST_INSERT_ID();";
 
-            return int.Parse(conexao.ExecuteScalar(SQL));
+                    int retorno = int.Parse(conexao.ExecuteScalar(SQL, conn, tran));
+
+                    //Atualiza Estoque
+                    if (!status_descricao.ToLower().Contains("cancel"))
+                    {
+                        foreach (UOL.PagSeguro.Produto p in listaProdutos)
+                        {
+                            string codigo = p.Codigo;
+                            if (p.Codigo.Contains("-"))
+                                codigo = p.Codigo.Split('-')[0];
+
+                            //Debita quantidade vendida do estoque
+                            Produtos.UpdateEstoque(codigo, p.Quantidade * -1, conn, tran);
+                        }
+                    }
+
+                    tran.Commit();
+
+                    return retorno;
+                }
+                catch
+                {
+                    tran.Rollback();
+                    throw;
+                }
+            }
         }
         #endregion
         #region seleciona todos os produtos_vendas
@@ -109,10 +144,43 @@ namespace Actio.Negocio
         }
         #endregion
         #region Atualizar
-        public static void UpdateById(string id, string pedido, string transacao, string status_descricao, string forma_pagamento, string frete, string anotacao, string email)
+        public static void UpdateById(string id, string pedido, string transacao, string status_descricao, string forma_pagamento, string frete, string anotacao, string email, 
+            List<UOL.PagSeguro.Produto> listaProdutos, string statusTransacaoAntigo)
         {
-            string SQL = @"UPDATE produtos_vendas SET transacao = '" + transacao + "', pedido = '" + pedido + "', status_descricao = '" + status_descricao + "', forma_pagamento = '" + forma_pagamento + "', frete = '" + frete + "', anotacao = '" + anotacao + "', email = '" + email + "' WHERE id = '" + id + "' LIMIT 1";
-            conexao.ExecuteNonQuery(SQL);
+            MySqlConnection conn = conexao.getConn();
+            conn.Open();
+            MySqlTransaction tran = conn.BeginTransaction();
+
+            using (conn)
+            {
+                try
+                {
+                    //Atualiza dados da venda
+                    string SQL = @"UPDATE produtos_vendas SET transacao = '" + transacao + "', pedido = '" + pedido + "', status_descricao = '" + status_descricao + "', forma_pagamento = '" + forma_pagamento + "', frete = '" + frete + "', anotacao = '" + anotacao + "', email = '" + email + "' WHERE id = '" + id + "' LIMIT 1";
+                    
+                    conexao.ExecuteNonQuery(SQL, conn, tran);
+
+                    //Atualiza Estoque se a venda foi cancelada e anteriormente o status não era este.
+                    if (status_descricao.ToLower().Contains("cancel") && !statusTransacaoAntigo.Contains("cancel"))
+                    {
+                        foreach (UOL.PagSeguro.Produto p in listaProdutos)
+                        {
+                            string codigo = p.Codigo;
+                            if (p.Codigo.Contains("-"))
+                                codigo = p.Codigo.Split('-')[0];
+
+                            //Adiciona no estoque a quantidade que havia sido vendida
+                            Produtos.UpdateEstoque(codigo, p.Quantidade, conn, tran);
+                        }
+                    }
+
+                    tran.Commit();
+                }
+                catch
+                {
+                    tran.Rollback();
+                }
+            }
         }
         #endregion
         #region Atualizar status do pedido

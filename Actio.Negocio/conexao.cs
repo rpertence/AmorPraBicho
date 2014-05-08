@@ -17,6 +17,7 @@ namespace Actio.Negocio
             MySqlConnection objConn = new MySqlConnection(settings.ConnectionString);
             return objConn;
         }
+
         public static void ExecuteNonQuery(string SQL)
         {
             using (MySqlConnection conn = getConn())
@@ -27,6 +28,16 @@ namespace Actio.Negocio
                 cmd.Dispose();
             }
         }
+        public static void ExecuteNonQuery(string SQL, MySqlConnection conn, MySqlTransaction tran)
+        {
+            if (conn.State != ConnectionState.Open)
+                conn.Open();
+
+            MySqlCommand cmd = new MySqlCommand(SQL, conn, tran);
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+        }
+
         public static string ExecuteScalar(string SQL)
         {
             using (MySqlConnection conn = getConn())
@@ -36,6 +47,15 @@ namespace Actio.Negocio
                 return cmd.ExecuteScalar().ToString();
             }
         }
+        public static string ExecuteScalar(string SQL, MySqlConnection conn, MySqlTransaction tran)
+        {
+            if (conn.State != ConnectionState.Open)
+                conn.Open();
+
+            MySqlCommand cmd = new MySqlCommand(SQL, conn, tran);
+            return cmd.ExecuteScalar().ToString();
+        }
+
         public static DataTable Dados(string SQL)
         {
             DataTable dtResult = null;
@@ -54,5 +74,5 @@ namespace Actio.Negocio
 
             return dtResult;
         }
-}
+    }
 }

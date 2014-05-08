@@ -124,6 +124,12 @@ where resumo like '%{0}%'
             string SQL = @"UPDATE produtos SET estoque = '" + estoque + "' WHERE id = '" + id + "' LIMIT 1";
             conexao.ExecuteNonQuery(SQL);
         }
+
+        public static void UpdateEstoque(string id, int qtdeAtualizar, MySqlConnection conn, MySqlTransaction tran)
+        {
+            string SQL = @"UPDATE produtos SET estoque = estoque + " + qtdeAtualizar + " WHERE id = '" + id + "' LIMIT 1";
+            conexao.ExecuteNonQuery(SQL, conn, tran);
+        }
         #endregion
 
         #region Exluir item

@@ -60,7 +60,7 @@ namespace Actio.Negocio
         [DataObjectMethodAttribute(DataObjectMethodType.Update, true)]
         public static void Atualizar(string cliente_id, string CliNome, string CliEmail, string CliEndereco, string CliNumero, string CliComplemento, string CliBairro, string CliCidade, string CliEstado, string CliCEP, string CliTelefone, string emailmarketing, string status)
         {
-            string SQL = @"UPDATE cliente SET CliNome = '" + CliNome + "', CliEmail = '" + CliEmail + "', CliEndereco = '" + CliEndereco + "', CliNumero = '" + CliNumero + "', CliComplemento = '" + CliComplemento + "', CliBairro = '" + CliBairro + "', CliCidade = '" + CliCidade + "', CliEstado = '" + CliEstado + "', ClieCEP = '" + CliCEP + "', CliTelefone = '" + CliTelefone + "', emailmarketing = '" + emailmarketing + "', stauts = '" + status + "' WHERE cliente_id = '" + cliente_id + "' LIMIT 1";
+            string SQL = @"UPDATE cliente SET CliNome = '" + CliNome + "', CliEmail = '" + CliEmail + "', CliEndereco = '" + CliEndereco + "', CliNumero = '" + CliNumero + "', CliComplemento = '" + CliComplemento + "', CliBairro = '" + CliBairro + "', CliCidade = '" + CliCidade + "', CliEstado = '" + CliEstado + "', CliCEP = '" + CliCEP + "', CliTelefone = '" + CliTelefone + "', emailmarketing = '" + emailmarketing + "', status = '" + status + "' WHERE cliente_id = '" + cliente_id + "' LIMIT 1";
             conexao.ExecuteNonQuery(SQL);
         }
         #endregion

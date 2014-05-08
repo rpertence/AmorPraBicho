@@ -159,8 +159,8 @@ namespace Site
         #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Esta linha deve ser removida para que seja utilizado o ambiente real do PagSeguro
-            this.VendaPagSeguro1.UrlPagSeguro = "http://localhost:9090/checkout/checkout.jhtml";
+            //TODO:Esta linha deve ser removida para que seja utilizado o ambiente real do PagSeguro
+            //this.VendaPagSeguro1.UrlPagSeguro = "http://localhost:9090/checkout/checkout.jhtml";
 
             if (!IsPostBack)
             {
@@ -256,24 +256,40 @@ namespace Site
                     //Configurando cor do produto
                     if (!string.IsNullOrEmpty(hdfCor.Value))
                     {
-                        idProduto = idProduto + " - " + hdfCor.Value;
+                        idProduto = idProduto + "-" + hdfCor.Value;
                         nomeProduto = nomeProduto + " - Cor " + hdfCor.Value;
                     }
 
                     #region Teste Venda PagSeguro
-                    //TODO: RETIRAR TODA ESTA REGION.. UTILIZAR SOMENTE PARA TESTES
-                    UOL.PagSeguro.Produto p = new UOL.PagSeguro.Produto();
-                    p.Codigo = idProduto.ToString();
-                    p.Descricao = nomeProduto;
-                    p.Quantidade = 1;
-                    p.Valor = (double)valor;
-                    this.VendaPagSeguro1.Produtos.Add(p);
-                    this.VendaPagSeguro1.CodigoReferencia = "1";
-                    this.VendaPagSeguro1.Executar(this.Response);
+                    //UOL.PagSeguro.Produto p = new UOL.PagSeguro.Produto();
+                    //p.Codigo = idProduto.ToString();
+                    //p.Descricao = nomeProduto;
+                    //p.Quantidade = 2;
+                    //p.Valor = (double)valor;
+                    //this.VendaPagSeguro1.Produtos.Add(p);
+
+                    //UOL.PagSeguro.Produto p2 = new UOL.PagSeguro.Produto();
+                    //p2.Codigo = "3";
+                    //p2.Descricao = nomeProduto;
+                    //p2.Quantidade = 3;
+                    //p2.Valor = (double)valor;
+                    //this.VendaPagSeguro1.Produtos.Add(p2);
+
+                    //this.VendaPagSeguro1.CodigoReferencia = "1";
+
+                    //UOL.PagSeguro.Cliente c = new UOL.PagSeguro.Cliente();
+                    //c.Nome = "Henrique";
+                    //c.Endereco = "R. Prof Bartira Mourao";
+                    //c.DDD = 31;
+                    //c.Telefone = 84779900;
+                    //c.Email = "henrique@email.com";
+
+                    //this.VendaPagSeguro1.Cliente = c;
+
+                    //this.VendaPagSeguro1.Executar(this.Response);
                     #endregion
 
-                    //TODO: DESCOMENTAR
-                    //Produto_Finaliza.Comprar(idProduto, nomeProduto, 1, valor, peso, 0);
+                    Produto_Finaliza.Comprar(idProduto, nomeProduto, 1, valor, peso, 0);
 
                     #region Criando Requisição de Pagamento do PagSeguro (não utilizado pois não direciona para o carrinho)
                     //PaymentRequest p = new PaymentRequest();
